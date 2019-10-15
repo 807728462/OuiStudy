@@ -1,0 +1,90 @@
+ext {
+    isModule = false
+    versions = [
+            applicationId           : "com.oyf.codecollection",        //应用ID
+            versionCode             : 1,                    //版本号
+            versionName             : "1.0.0",              //版本名称
+
+            compileSdkVersion       : 28,
+            buildToolsVersion       : "28.0.0",
+            minSdkVersion           : 19,
+            targetSdkVersion        : 22,
+
+            androidSupportSdkVersion: "27.1.0",
+            constraintLayoutVersion : "1.1.3",
+            runnerVersion           : "1.0.2",
+            espressoVersion         : "3.0.2",
+            junitVersion            : "4.12",
+            annotationsVersion      : "24.0.0",
+            androidx                : "1.0.2",
+
+            multidexVersion         : "1.0.2",//多个dex 65535
+            loggerVersion           : "1.0.9",//日志
+            eventbusVersion         : "3.0.0",//eventbus消息总线
+            rxjavaVersion           : "2.1.3",//rx
+            rxandroidVersion        : "2.0.1",
+            okgo                    : "3.0.4",
+            butterknifeVersion      : "8.4.0",//黄油刀
+            superAdapterVersion     : "3.6.8",//万能Adapter
+            easypermissionsVersion  : "1.2.0",//权限申请
+            gsonVersion             : "2.8.5",//json
+            glideVersion            : "3.6.1",
+            greendaoVersion         : "3.2.2",
+            luban                   : "1.1.8"
+
+    ]
+    dependencies = ["appcompat_v7"        : "com.android.support:appcompat-v7:${versions["androidSupportSdkVersion"]}",
+                    "constraint_layout"   : "com.android.support.constraint:constraint-layout:${versions["constraintLayoutVersion"]}",
+                    "runner"              : "com.android.support.test:runner:${versions["runnerVersion"]}",
+                    "espresso_core"       : "com.android.support.test.espresso:espresso-core:${versions["espressoVersion"]}",
+                    "junit"               : "junit:junit:${versions["junitVersion"]}",
+                    "support_annotations" : "com.android.support:support-annotations:${versions["annotationsVersion"]}",
+                    "design"              : "com.android.support:design:${versions["androidSupportSdkVersion"]}",
+                    "support-v4"          : "com.android.support:support-v4:${versions["androidSupportSdkVersion"]}",
+                    "cardview-v7"         : "com.android.support:cardview-v7:${versions["androidSupportSdkVersion"]}",
+                    "recyclerview-v7"     : "com.android.support:recyclerview-v7:${versions["androidSupportSdkVersion"]}",
+                    "androidx"            : "androidx.appcompat:appcompat:${versions["androidx"]}",
+                    //方法数超过65535解决方法64K MultiDex分包方法
+                    "multidex"            : "com.android.support:multidex:${versions["multidexVersion"]}",
+
+                    //路由
+                    //"arouter_api"         : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
+                    //"arouter_compiler"    : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
+                    // "arouter_annotation"  : "com.alibaba:arouter-annotation:${versions["arouterannotationVersion"]}",
+
+                    //黄油刀
+                    "butterknife_compiler": "com.jakewharton:butterknife-compiler:${versions["butterknifeVersion"]}",
+                    "butterknife"         : "com.jakewharton:butterknife:${versions["butterknifeVersion"]}",
+                    //事件订阅
+                    "eventbus"            : "org.greenrobot:eventbus:${versions["eventbusVersion"]}",
+                    //日志
+                    "logger"              : "com.maikel:logger:${versions["loggerVersion"]}",
+                    "rxjava"              : "io.reactivex.rxjava2:rxjava:${versions["rxjavaVersion"]}",
+                    "rxandroid"           : "io.reactivex.rxjava2:rxandroid:${versions["rxandroidVersion"]}",
+                    "okgo"                : "com.lzy.net:okgo:${versions["okgo"]}",
+                    //fastJson
+                    //"fastjson"            : "com.alibaba:fastjson:${versions["fastjsonVersion"]}.android",
+                    //沉浸式状态栏
+                    //"immersionbar"        : "com.gyf.immersionbar:immersionbar:${versions["immersionbarVersion"]}",
+                    //banner
+                    //"banner"              : "com.bigkoo:ConvenientBanner:${versions["bannerVersion"]}",
+
+                    //图片加载
+                    "glide"               : "com.github.bumptech.glide:glide:${versions["glideVersion"]}",
+                    //lombok
+                    //"lombokJavax"         : "javax.annotation:javax.annotation-api:${versions["javaxVersion"]}",
+                    //"lombok"              : "org.projectlombok:lombok:${versions["lombokVersion"]}",
+                    //数据库
+                    "greenDao"            : "org.greenrobot:greendao:${versions["greendaoVersion"]}",
+                    //时间,地址,条件选择器
+                    //"pickerView"          : "com.contrarywind:Android-PickerView:${versions["pickerViewVersion"]}",
+                    //万能Adapter
+                    "superAdapter"        : "org.byteam.superadapter:superadapter:${versions["superAdapterVersion"]}",
+                    "easypermissions"     : "pub.devrel:easypermissions:${versions["easypermissionsVersion"]}",
+                    "gson"                : "com.google.code.gson:gson:${versions["gsonVersion"]}",
+                    "Luban"               : "top.zibin:Luban:${versions["luban"]}",
+
+
+    ]
+
+}
