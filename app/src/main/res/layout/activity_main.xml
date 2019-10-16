@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.oyf.basemodule.weight.ScreenAdapterLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.oyf.basemodule.weight.ScreenAdapterLayout
-        android:layout_width="180px"
-        android:layout_height="360px"
-        android:background="#18E620">
+    <Button
+        android:id="@+id/bt_vlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoVlayout"
+        android:text="VLayout"/>
+    <Button
+        android:id="@+id/bt_behavior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoBehavior"
+        android:text="behavior"/>
 
-    </com.oyf.basemodule.weight.ScreenAdapterLayout>
-
-</com.oyf.basemodule.weight.ScreenAdapterLayout>
+</LinearLayout>

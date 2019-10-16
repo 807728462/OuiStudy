@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion  rootProject.ext.versions.compileSdkVersion
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
 
     defaultConfig {
         applicationId rootProject.ext.versions.applicationId
@@ -21,10 +21,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation rootProject.ext.dependencies.appcompat_v7
+    implementation rootProject.ext.dependencies.design
+    implementation rootProject.ext.dependencies.recyclerview_v7
+    implementation rootProject.ext.dependencies.constraint_layout
     implementation project(path: ':basemodule')
+    implementation rootProject.ext.dependencies.vlayout
+    implementation rootProject.ext.dependencies.smartRefreshLayout
 }
