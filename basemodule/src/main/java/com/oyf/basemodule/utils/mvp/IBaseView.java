@@ -1,12 +1,12 @@
-package com.oyf.basemodule.mvp;
+package com.oyf.basemodule.utils.mvp;
 
 import android.content.Context;
-import android.os.Bundle;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
+/**
+ * V接口基类，用于显示控制
+ */
+public interface IBaseView {
 
-public interface IView {
 
     /**
      * 隐藏加载框
@@ -24,6 +24,21 @@ public interface IView {
      * 隐藏无数据页面
      */
     void hideEmptyView();
+//    /**
+//     * 空数据
+//     *
+//     * @param tag TAG
+//     */
+//    void onEmpty(Object tag);
+//
+//    /**
+//     * 错误数据
+//     *
+//     * @param tag      TAG
+//     * @param errorMsg 错误信息
+//     */
+//    void onError(Object tag, String errorMsg);
+
     /**
      * 显示空页面或者出错页面
      */
@@ -32,7 +47,7 @@ public interface IView {
     /**
      * 显示空页面或者出错页面
      */
-    void showEmptyOrErrorView(String text,int imageId);
+    void showEmptyOrErrorView(String text, int imageId);
     /**
      * 显示加载框
      */

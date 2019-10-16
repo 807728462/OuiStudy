@@ -3,6 +3,7 @@ package com.oyf.basemodule.mvp;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 
 public abstract class BaseActivity extends Activity implements IView {
@@ -13,21 +14,26 @@ public abstract class BaseActivity extends Activity implements IView {
         initView(savedInstanceState);
         initData(savedInstanceState);
     }
+    /**
+     * 如果返回 0, 则不会调用 setContentView
+     *
+     * @return
+     */
+    @LayoutRes
+    protected abstract int getLayoutId();
 
-    public abstract int getLayoutId();
+    /**
+     * 初始化 View
+     *
+     * @param savedInstanceState
+     * @return
+     */
+    protected abstract void initView(@Nullable Bundle savedInstanceState);
 
-    @Override
-    public void initView(@Nullable Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    public void initData(@Nullable Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    public boolean isRegisterEventBus() {
-        return false;
-    }
+    /**
+     * 初始化数据
+     *
+     * @param savedInstanceState
+     */
+    protected abstract void initData(@Nullable Bundle savedInstanceState);
 }

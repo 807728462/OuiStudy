@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ public class BehaviorActivity extends BaseActivity {
     public void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         rcv = findViewById(R.id.rcv);
+
     }
 
     @Override
