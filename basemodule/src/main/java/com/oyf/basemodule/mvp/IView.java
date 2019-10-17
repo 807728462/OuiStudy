@@ -1,10 +1,6 @@
 package com.oyf.basemodule.mvp;
 
 import android.content.Context;
-import android.os.Bundle;
-
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
 
 public interface IView {
 
@@ -44,5 +40,4 @@ public interface IView {
      */
     boolean useEventBus();
 
-    void setLoadingText(int resId);
 }

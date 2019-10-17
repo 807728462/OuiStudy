@@ -19,5 +19,11 @@
         android:layout_height="wrap_content"
         android:onClick="gotoBehavior"
         android:text="behavior"/>
+    <Button
+        android:id="@+id/bt_map_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoMapView"
+        android:text="ChinaMapView"/>
 
 </LinearLayout>

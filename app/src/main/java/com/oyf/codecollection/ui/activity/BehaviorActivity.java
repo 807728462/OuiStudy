@@ -1,12 +1,15 @@
 package com.oyf.codecollection.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
+import androidx.core.widget.TextViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +17,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.oyf.basemodule.mvp.BaseActivity;
+import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.codecollection.R;
 
 
 public class BehaviorActivity extends BaseActivity {
 
     RecyclerView rcv;
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
 
     @Override
     public int getLayoutId() {
@@ -30,7 +39,6 @@ public class BehaviorActivity extends BaseActivity {
     public void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         rcv = findViewById(R.id.rcv);
-
     }
 
     @Override

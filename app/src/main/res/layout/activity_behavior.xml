@@ -4,49 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-    tools:context=".ui.activity.BehaviorActivity"
-    tools:ignore="MissingConstraints">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/AppBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:title="toolbar" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
+    tools:context=".ui.activity.BehaviorActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#134562"
-            android:text="我是显示在底部的空间"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="100dp"
-            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-            />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#134562"
+        android:text="我是显示在底部的空间"
+        android:layout_gravity="bottom"
+        app:layout_behavior="com.oyf.basemodule.RightScaleBehavior"
+        />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="bottom|right"
-        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
+        app:layout_behavior="com.oyf.basemodule.RightScaleBehavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

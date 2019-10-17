@@ -12,6 +12,7 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.oyf.basemodule.mvp.BaseActivity;
+import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.codecollection.R;
 import com.oyf.codecollection.ui.adapter.BaseVLayoutAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
@@ -33,6 +34,11 @@ public class VLayoutActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override
