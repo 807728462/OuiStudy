@@ -5,8 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.ChinaMapActivity">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" 中国地图
+            \n 1.raw放入中国地图的svg
+            \n 2.在init中加载文件，并且使用dom解析（解析path时候使用ParsePath解析路径）并且计算出整个地图的矩阵（宽高）
+            \n 3.在onmearsure中计算出地图跟空间宽高的比例
+            \n 4.绘制中先缩放画布，然后绘制path
+            \n 5.onTouchEvent中计算点击是否在某个省份中，记录，刷新
+            \n （计算点击位置时候，使用Region去判断是否在点击范围内）"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <com.oyf.basemodule.weight.ChinaMapView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,15 +2,25 @@ package com.oyf.codecollection.ui.activity;
 
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.oyf.basemodule.animation.FlyAnimator;
+import com.oyf.basemodule.animation.MyAnimation;
+import com.oyf.basemodule.animation.MyDecoration;
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.codecollection.R;
@@ -29,7 +39,8 @@ public class VLayoutActivity extends BaseActivity {
     RefreshLayout srl;
     RecyclerView rcv;
     DelegateAdapter mDelegateAdapter;
-    List<DelegateAdapter.Adapter> mAdapters=new ArrayList();
+    List<DelegateAdapter.Adapter> mAdapters = new ArrayList();
+    List<ItemBean> lists = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +83,47 @@ public class VLayoutActivity extends BaseActivity {
                 refreshLayout.finishLoadMore(1000);
             }
         });
+        // initVlayoutRecycleData();
+        initAnimationRecycleData();
+    }
+
+    RecyclerView.Adapter adapter;
+
+    private void initAnimationRecycleData() {
+        rcv.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new RecyclerView.Adapter() {
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.rcv_item, parent, false);
+                return new RecyclerView.ViewHolder(inflate) {
+                    @Override
+                    public String toString() {
+                        return super.toString();
+                    }
+                };
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+                TextView tv = holder.itemView.findViewById(R.id.tv_list);
+                tv.setText("列表" + position + "-" + lists.get(position).name);
+            }
+
+            @Override
+            public int getItemCount() {
+                return lists.size();
+            }
+        };
+        for (int i = 0; i < 100; i++) {
+            lists.add(new ItemBean("" + i));
+        }
+        rcv.addItemDecoration(new MyDecoration());
+        rcv.setItemAnimator(new MyAnimation());
+        rcv.setAdapter(adapter);
+    }
+
+    private void initVlayoutRecycleData() {
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(this);
         mDelegateAdapter = new DelegateAdapter(virtualLayoutManager, false);
 
@@ -79,18 +131,8 @@ public class VLayoutActivity extends BaseActivity {
         recycledViewPool.setMaxRecycledViews(0, 40);
         rcv.setRecycledViewPool(recycledViewPool);
         rcv.setLayoutManager(virtualLayoutManager);
-
         rcv.setAdapter(mDelegateAdapter);
-        initRecycleData();
-    }
 
-    private void initRecycleData() {
-        List<ItemBean> lists = new ArrayList<>();
-        lists.add(new ItemBean("1"));
-        lists.add(new ItemBean("2"));
-        lists.add(new ItemBean("3"));
-        lists.add(new ItemBean("4"));
-        lists.add(new ItemBean("5"));
         mAdapters.add(new BaseVLayoutAdapter<ItemBean>(R.layout.rcv_item, lists) {
             @Override
             protected void convert(BaseViewHolder holder, ItemBean item) {
@@ -105,6 +147,22 @@ public class VLayoutActivity extends BaseActivity {
 
         });
         mDelegateAdapter.setAdapters(mAdapters);
+    }
+
+    public void insert(View view) {
+        if (lists.size() > 0) {
+            lists.add(1, new ItemBean("insert"));
+            adapter.notifyItemInserted(1);
+        }
+    }
+
+    public void delete(View view) {
+        if (lists.size() > 1) {
+            lists.remove(1);
+            adapter.notifyItemRemoved(1);
+
+        }
+
 
     }
 }
