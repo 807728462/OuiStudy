@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".ui.activity.ChinaMapActivity"></activity>
+        <activity android:name=".ui.activity.MyRecycleViewActivity"></activity>
+        <activity android:name=".ui.activity.ChinaMapActivity" />
         <activity android:name=".ui.activity.BehaviorActivity" />
         <activity android:name=".ui.activity.VLayoutActivity" />
         <activity android:name=".MainActivity">

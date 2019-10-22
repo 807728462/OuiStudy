@@ -35,36 +35,9 @@ public class PercentLayout extends RelativeLayout {
             if (checkLayoutParams(params)){
                 LayoutParams lp = (LayoutParams)params;
                  float widthPercent = lp.widthPercent;
-                 float heightPercent = lp.heightPercent;
-                 float marginLeftPercent = lp.marginLeftPercent;
-                 float marginRightPercent= lp.marginRightPercent;
-                 float marginTopPercent= lp.marginTopPercent;
-                 float marginBottomPercent = lp.marginBottomPercent;
-
                  if (widthPercent > 0){
                      params.width = (int) (widthSize * widthPercent);
                  }
-
-                if (heightPercent > 0){
-                    params.height = (int) (heightSize * heightPercent);
-                }
-
-                if (marginLeftPercent > 0){
-                    ((LayoutParams) params).leftMargin = (int) (widthSize * marginLeftPercent);
-                }
-
-                if (marginRightPercent > 0){
-                    ((LayoutParams) params).rightMargin = (int) (widthSize * marginRightPercent);
-                }
-
-                if (marginTopPercent > 0){
-                    ((LayoutParams) params).topMargin = (int) (heightSize * marginTopPercent);
-                }
-
-                if (marginBottomPercent > 0){
-                    ((LayoutParams) params).bottomMargin = (int) (heightSize * marginBottomPercent);
-                }
-
             }
         }
 
