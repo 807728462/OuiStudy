@@ -31,4 +31,6 @@ dependencies {
     implementation project(path: ':basemodule')
     implementation rootProject.ext.dependencies.vlayout
     implementation rootProject.ext.dependencies.smartRefreshLayout
+    implementation rootProject.ext.dependencies.blockcanary
+    implementation  rootProject.ext.dependencies.flexbox
 }

@@ -17,6 +17,7 @@ ext {
             junitVersion            : "4.12",
             annotationsVersion      : "24.0.0",
             androidx                : "1.0.2",
+            blockcanary             : "1.5.0",
 
             multidexVersion         : "1.0.2",//多个dex 65535
             loggerVersion           : "1.0.9",//日志
@@ -32,22 +33,25 @@ ext {
             greendaoVersion         : "3.2.2",
             luban                   : "1.1.8",
             vlayout                 : "1.2.8",
-            smartRefreshLayout      : "1.1.0"
+            smartRefreshLayout      : "1.1.0",
+            flexbox                 : "1.0.0"//流式布局
 
     ]
-    dependencies = ["appcompat_v7"        : 'androidx.appcompat:appcompat:1.0.2',
-                    "constraint_layout"   : 'androidx.constraintlayout:constraintlayout:1.1.3',
+    dependencies = ["appcompat_v7"        : "androidx.appcompat:appcompat:1.0.2",
+                    "constraint_layout"   : "androidx.constraintlayout:constraintlayout:1.1.3",
                     "runner"              : "com.android.support.test:runner:${versions["runnerVersion"]}",
                     "espresso_core"       : "com.android.support.test.espresso:espresso-core:${versions["espressoVersion"]}",
                     "junit"               : "junit:junit:${versions["junitVersion"]}",
                     "support_annotations" : "com.android.support:support-annotations:${versions["annotationsVersion"]}",
-                    "design"              : 'com.google.android.material:material:1.0.0',
+                    "design"              : "com.google.android.material:material:1.0.0",
                     "support-v4"          : "com.android.support:support-v4:${versions["androidSupportSdkVersion"]}",
                     "cardview-v7"         : "com.android.support:cardview-v7:${versions["androidSupportSdkVersion"]}",
-                    "recyclerview_v7"     : 'androidx.recyclerview:recyclerview:1.0.0',
+                    "recyclerview_v7"     : "com.android.support:recyclerview-v7:${versions["androidSupportSdkVersion"]}",
                     "androidx"            : "androidx.appcompat:appcompat:${versions["androidx"]}",
                     //方法数超过65535解决方法64K MultiDex分包方法
                     "multidex"            : "com.android.support:multidex:${versions["multidexVersion"]}",
+                    "blockcanary"         : "com.github.markzhai:blockcanary-android:${versions["blockcanary"]}",
+
                     //路由
                     //"arouter_api"         : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
                     //"arouter_compiler"    : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
@@ -86,6 +90,7 @@ ext {
                     "luban"               : "top.zibin:Luban:${versions["luban"]}",
                     "vlayout"             : "com.alibaba.android:vlayout:${versions["vlayout"]}@aar",
                     "smartRefreshLayout"  : "com.scwang.smartrefresh:SmartRefreshLayout:${versions["smartRefreshLayout"]}",
+                    "flexbox"             : "com.google.android:flexbox:${versions["flexbox"]}",
 
     ]
 

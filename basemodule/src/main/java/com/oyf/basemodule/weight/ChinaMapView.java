@@ -31,7 +31,16 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
+/**
+ * 中国地图
+ *  1.raw放入中国地图的svg
+ *  2.在init中加载文件，并且使用dom解析（解析path时候使用ParsePath解析路径）并且计算出整个地图的矩阵（宽高）
+ *  3.在onmearsure中计算出地图跟空间宽高的比例
+ *  4.绘制中先缩放画布，然后绘制path
+ *  5,.onTouchEvent中计算点击是否在某个省份中，记录，刷新
+ *  （计算点击位置时候，使用Region去判断是否在点击范围内）
+ *
+ * */
 public class ChinaMapView extends View {
 
     private int[] colorArray = new int[]{0xFF239BD7, 0xFF30A9E5, 0xFF80CBF1, 0xFFFFFFFF};
