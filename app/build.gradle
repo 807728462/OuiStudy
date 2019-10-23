@@ -32,5 +32,5 @@ dependencies {
     implementation rootProject.ext.dependencies.vlayout
     implementation rootProject.ext.dependencies.smartRefreshLayout
     implementation rootProject.ext.dependencies.blockcanary
-    implementation  rootProject.ext.dependencies.flexbox
+    implementation rootProject.ext.dependencies.flexbox
 }

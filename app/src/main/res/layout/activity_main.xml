@@ -12,63 +12,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="gotoVlayout"
-        android:text="VLayout"/>
+        android:text="VLayout" />
+
     <Button
         android:id="@+id/bt_behavior"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="gotoBehavior"
-        android:text="behavior"/>
+        android:text="behavior" />
+
     <Button
         android:id="@+id/bt_map_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="gotoMapView"
-        android:text="ChinaMapView"/>
+        android:text="ChinaMapView" />
+
     <Button
         android:id="@+id/bt_my_recycle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="gotoRecycleViewView"
-        android:text="自定义recycleveiw"/>
+        android:text="自定义recycleveiw" />
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/bt_music"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:flexWrap="wrap"
-        app:justifyContent="space_around"
-        android:background="@android:color/holo_blue_dark">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="adasdasdsd "/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="asdsd "/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="asdadssd "/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="asdasdsd "/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="asddasdsd "/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="asdsd "/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="asdsd "/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="asdsd "/>
-    </com.google.android.flexbox.FlexboxLayout>
+        android:onClick="gotoMusic"
+        android:text="music" />
+
 </LinearLayout>

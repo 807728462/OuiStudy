@@ -9,6 +9,9 @@ import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.Message;
+import android.os.MessageQueue;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,7 +26,5 @@ public class ChinaMapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_china_map);
-        Path path=new Path();
-        Canvas canvas=new Canvas();
     }
 }
