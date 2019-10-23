@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.oyf.codecollection.ui.activity.BehaviorActivity;
 import com.oyf.codecollection.ui.activity.ChinaMapActivity;
+import com.oyf.codecollection.ui.activity.MusicActivity;
 import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
 import com.oyf.codecollection.ui.activity.VLayoutActivity;
 
@@ -25,17 +26,23 @@ public class MainActivity extends AppCompatActivity {
         //StatusBarUtil.setStatusBar(this);
     }
 
-    public void gotoVlayout(View view){
+    public void gotoVlayout(View view) {
         startActivity(new Intent(this, VLayoutActivity.class));
     }
-    public void gotoBehavior(View view){
+
+    public void gotoBehavior(View view) {
         startActivity(new Intent(this, BehaviorActivity.class));
     }
-    public void gotoMapView(View view){
+
+    public void gotoMapView(View view) {
         startActivity(new Intent(this, ChinaMapActivity.class));
     }
 
-    public void gotoRecycleViewView(View view){
+    public void gotoRecycleViewView(View view) {
         startActivity(new Intent(this, MyRecycleViewActivity.class));
+    }
+
+    public void gotoMusic(View view) {
+        startActivity(new Intent(this, MusicActivity.class));
     }
 }
