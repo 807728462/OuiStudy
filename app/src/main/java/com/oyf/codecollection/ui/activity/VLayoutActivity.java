@@ -21,6 +21,7 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.oyf.basemodule.animation.FlyAnimator;
 import com.oyf.basemodule.animation.MyAnimation;
 import com.oyf.basemodule.animation.MyDecoration;
+import com.oyf.basemodule.animation.TestAnimation;
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.codecollection.R;
@@ -119,7 +120,7 @@ public class VLayoutActivity extends BaseActivity {
             lists.add(new ItemBean("" + i));
         }
         rcv.addItemDecoration(new MyDecoration());
-        rcv.setItemAnimator(new MyAnimation());
+        rcv.setItemAnimator(new TestAnimation());
         rcv.setAdapter(adapter);
     }
 
