@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
 
 public class RightScaleBehavior extends CoordinatorLayout.Behavior {
 
@@ -23,7 +24,8 @@ public class RightScaleBehavior extends CoordinatorLayout.Behavior {
 
     @Override
     public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
-        return axes == ViewCompat.SCROLL_INDICATOR_BOTTOM;
+        Log.d("nestedScroll", "axes=" + axes);
+        return axes == ViewCompat.SCROLL_AXIS_VERTICAL;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class RightScaleBehavior extends CoordinatorLayout.Behavior {
         if (dyConsumed > 0 && !isRunning && child.getVisibility() == View.VISIBLE) {
             //向下滚动
             onHide(child);
-        } else if (dyConsumed < 0 && !isRunning && child.getVisibility() == View.VISIBLE) {
+        } else if (dyConsumed < 0 && !isRunning && child.getVisibility() == View.INVISIBLE) {
             //向上滚动
             onshow(child);
         }
@@ -46,24 +48,28 @@ public class RightScaleBehavior extends CoordinatorLayout.Behavior {
 
 
     private void onshow(View child) {
+        isRunning = true;
         ViewCompat.animate(child)
                 .scaleX(1)
                 .scaleY(1)
                 .setDuration(500)
-                .setListener(new ViewPropertyAnimatorListener() {
+                .setListener(new ViewPropertyAnimatorListenerAdapter() {
                     @Override
                     public void onAnimationStart(View view) {
+                        super.onAnimationStart(view);
                         child.setVisibility(View.VISIBLE);
-                        isRunning = true;
                     }
 
                     @Override
                     public void onAnimationEnd(View view) {
+                        super.onAnimationEnd(view);
+                        child.setVisibility(View.VISIBLE);
                         isRunning = false;
                     }
 
                     @Override
                     public void onAnimationCancel(View view) {
+                        super.onAnimationCancel(view);
                         isRunning = false;
                     }
                 }).start();
@@ -71,25 +77,28 @@ public class RightScaleBehavior extends CoordinatorLayout.Behavior {
 
 
     private void onHide(View child) {
+        isRunning = true;
         top = child.getTop();
         ViewCompat.animate(child)
                 .scaleX(0)
                 .scaleY(0)
                 .setDuration(500)
-                .setListener(new ViewPropertyAnimatorListener() {
+                .setListener(new ViewPropertyAnimatorListenerAdapter() {
                     @Override
                     public void onAnimationStart(View view) {
-                        isRunning = true;
+                        super.onAnimationStart(view);
                     }
 
                     @Override
                     public void onAnimationEnd(View view) {
+                        super.onAnimationEnd(view);
                         child.setVisibility(View.INVISIBLE);
                         isRunning = false;
                     }
 
                     @Override
                     public void onAnimationCancel(View view) {
+                        super.onAnimationCancel(view);
                         isRunning = false;
                     }
                 }).start();

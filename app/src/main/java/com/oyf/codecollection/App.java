@@ -3,6 +3,7 @@ package com.oyf.codecollection;
 import android.app.Application;
 
 import com.github.moduth.blockcanary.BlockCanary;
+import com.oyf.basemodule.utils.PxAdapterUtil;
 import com.oyf.codecollection.utils.AppContext;
 
 public class App extends Application {
@@ -11,5 +12,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         BlockCanary.install(this, new AppContext()).start();
+        PxAdapterUtil.init(this);
     }
 }
