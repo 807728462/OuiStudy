@@ -27,6 +27,7 @@ import com.oyf.codecollection.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MusicActivity extends AppCompatActivity {
 
@@ -48,7 +49,7 @@ public class MusicActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initView() {
-        lv = findViewById(R.id.lv);
+            lv = findViewById(R.id.lv);
         toolbar = findViewById(R.id.toolbar);
         ll_hide = findViewById(R.id.ll_hide);
         headView = getLayoutInflater().inflate(R.layout.head_music, null, true);
@@ -61,8 +62,8 @@ public class MusicActivity extends AppCompatActivity {
         AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1000);
         headView.setLayoutParams(layoutParams);
 
-        FrameLayout.LayoutParams layoutParams1 =new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams1.topMargin=toolbar.getHeight()+getStateBar();
+        FrameLayout.LayoutParams layoutParams1 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams1.topMargin = toolbar.getHeight() + getStateBar();
         ll_hide.setLayoutParams(layoutParams1);
         List<HashMap<String, String>> data = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {    //创建 18  个 map 数据对象 ，每个map 对象 有两个键值数据

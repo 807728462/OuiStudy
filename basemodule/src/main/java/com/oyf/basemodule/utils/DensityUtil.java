@@ -7,7 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
-public class DensityUtils {
+public class DensityUtil {
     private static final float WINDTH = 1920;
 
     private static float mDensity = 0;

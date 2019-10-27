@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.oyf.basemodule.utils.PxAdapterUtils;
+import com.oyf.basemodule.utils.PxAdapterUtil;
 
 
 public class ScreenAdapterLayout extends RelativeLayout {
@@ -28,8 +28,8 @@ public class ScreenAdapterLayout extends RelativeLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (!flag){
             //得到宽高的缩放比例
-            float scaleX = PxAdapterUtils.getInstance(getContext()).getHorizontalScale();
-            float scaleY = PxAdapterUtils.getInstance(getContext()).getVerticalScale();
+            float scaleX = PxAdapterUtil.getInstance().getWidthScale();
+            float scaleY = PxAdapterUtil.getInstance().getHeightScale();
 
             int count = getChildCount();
             for (int i = 0; i < count; i++) {

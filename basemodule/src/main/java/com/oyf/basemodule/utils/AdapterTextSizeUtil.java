@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.core.widget.TextViewCompat;
 
-public class AdapterTextSizeUtils {
+public class AdapterTextSizeUtil {
     @SuppressLint("NewApi")
     public static void updateTextSize(View view) {
         if (view instanceof ViewGroup) {
@@ -21,5 +21,7 @@ public class AdapterTextSizeUtils {
             tv.setAutoSizeTextTypeUniformWithPresetSizes(new int[]{10, 12, 14, 16, 18, 20, 22, 24, 26}, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         }
     }
+
+
 
 }
