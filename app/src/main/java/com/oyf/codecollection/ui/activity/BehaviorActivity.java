@@ -1,6 +1,8 @@
 package com.oyf.codecollection.ui.activity;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.graphics.PathMeasure;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.oyf.basemodule.mvp.BaseActivity;

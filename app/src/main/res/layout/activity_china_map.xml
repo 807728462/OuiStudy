@@ -17,12 +17,18 @@
             \n 4.绘制中先缩放画布，然后绘制path
             \n 5.onTouchEvent中计算点击是否在某个省份中，记录，刷新
             \n （计算点击位置时候，使用Region去判断是否在点击范围内）"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.oyf.basemodule.weight.ChinaMapView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.oyf.basemodule.weight.ImageOperationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
