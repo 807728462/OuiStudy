@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.oyf.basemodule" />
+    package="com.oyf.basemodule" >
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+</manifest>

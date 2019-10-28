@@ -25,6 +25,11 @@ import androidx.annotation.RequiresApi;
 import com.oyf.basemodule.R;
 
 public class ImageOperationView extends View {
+    private static int NONE = 0;
+    private static int DRAG = 1;    // 拖动
+    private static int ZOOM = 2;    // 缩放
+    private static int ROTATE = 3;    // 旋转
+
     public ImageOperationView(Context context) {
         this(context, null);
     }
@@ -41,43 +46,35 @@ public class ImageOperationView extends View {
     Paint mPaint;
     Bitmap mBitmap;
 
-    Matrix mBitmapMatrix;
-    RectF mBitmapRectf;
+    Matrix mSaveMatrix;
+    Matrix mMatrix;
 
-    boolean canScale;
-    boolean canRotate;
-    boolean canTranslate;
+    int mode = NONE;
 
     Point mFristPoint;
     Point mSecondPoint;
-    float startDistance;
-
-    int currentX = 50;
-    int currentY = 200;
-    float imgScale;
+    PointF mCenterPointF;
+    float oldDistance;
+    float oldAngle;
 
     private void init() {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        mPaint.setTextSize(40);
+        mPaint.setColor(Color.RED);
 
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.image);
 
         mBitmap = Bitmap.createScaledBitmap(
                 mBitmap,
-                displayMetrics.widthPixels - currentX * 2,
-                (displayMetrics.widthPixels - currentX * 2) * mBitmap.getWidth() / mBitmap.getHeight(),
+                displayMetrics.widthPixels,
+                displayMetrics.widthPixels * mBitmap.getWidth() / mBitmap.getHeight(),
                 true);
 
-        mBitmapMatrix = new Matrix();
-        mBitmapRectf = new RectF();
-        mBitmapRectf.left = currentX;
-        mBitmapRectf.top = currentY;
-        mBitmapRectf.right = mBitmapRectf.left + mBitmap.getWidth();
-        mBitmapRectf.bottom = mBitmapRectf.top + mBitmap.getHeight();
-
-        updateTranslate(0, 0);
-
+        mSaveMatrix = new Matrix();
+        mMatrix = new Matrix();
+        mMatrix.setTranslate(0, 100);
         mFristPoint = new Point();
         mSecondPoint = new Point();
     }
@@ -91,103 +88,84 @@ public class ImageOperationView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.GREEN);
-        mPaint.setColor(Color.GRAY);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(2);
-        canvas.drawRect(mBitmapRectf, mPaint);
-        canvas.saveLayer(mBitmapRectf, mPaint);
-        canvas.drawBitmap(mBitmap, mBitmapMatrix, mPaint);
-        canvas.restore();
+        canvas.drawText("单点拖拽，两指缩放，三指旋转", 0, 100, mPaint);
+        canvas.drawBitmap(mBitmap, mMatrix, null);
     }
 
-    public void updateTranslate(float x, float y) {
-        currentX += x;
-        currentY += y;
-        mBitmapMatrix.setTranslate(currentX, currentY);
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                canScale = false;
-                canRotate = false;
-                canTranslate = true;
+                mSaveMatrix.set(mMatrix);
+                mode = DRAG;
                 mFristPoint.x = (int) event.getX();
                 mFristPoint.y = (int) event.getY();
-
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
-                if (event.getPointerCount() == 2) {
-                    canScale = true;
-                    canRotate = true;
-                    canTranslate = false;
-                    startDistance = calculationPoint(event);
-                    mSecondPoint.x = (int) event.getX(1);
-                    mSecondPoint.y = (int) event.getY(1);
+                oldDistance = calculationPoint(event);
+                oldAngle = getDegree(event);
+                if (oldDistance > 10) {
+                    if (event.getPointerCount() == 3) {
+                        mode = ROTATE;
+                    } else {
+                        mode = ZOOM;
+                    }
+                    mSaveMatrix.set(mMatrix);
+                    mCenterPointF = midPoint(event);
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (canTranslate) {
-                    updateTranslate(event.getX() - mFristPoint.x, event.getY() - mFristPoint.y);
-                    mFristPoint.x = (int) event.getX();
-                    mFristPoint.y = (int) event.getY();
+                if (mode == DRAG) {
+                    mMatrix.set(mSaveMatrix);
+                    mMatrix.postTranslate(event.getX() - mFristPoint.x, event.getY() - mFristPoint.y);
                 }
-                if (canRotate) {
-
+                if (mode == ZOOM) {
+                    float nowDistance = calculationPoint(event);
+                    if (nowDistance > 10) {
+                        mMatrix.set(mSaveMatrix);
+                        mMatrix.postScale(nowDistance / oldDistance, nowDistance / oldDistance, mCenterPointF.x, mCenterPointF.y);
+                    }
                 }
-
-                if (canScale) {
-
+                if (mode == ROTATE) {
+                    float nowDegree = getDegree(event);
+                    mMatrix.set(mSaveMatrix);
+                    mMatrix.postRotate(nowDegree - oldAngle);
                 }
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                if (event.getPointerCount() == 2) {
-                    canScale = true;
-                    canRotate = true;
-                    canTranslate = false;
-                } else if (event.getPointerCount() == 1) {
-                    canScale = false;
-                    canRotate = false;
-                    canTranslate = true;
-                    mSecondPoint.x = 0;
-                    mSecondPoint.y = 0;
-                    mFristPoint.x = (int) event.getX();
-                    mFristPoint.y = (int) event.getY();
-                } else {
-                    canScale = false;
-                    canRotate = false;
-                    canTranslate = false;
-                    mFristPoint.x = 0;
-                    mFristPoint.y = 0;
-                }
+            case MotionEvent.ACTION_POINTER_UP:
+                mode = NONE;
                 break;
         }
         return true;
     }
 
-    //两点间距离公式
+
+    /**
+     * 计算两个点之间的距离
+     *
+     * @param event
+     * @return
+     */
     public float calculationPoint(MotionEvent event) {
         float x = event.getX(0) - event.getX(1);
         float y = event.getY(0) - event.getY(1);
         return (float) Math.sqrt(x * x + y * y);
     }
 
+
     /**
-     * 计算两个向量之间的夹角
+     * 计算两个手指触摸时候的角度
      *
-     * @param lastVector 上一次两只手指形成的向量
-     * @param vector     本次两只手指形成的向量
-     * @return 返回手指旋转过的角度
+     * @param event
+     * @return
      */
-    private float calculateDeltaDegree(PointF lastVector, PointF vector) {
-        float lastDegree = (float) Math.atan2(lastVector.y, lastVector.x);
-        float degree = (float) Math.atan2(vector.y, vector.x);
-        float deltaDegree = degree - lastDegree;
-        return (float) Math.toDegrees(deltaDegree);
+    private float getDegree(MotionEvent event) {
+        return (float) (Math.atan((event.getY(1) - event.getY(0)) / (event.getX(1) - event.getX(0))) * 180f);
     }
+
 
     /**
      * 计算两个手指头之间的中心点的位置
@@ -202,4 +180,5 @@ public class ImageOperationView extends View {
         float y = (event.getY(0) + event.getY(1)) / 2;
         return new PointF(x, y);
     }
+
 }

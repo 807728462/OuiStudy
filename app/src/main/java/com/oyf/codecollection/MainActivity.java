@@ -23,8 +23,6 @@ import com.oyf.codecollection.ui.activity.MusicActivity;
 import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
 import com.oyf.codecollection.ui.activity.VLayoutActivity;
 
-import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //StatusBarUtil.setStatusBar(this);
         button = findViewById(R.id.bt_vlayout);
-        //ViewCalculateUtil.setViewLayoutParam(ll, 180, 360, true);
 
     }
 
