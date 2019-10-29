@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#134562"
+        android:onClick="onclick"
         android:text="我是显示在底部的空间"
         android:layout_gravity="bottom"
         app:layout_behavior="com.oyf.basemodule.RightScaleBehavior"

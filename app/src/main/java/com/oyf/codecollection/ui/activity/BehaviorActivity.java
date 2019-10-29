@@ -2,6 +2,7 @@ package com.oyf.codecollection.ui.activity;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.PathMeasure;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
+import com.oyf.codecollection.MainActivity;
 import com.oyf.codecollection.R;
 
 
@@ -50,6 +52,11 @@ public class BehaviorActivity extends BaseActivity {
         super.initData(savedInstanceState);
         rcv.setLayoutManager(new LinearLayoutManager(this));
         rcv.setAdapter(new Badapter());
+    }
+
+    public void onclick(View view) {
+      /*  Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);*/
     }
 
     public class Badapter extends RecyclerView.Adapter {
