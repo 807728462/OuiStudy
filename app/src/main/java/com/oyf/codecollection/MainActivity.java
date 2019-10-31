@@ -14,10 +14,17 @@ import com.oyf.basemodule.bus.OSubscribe;
 import com.oyf.basemodule.bus.OThreadMode;
 import com.oyf.codecollection.ui.activity.BehaviorActivity;
 import com.oyf.codecollection.ui.activity.ChinaMapActivity;
+import com.oyf.codecollection.ui.activity.GalleryActivity;
 import com.oyf.codecollection.ui.activity.MusicActivity;
 import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
+import com.oyf.codecollection.ui.activity.PlayMusicActivity;
 import com.oyf.codecollection.ui.activity.VLayoutActivity;
 import com.oyf.codecollection.ui.bean.ItemBean;
+
+import java.util.concurrent.ArrayBlockingQueue;
+
+import dalvik.system.DexClassLoader;
+import dalvik.system.PathClassLoader;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,13 +39,18 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.bt_vlayout);
         OBus.getDefault().register(this);
         Log.d("test", "MainActivity.oncreat");
+        ClassLoader loader = MainActivity.class.getClassLoader();
+        while (loader != null) {
+            Log.d("test", loader.toString());//1
+            loader = loader.getParent();
+        }
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         Log.d("test", "MainActivity.onNewIntent");
-
     }
 
     public void gotoVlayout(View view) {
@@ -59,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void gotoMusic(View view) {
         startActivity(new Intent(this, MusicActivity.class));
+    }
+
+    public void playMusic(View view) {
+        startActivity(new Intent(this, PlayMusicActivity.class));
+    }
+
+    public void imageSelect(View view) {
+        startActivity(new Intent(this, GalleryActivity.class));
     }
 
     @OSubscribe(threadMode = OThreadMode.MAIN)

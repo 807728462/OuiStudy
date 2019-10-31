@@ -42,4 +42,17 @@
         android:onClick="gotoMusic"
         android:text="music" />
 
+    <Button
+        android:id="@+id/bt_play_music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="playMusic"
+        android:text="播放音乐" />
+    <Button
+        android:id="@+id/bt_image_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="imageSelect"
+        android:text="图片滚动配合" />
+
 </LinearLayout>

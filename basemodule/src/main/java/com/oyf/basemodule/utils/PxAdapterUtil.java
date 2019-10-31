@@ -9,8 +9,9 @@ public class PxAdapterUtil {
     private static PxAdapterUtil utils;
 
     //这里是设计稿参考宽高
-    private static final float STANDARD_WIDTH = 360;
-    private static final float STANDARD_HEIGHT = 720;
+    public static final float STANDARD_WIDTH = 1080f;
+    public static final float STANDARD_HEIGHT = 1920f;
+
 
     //这里是屏幕显示宽高
     private int mDisplayWidth;
@@ -54,7 +55,8 @@ public class PxAdapterUtil {
     }
 
     /**
-     *得到状态栏高度，这种方式在某些特定的手机上获取不到，需要利用反射
+     * 得到状态栏高度，这种方式在某些特定的手机上获取不到，需要利用反射
+     *
      * @param context
      * @return
      */
@@ -68,6 +70,7 @@ public class PxAdapterUtil {
 
     /**
      * 获取水平方向的缩放比例
+     *
      * @return
      */
     public float getWidthScale() {
@@ -76,6 +79,7 @@ public class PxAdapterUtil {
 
     /**
      * 获取水平方向的具体的值
+     *
      * @param width
      * @return
      */
@@ -85,6 +89,7 @@ public class PxAdapterUtil {
 
     /**
      * 获取垂直方向的缩放比例
+     *
      * @return
      */
     public float getHeightScale() {
@@ -93,10 +98,21 @@ public class PxAdapterUtil {
 
     /**
      * 获取垂直方向的具体的值
+     *
      * @param height
      * @return
      */
     public int getHeight(int height) {
         return Math.round(height * getHeightScale());
     }
+
+    public int getScreenWidth() {
+        return mDisplayWidth;
+    }
+
+    public int getScreenHeight() {
+        return mDisplayHeight;
+    }
+
+
 }
