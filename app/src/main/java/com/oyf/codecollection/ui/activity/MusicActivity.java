@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -22,7 +23,9 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.alibaba.android.vlayout.VirtualLayoutAdapter;
+import com.oyf.basemodule.bus.OBus;
 import com.oyf.codecollection.R;
+import com.oyf.codecollection.ui.bean.ItemBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +52,7 @@ public class MusicActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initView() {
-            lv = findViewById(R.id.lv);
+        lv = findViewById(R.id.lv);
         toolbar = findViewById(R.id.toolbar);
         ll_hide = findViewById(R.id.ll_hide);
         headView = getLayoutInflater().inflate(R.layout.head_music, null, true);

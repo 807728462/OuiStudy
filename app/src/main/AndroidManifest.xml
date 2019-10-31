@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".ui.activity.MusicActivity"></activity>
+        <activity android:name=".ui.activity.GalleryActivity"></activity>
+        <activity android:name=".ui.activity.PlayMusicActivity" />
+        <activity android:name=".ui.activity.MusicActivity" />
         <activity android:name=".ui.activity.MyRecycleViewActivity" />
         <activity android:name=".ui.activity.ChinaMapActivity" />
         <activity android:name=".ui.activity.BehaviorActivity" />
