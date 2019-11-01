@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -11,6 +12,12 @@ import android.view.View;
 
 import com.oyf.codecollection.utils.TouchView;
 import com.oyf.codecollection.R;
+
+import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import butterknife.OnClick;
 
 public class ChinaMapActivity extends AppCompatActivity {
 
@@ -27,9 +34,8 @@ public class ChinaMapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_china_map);
-
+        Handler handler = new Handler();
     }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
