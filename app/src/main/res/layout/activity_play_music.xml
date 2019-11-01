@@ -47,21 +47,21 @@
             android:id="@+id/iv_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/ic_play" />
+            android:src="@mipmap/ic_play" />
 
         <ImageView
             android:id="@+id/iv_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:background="@mipmap/ic_next" />
+            android:src="@mipmap/ic_next" />
 
         <ImageView
             android:id="@+id/iv_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:background="@mipmap/ic_list" />
+            android:src="@mipmap/ic_list" />
     </LinearLayout>
 
     <LinearLayout
@@ -83,6 +83,7 @@
             android:textSize="12sp" />
 
         <SeekBar
+            android:id="@+id/seek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -140,10 +141,11 @@
             android:src="@mipmap/ic_detail" />
     </LinearLayout>
 
-    <com.oyf.codecollection.palymusic.MusicViewFlipper
-        android:id="@+id/mvf_main"
+    <include
+        android:id="@+id/discview"
+        layout="@layout/layout_disc_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/ll_list"
-        android:layout_below="@+id/toolbar" />
+        android:layout_above="@+id/ll_list"
+        android:layout_below="@id/toolbar" />
 </RelativeLayout>

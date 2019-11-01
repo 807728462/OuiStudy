@@ -1,6 +1,8 @@
 package com.oyf.codecollection.palymusic;
 
-public class MusicDataBean {
+import java.io.Serializable;
+
+public class MusicDataBean implements Serializable {
     /*音乐资源id*/
     private int mMusicRes;
     /*专辑图片id*/

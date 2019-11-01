@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 import com.oyf.codecollection.R;
@@ -75,7 +76,7 @@ public class MusicViewFlipper extends ViewFlipper implements View.OnTouchListene
                             float value = (float) animation.getAnimatedValue();
                             getCurrentView().setTranslationX(value);
                             getOtherView().setTranslationX(value + (isNext ? width : -width));
-                            if (value == 0) {
+                            if (Math.abs(value) == width) {
                                 if (isNext) {
                                     nextItem(currentItem + 1);
                                     showNext();
@@ -133,10 +134,12 @@ public class MusicViewFlipper extends ViewFlipper implements View.OnTouchListene
      * @param index
      * @return
      */
-    public int nextItem(int index) {
+    private int nextItem(int index) {
         currentItem = index;
-        if (index >= musicSize - 1) {
+        if (currentItem >= musicSize) {
             currentItem = 0;
+        } else if (currentItem < 0) {
+            currentItem = musicSize - 1;
         }
         return currentItem;
     }
@@ -149,7 +152,9 @@ public class MusicViewFlipper extends ViewFlipper implements View.OnTouchListene
      */
     public int previousItem(int index) {
         currentItem = index;
-        if (index < 0) {
+        if (currentItem >= musicSize) {
+            currentItem = 0;
+        } else if (currentItem < 0) {
             currentItem = musicSize - 1;
         }
         return currentItem;
@@ -161,10 +166,13 @@ public class MusicViewFlipper extends ViewFlipper implements View.OnTouchListene
      * @return
      */
     public int getNextItem() {
-        if (currentItem >= musicSize - 1) {
+        int next = currentItem + 1;
+        if (next >= musicSize) {
             return 0;
+        } else if (next < 0) {
+            return musicSize - 1;
         }
-        return currentItem + 1;
+        return next;
     }
 
     /**
@@ -173,10 +181,57 @@ public class MusicViewFlipper extends ViewFlipper implements View.OnTouchListene
      * @return
      */
     public int getPreviousItem() {
-        if (currentItem <= 0) {
+        int previous = currentItem - 1;
+        if (previous >= musicSize) {
+            return 0;
+        } else if (previous < 0) {
             return musicSize - 1;
         }
-        return currentItem - 1;
+        return previous;
+    }
+
+    public void showPreviousWithAnimation() {
+        ValueAnimator previousAnimator = ValueAnimator.ofFloat(0, width);
+        getOtherView().setVisibility(VISIBLE);
+        previousAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                getCurrentView().setTranslationX(value);
+                getOtherView().setTranslationX(value - width);
+                if (value == width) {
+                    previousItem(currentItem - 1);
+                    showPrevious();
+                    if (mOnPageChangeListener != null) {
+                        mOnPageChangeListener.onPageSelected(currentItem, false);
+                        mOnPageChangeListener.onPageScrollStateChanged(SCROLL_STATE_IDLE);
+                    }
+                }
+            }
+        });
+        previousAnimator.start();
+    }
+
+    public void showNextWithAnimation() {
+        ValueAnimator nextAnimator = ValueAnimator.ofFloat(0, -width);
+        getOtherView().setVisibility(VISIBLE);
+        nextAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                getCurrentView().setTranslationX(value);
+                getOtherView().setTranslationX(value + width);
+                if (Math.abs(value) == width) {
+                    previousItem(currentItem + 1);
+                    showNext();
+                    if (mOnPageChangeListener != null) {
+                        mOnPageChangeListener.onPageSelected(currentItem, true);
+                        mOnPageChangeListener.onPageScrollStateChanged(SCROLL_STATE_IDLE);
+                    }
+                }
+            }
+        });
+        nextAnimator.start();
     }
 
     public int getOtherItem() {
@@ -185,6 +240,11 @@ public class MusicViewFlipper extends ViewFlipper implements View.OnTouchListene
 
     public View getOtherView() {
         return getChildAt(getOtherItem());
+    }
+
+    //获取没在屏幕中显示的Poster
+    public ImageView getOtherPosterView() {
+        return getOtherView().findViewById(R.id.iv_poster);
     }
 
     public void setOnPageChangeListener(OnPageChangeListener listener) {
