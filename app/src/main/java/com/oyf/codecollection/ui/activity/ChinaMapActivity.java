@@ -10,6 +10,8 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.oyf.basemodule.weight.LoadCircleView;
+import com.oyf.basemodule.weight.LoadingView;
 import com.oyf.codecollection.utils.TouchView;
 import com.oyf.codecollection.R;
 
@@ -33,7 +35,8 @@ public class ChinaMapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_china_map);
+        //setContentView(R.layout.activity_china_map);
+        setContentView(new LoadingView(this));
         Handler handler = new Handler();
     }
     @Override
