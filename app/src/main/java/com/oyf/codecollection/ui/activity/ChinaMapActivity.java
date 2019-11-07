@@ -12,6 +12,9 @@ import android.view.View;
 
 import com.oyf.basemodule.weight.LoadCircleView;
 import com.oyf.basemodule.weight.LoadingView;
+import com.oyf.basemodule.weight.RippleView;
+import com.oyf.basemodule.weight.ShipView;
+import com.oyf.basemodule.weight.WaveView;
 import com.oyf.codecollection.utils.TouchView;
 import com.oyf.codecollection.R;
 
@@ -32,16 +35,28 @@ public class ChinaMapActivity extends AppCompatActivity {
     float leftMargin;
     float topMargin;
 
+    RippleView rippleView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_china_map);
-        setContentView(new LoadingView(this));
-        Handler handler = new Handler();
+        setContentView(new ShipView(this));
+        rippleView = findViewById(R.id.rv_main);
+
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void start(View view) {
+        if (rippleView.isRunning()) {
+            rippleView.stop();
+        } else {
+            rippleView.start();
+        }
     }
 }
