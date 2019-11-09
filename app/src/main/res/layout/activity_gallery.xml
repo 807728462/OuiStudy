@@ -10,15 +10,21 @@
     <ImageSwitcher
         android:id="@+id/is_img"
         android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+    <com.oyf.codecollection.palymusic.MusicViewFlipper
+        android:id="@+id/mvf"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:background="#DBDBDC" />
 
     <Gallery
         android:id="@+id/g_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:gravity="center_vertical"
         android:background="#AEAFAF"
-        android:spacing="16dp"/>
+        android:gravity="center_vertical"
+        android:padding="20dp"
+        android:spacing="16dp" />
 </LinearLayout>

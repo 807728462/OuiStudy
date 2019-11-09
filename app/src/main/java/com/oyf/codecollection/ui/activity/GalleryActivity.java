@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import android.widget.ViewSwitcher;
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.codecollection.R;
+import com.oyf.codecollection.palymusic.MusicViewFlipper;
 
 public class GalleryActivity extends BaseActivity {
 
@@ -35,6 +37,7 @@ public class GalleryActivity extends BaseActivity {
     }
 
     private ImageSwitcher imageSwitcher;
+    private MusicViewFlipper musicViewFlipper;
     private Gallery gallery;
     private int images[] = {R.drawable.poster1,
             R.drawable.poster2, R.drawable.poster3};
@@ -46,6 +49,7 @@ public class GalleryActivity extends BaseActivity {
         super.initView(savedInstanceState);
         gallery = findViewById(R.id.g_img);
         imageSwitcher = findViewById(R.id.is_img);
+        musicViewFlipper = findViewById(R.id.mvf);
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
@@ -97,11 +101,52 @@ public class GalleryActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currentPosition = position;
                 imageSwitcher.setImageResource(images[currentPosition]);
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        initMVF();
+
+    }
+
+    int otherNum = 0;
+
+    private void initMVF() {
+        for (int i = 0; i < 2; i++) {
+            ImageView imageView = new ImageView(this);
+            imageView.setImageResource(images[i]);
+            imageView.setPadding(100, 100, 100, 100);
+            musicViewFlipper.addView(imageView);
+        }
+        musicViewFlipper.setMusicSize(images.length);
+        musicViewFlipper.setOnPageChangeListener(new MusicViewFlipper.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, float positionOffsetPixels) {
+                Log.d("test", "position=" + position + ",offset=" + positionOffset + ",offsetpix=" + positionOffsetPixels);
+                if (positionOffsetPixels > 0 && otherNum != musicViewFlipper.getPreviousItem()) {
+                    ImageView imageView = (ImageView) musicViewFlipper.getOtherView();
+                    imageView.setImageResource(images[musicViewFlipper.getPreviousItem()]);
+                    otherNum = musicViewFlipper.getPreviousItem();
+                } else if (positionOffsetPixels < 0 && otherNum != musicViewFlipper.getNextItem()) {
+                    ((ImageView) musicViewFlipper.getOtherView()).setImageResource(images[musicViewFlipper.getNextItem()]);
+                    otherNum = musicViewFlipper.getNextItem();
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position, boolean isNext) {
+                Log.d("test", "positon=" + position + ",isnext=" + isNext);
+                gallery.setSelection(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                Log.d("test", "state=" + state);
             }
         });
     }
