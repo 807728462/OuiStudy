@@ -13,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorListener;
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
 
+import com.oyf.basemodule.animators.BaseItemAnimator;
+
 public class RightScaleBehavior extends CoordinatorLayout.Behavior {
 
     int top;
@@ -38,6 +40,7 @@ public class RightScaleBehavior extends CoordinatorLayout.Behavior {
             //向上滚动
             onshow(child);
         }
+
         Log.d("nestedScroll", "dxConsumed=" + dxConsumed +
                 ",dyConsumed=" + dyConsumed +
                 ",dxUnconsumed=" + dxUnconsumed +

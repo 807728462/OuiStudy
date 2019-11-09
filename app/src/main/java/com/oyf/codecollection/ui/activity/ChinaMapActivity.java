@@ -3,6 +3,7 @@ package com.oyf.codecollection.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -43,7 +44,6 @@ public class ChinaMapActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_china_map);
         setContentView(new ShipView(this));
         rippleView = findViewById(R.id.rv_main);
-
     }
 
     @Override

@@ -39,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.bt_vlayout);
         OBus.getDefault().register(this);
         Log.d("test", "MainActivity.oncreat");
-        ClassLoader loader = MainActivity.class.getClassLoader();
-        while (loader != null) {
-            Log.d("test", loader.toString());//1
-            loader = loader.getParent();
-        }
 
     }
 
@@ -62,7 +57,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gotoMapView(View view) {
-        startActivity(new Intent(this, ChinaMapActivity.class));
+        Bundle bundle = new Bundle();
+        bundle.putInt("int", 12);
+        bundle.putBoolean("boolean", true);
+        bundle.putFloat("float", 2.0f);
+        Intent intent = new Intent();
+        intent.setAction("ChinaMapActivity");
+        intent.putExtras(bundle);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        //startActivity(new Intent(this, ChinaMapActivity.class));
     }
 
     public void gotoRecycleViewView(View view) {

@@ -1,6 +1,7 @@
 package com.oyf.codecollection.ui.activity;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,10 +19,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.oyf.basemodule.animation.FlyAnimator;
-import com.oyf.basemodule.animation.MyAnimation;
-import com.oyf.basemodule.animation.MyDecoration;
-import com.oyf.basemodule.animation.TestAnimation;
+import com.oyf.basemodule.animators.FadeInAnimator;
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.codecollection.R;
@@ -97,6 +95,7 @@ public class VLayoutActivity extends BaseActivity {
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.rcv_item, parent, false);
+
                 return new RecyclerView.ViewHolder(inflate) {
                     @Override
                     public String toString() {
@@ -106,9 +105,21 @@ public class VLayoutActivity extends BaseActivity {
             }
 
             @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
                 TextView tv = holder.itemView.findViewById(R.id.tv_list);
+                if (holder.getAdapterPosition() % 2 == 0) {
+                    holder.itemView.findViewById(R.id.ll).setBackgroundColor(Color.RED);
+                } else {
+                    holder.itemView.findViewById(R.id.ll).setBackgroundColor(Color.GREEN);
+                }
                 tv.setText("列表" + position + "-" + lists.get(position).name);
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        lists.remove(holder.getAdapterPosition());
+                        adapter.notifyItemRemoved(holder.getAdapterPosition());
+                    }
+                });
             }
 
             @Override
@@ -116,11 +127,12 @@ public class VLayoutActivity extends BaseActivity {
                 return lists.size();
             }
         };
-        for (int i = 0; i < 100; i++) {
+
+        for (int i = 0; i < 1; i++) {
             lists.add(new ItemBean("" + i));
         }
-        rcv.addItemDecoration(new MyDecoration());
-        rcv.setItemAnimator(new TestAnimation());
+        rcv.setItemAnimator(new FadeInAnimator());
+        //rcv.setItemAnimator();
         rcv.setAdapter(adapter);
     }
 
@@ -137,6 +149,7 @@ public class VLayoutActivity extends BaseActivity {
         mAdapters.add(new BaseVLayoutAdapter<ItemBean>(R.layout.rcv_item, lists) {
             @Override
             protected void convert(BaseViewHolder holder, ItemBean item) {
+
                 holder.setText(R.id.tv_list, "列表" + item.name);
             }
 
@@ -151,19 +164,15 @@ public class VLayoutActivity extends BaseActivity {
     }
 
     public void insert(View view) {
-        if (lists.size() > 0) {
-            lists.add(1, new ItemBean("insert"));
-            adapter.notifyItemInserted(1);
+        if (lists.size() >= 0) {
+            lists.add(0, new ItemBean("insert"));
+            adapter.notifyItemInserted(0);
         }
     }
 
     public void delete(View view) {
-        if (lists.size() > 1) {
-            lists.remove(1);
-            adapter.notifyItemRemoved(1);
+        if (lists.size() >= 0) {
 
         }
-
-
     }
 }
