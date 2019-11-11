@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.GalleryActivity"></activity>
+        <activity android:name=".ui.activity.ViewActivity"></activity>
+        <activity android:name=".ui.activity.GalleryActivity" />
         <activity android:name=".ui.activity.PlayMusicActivity" />
         <activity android:name=".ui.activity.MusicActivity" />
         <activity android:name=".ui.activity.MyRecycleViewActivity" />

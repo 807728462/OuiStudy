@@ -19,6 +19,7 @@ import com.oyf.codecollection.ui.activity.MusicActivity;
 import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
 import com.oyf.codecollection.ui.activity.PlayMusicActivity;
 import com.oyf.codecollection.ui.activity.VLayoutActivity;
+import com.oyf.codecollection.ui.activity.ViewActivity;
 import com.oyf.codecollection.ui.bean.ItemBean;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -83,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void imageSelect(View view) {
         startActivity(new Intent(this, GalleryActivity.class));
+    }
+
+    public void customView(View view) {
+        startActivity(new Intent(this, ViewActivity.class));
     }
 
     @OSubscribe(threadMode = OThreadMode.MAIN)
