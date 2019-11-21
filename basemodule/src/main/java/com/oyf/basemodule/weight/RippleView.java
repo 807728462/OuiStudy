@@ -20,6 +20,9 @@ import java.util.List;
 
 import javax.security.auth.Subject;
 
+/**
+ * 语音的波纹效果
+ */
 public class RippleView extends RelativeLayout {
     public RippleView(Context context) {
         this(context, null);
@@ -100,8 +103,8 @@ public class RippleView extends RelativeLayout {
 
     public void stop() {
         if (isRunning()) {
-            mAnimationSet.pause();
-         /*   for (int i = 0; i < mViewAnimation.size(); i++) {
+            //mAnimationSet.end();
+            for (int i = 0; i < mViewAnimation.size(); i++) {
                 ObjectAnimator animator = (ObjectAnimator) mViewAnimation.get(i);
                 animator.setRepeatCount(0);
                 int finalI = i;
@@ -112,7 +115,7 @@ public class RippleView extends RelativeLayout {
                         mViewLists.get(finalI).setVisibility(INVISIBLE);
                     }
                 });
-            }*/
+            }
         }
     }
 

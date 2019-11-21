@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.graphics.Region;
 import android.util.Log;
 
+import com.oyf.basemodule.weight.ProgressView;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,12 +15,16 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestMain {
 
+    public static volatile int a = 0;
+
     public static void main(String[] args) {
-        String property = System.getProperty("sun.boot.class.path");
+
+      /*  String property = System.getProperty("sun.boot.class.path");
         System.out.println(property);
         System.out.println("----------------");
         System.out.println(System.getProperty("java.ext.dirs"));
@@ -42,7 +48,7 @@ public class TestMain {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public static class MyClassLoder extends ClassLoader {

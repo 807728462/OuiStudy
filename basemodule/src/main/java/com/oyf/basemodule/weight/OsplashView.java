@@ -18,6 +18,9 @@ import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 
+/**
+ * 旋转动画交过，扩散
+ */
 public class OsplashView extends View {
     public OsplashView(Context context) {
         this(context, null);

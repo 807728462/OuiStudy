@@ -31,6 +31,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class VLayoutActivity extends BaseActivity {
@@ -61,7 +62,6 @@ public class VLayoutActivity extends BaseActivity {
         super.initView(savedInstanceState);
         srl = findViewById(R.id.srl);
         rcv = findViewById(R.id.rcv);
-
     }
 
     @Override
@@ -82,8 +82,8 @@ public class VLayoutActivity extends BaseActivity {
                 refreshLayout.finishLoadMore(1000);
             }
         });
-        // initVlayoutRecycleData();
-        initAnimationRecycleData();
+        initVlayoutRecycleData();
+        //initAnimationRecycleData();
     }
 
     RecyclerView.Adapter adapter;
@@ -144,8 +144,13 @@ public class VLayoutActivity extends BaseActivity {
         recycledViewPool.setMaxRecycledViews(0, 40);
         rcv.setRecycledViewPool(recycledViewPool);
         rcv.setLayoutManager(virtualLayoutManager);
+
+        
         rcv.setAdapter(mDelegateAdapter);
 
+        for (int i = 0; i < 10; i++) {
+            lists.add(new ItemBean("" + i));
+        }
         mAdapters.add(new BaseVLayoutAdapter<ItemBean>(R.layout.rcv_item, lists) {
             @Override
             protected void convert(BaseViewHolder holder, ItemBean item) {
@@ -166,7 +171,7 @@ public class VLayoutActivity extends BaseActivity {
     public void insert(View view) {
         if (lists.size() >= 0) {
             lists.add(0, new ItemBean("insert"));
-            adapter.notifyItemInserted(0);
+            mAdapters.get(0).notifyDataSetChanged();
         }
     }
 

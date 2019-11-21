@@ -4,13 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,12 +33,15 @@ public class CountDownView extends LinearLayout {
     }
 
     private TextView[] mTextViews;
+    private TextView mDayViews;
 
     private int mBackColor = Color.GRAY;
     private int mTextColor = Color.WHITE;
     private int radius = 20;
     private int textSize = 14;
-    private int padding = 8;
+    private int textDaySize = 14;
+    private int paddingLeft = 10;
+    private int paddingTop = 2;
     private CountDownTimer timer;
     private int countSpeed = 1000;
 
@@ -59,6 +58,13 @@ public class CountDownView extends LinearLayout {
         layoutParams.setMargins(2, 2, 2, 2);
         layoutParams.gravity = Gravity.CENTER;
 
+        mDayViews = new TextView(context);
+        mDayViews.setLayoutParams(layoutParams);
+        mDayViews.setTextColor(mBackColor);
+        mDayViews.setTextSize(textDaySize);
+        mDayViews.setText("-天");
+        addView(mDayViews);
+
         mTextViews = new TextView[3];
         for (int i = 0; i < mTextViews.length; i++) {
             TextView tv = new TextView(context);
@@ -66,14 +72,14 @@ public class CountDownView extends LinearLayout {
             tv.setTextColor(mTextColor);
             tv.setTextSize(textSize);
             tv.setBackground(drawable);
-            tv.setText("00");
-            tv.setPadding(padding, padding, padding, padding);
+            tv.setText("--");
+            tv.setPadding(paddingLeft, paddingTop, paddingLeft, paddingTop);
             addView(tv);
             mTextViews[i] = tv;
 
             if (i != mTextViews.length - 1) {
                 TextView tvWell = new TextView(context);
-                tvWell.setTextSize(textSize);
+                tvWell.setTextSize(Color.BLACK);
                 tvWell.setText(":");
                 addView(tvWell);
             }
