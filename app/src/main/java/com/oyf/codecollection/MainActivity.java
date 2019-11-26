@@ -23,6 +23,7 @@ import com.oyf.codecollection.ui.activity.ChinaMapActivity;
 import com.oyf.codecollection.ui.activity.GalleryActivity;
 import com.oyf.codecollection.ui.activity.MusicActivity;
 import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
+import com.oyf.codecollection.ui.activity.NinePasswordActivity;
 import com.oyf.codecollection.ui.activity.PlayMusicActivity;
 import com.oyf.codecollection.ui.activity.RippleActivity;
 import com.oyf.codecollection.ui.activity.VLayoutActivity;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         mLists.add(new ListBean("播放音乐界面", "音乐播放效果，滑动切歌，service播放音乐，ViewFlipper的基本使用", PlayMusicActivity.class));
         mLists.add(new ListBean("图片滚动配合", "ViewFlipper跟Gallery的配合使用", GalleryActivity.class));
         mLists.add(new ListBean("自定义View", "一些自定义view", ViewActivity.class));
+        mLists.add(new ListBean("九宫格密码支付", "一些自定义view", NinePasswordActivity.class));
 
     }
 
