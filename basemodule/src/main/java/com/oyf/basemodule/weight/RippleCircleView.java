@@ -8,6 +8,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerTitleStrip;
 
+/**
+ * 语音识别波纹效果子view
+ */
 public class RippleCircleView extends View {
     private int cx;
     private int cy;

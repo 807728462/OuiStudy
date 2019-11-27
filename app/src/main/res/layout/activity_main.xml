@@ -7,58 +7,9 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/bt_vlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="gotoVlayout"
-        android:text="VLayout" />
-
-    <Button
-        android:id="@+id/bt_behavior"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="gotoBehavior"
-        android:text="behavior" />
-
-    <Button
-        android:id="@+id/bt_map_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="gotoMapView"
-        android:text="ChinaMapView" />
-
-    <Button
-        android:id="@+id/bt_my_recycle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="gotoRecycleViewView"
-        android:text="自定义recycleveiw" />
-
-    <Button
-        android:id="@+id/bt_music"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="gotoMusic"
-        android:text="music" />
-
-    <Button
-        android:id="@+id/bt_play_music"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="playMusic"
-        android:text="播放音乐" />
-    <Button
-        android:id="@+id/bt_image_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="imageSelect"
-        android:text="图片滚动配合" />
-    <Button
-        android:id="@+id/bt_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="customView"
-        android:text="自定义view" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

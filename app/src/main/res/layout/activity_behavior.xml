@@ -5,15 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.BehaviorActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="我是标题"
+            android:gravity="center"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/rcv_item"
+            />
+
+        <TextView
+            android:id="@+id/tv_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:text="t头部1" />
 
     </FrameLayout>
 
@@ -21,16 +45,16 @@
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#134562"
+        android:layout_gravity="bottom"
+        android:background="#7D7F81"
         android:onClick="onclick"
         android:text="我是显示在底部的空间"
-        android:layout_gravity="bottom"
-        app:layout_behavior="com.oyf.basemodule.RightScaleBehavior"
-        />
+        app:layout_behavior="com.oyf.basemodule.RightScaleBehavior" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="bottom|right"
-        app:layout_behavior="com.oyf.basemodule.RightScaleBehavior"/>
+        app:layout_behavior="com.oyf.basemodule.RightScaleBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

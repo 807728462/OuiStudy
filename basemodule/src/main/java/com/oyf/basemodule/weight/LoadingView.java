@@ -13,6 +13,9 @@ import android.view.View;
 
 import java.util.logging.Level;
 
+/**
+ * 加载转圈圈
+ */
 public class LoadingView extends View {
     public LoadingView(Context context) {
         super(context);

@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".ui.activity.ViewActivity">
+
 
     <com.oyf.basemodule.weight.ProgressView
         android:layout_width="300dp"
@@ -16,5 +18,17 @@
     <com.oyf.basemodule.weight.CountDownView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="20dp" />
+
+    <com.oyf.basemodule.weight.BigView
+        android:id="@+id/bigview"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:background="#B3B2B2" />
+
+    <com.oyf.basemodule.weight.OdragBubbleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 </LinearLayout>
