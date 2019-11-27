@@ -3,6 +3,7 @@ package com.oyf.basemodule.weight;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.view.animation.AnticipateInterpolator;
 import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 public class OsplashView extends View {
     public OsplashView(Context context) {
@@ -98,6 +101,7 @@ public class OsplashView extends View {
         splashStatus.drawState(canvas);
     }
 
+    @SuppressLint("NewApi")
     private void drawBackGround(Canvas canvas) {
         if (mCurrentHoleRadius>0){
             canvas.drawColor(Color.WHITE);
