@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name=".ui.activity.SplashActivity"></activity>
         <activity android:name=".ui.activity.RippleActivity"></activity>
         <activity android:name=".ui.activity.ViewActivity" />
         <activity android:name=".ui.activity.GalleryActivity" />

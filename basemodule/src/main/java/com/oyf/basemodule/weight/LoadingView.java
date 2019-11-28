@@ -73,13 +73,13 @@ public class LoadingView extends View {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                startTwo();
+                startRight();
             }
         });
         animator.start();
     }
 
-    private void startTwo() {
+    private void startRight() {
         mPathMeasure.setPath(mTruePath, false);
         ValueAnimator animator = ValueAnimator.ofFloat(0, mPathMeasure.getLength());
         animator.setDuration(2000);
