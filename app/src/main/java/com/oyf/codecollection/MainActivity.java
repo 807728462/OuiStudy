@@ -3,18 +3,16 @@ package com.oyf.codecollection;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.oyf.aspectj.TestUtils;
+import com.oyf.aspectj.annotation.LimitClick;
 import com.oyf.basemodule.bus.OBus;
 import com.oyf.basemodule.bus.OSubscribe;
 import com.oyf.basemodule.bus.OThreadMode;
@@ -35,12 +33,6 @@ import com.oyf.codecollection.ui.bean.ListBean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-
-import dalvik.system.DexClassLoader;
-import dalvik.system.PathClassLoader;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -60,12 +52,26 @@ public class MainActivity extends AppCompatActivity {
         OBus.getDefault().register(this);
         initView(savedInstanceState);
         initData();
-        Log.d("test", "MainActivity.oncreat");
 
     }
 
     private void initView(Bundle savedInstanceState) {
         rcv = findViewById(R.id.rcv);
+        Button bt = findViewById(R.id.bt_test);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testClick();
+            }
+        });
+    }
+
+    public void testClick() {
+        TestUtils.click();
+        TestUtils.click1();
+        TestUtils.click2();
+        TestUtils.click3();
+        TestUtils.abc();
     }
 
     private void initData() {
