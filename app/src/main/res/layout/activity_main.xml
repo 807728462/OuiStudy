@@ -14,10 +14,6 @@
         android:layout_height="wrap_content"
         android:text="按钮" />
 
-    <com.oyf.basemodule.weight.ProgressView
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        app:progress="0.3"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
         android:layout_width="match_parent"

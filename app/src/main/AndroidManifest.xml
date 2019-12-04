@@ -27,6 +27,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.DataBindingActivity"/>
         <activity android:name=".ui.activity.BehaviorActivity" />
         <activity android:name=".ui.activity.VLayoutActivity" />
         <activity android:name=".ui.activity.NinePasswordActivity" />

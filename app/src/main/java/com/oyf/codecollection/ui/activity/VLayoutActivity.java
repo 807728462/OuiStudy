@@ -3,17 +3,16 @@ package com.oyf.codecollection.ui.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
@@ -31,7 +30,6 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class VLayoutActivity extends BaseActivity {
@@ -134,7 +132,11 @@ public class VLayoutActivity extends BaseActivity {
         rcv.setItemAnimator(new FadeInAnimator());
         //rcv.setItemAnimator();
         rcv.setAdapter(adapter);
+
     }
+
+    String it = null;
+    DelegateAdapter.Adapter delegateAdapter;
 
     private void initVlayoutRecycleData() {
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(this);
@@ -145,8 +147,39 @@ public class VLayoutActivity extends BaseActivity {
         rcv.setRecycledViewPool(recycledViewPool);
         rcv.setLayoutManager(virtualLayoutManager);
 
-        
+
         rcv.setAdapter(mDelegateAdapter);
+        it = 11111 + "";
+        delegateAdapter = new DelegateAdapter.Adapter() {
+
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.rcv_item, parent, false);
+                return new BaseViewHolder(inflate);
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+                TextView viewById = holder.itemView.findViewById(R.id.tv_list);
+                viewById.setText(it);
+                it.charAt(0);
+            }
+
+            @Override
+            public int getItemCount() {
+
+                return 1;
+            }
+
+            @Override
+            public LayoutHelper onCreateLayoutHelper() {
+                return new LinearLayoutHelper();
+            }
+        };
+
+
+        mDelegateAdapter.addAdapter(delegateAdapter);
 
         for (int i = 0; i < 10; i++) {
             lists.add(new ItemBean("" + i));
@@ -165,7 +198,7 @@ public class VLayoutActivity extends BaseActivity {
             }
 
         });
-        mDelegateAdapter.setAdapters(mAdapters);
+        //mDelegateAdapter.addAdapter();
     }
 
     public void insert(View view) {
@@ -176,8 +209,7 @@ public class VLayoutActivity extends BaseActivity {
     }
 
     public void delete(View view) {
-        if (lists.size() >= 0) {
-
-        }
+        it = null;
+        delegateAdapter.notifyDataSetChanged();
     }
 }
