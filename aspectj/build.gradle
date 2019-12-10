@@ -2,16 +2,6 @@ import com.android.build.gradle.LibraryPlugin
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.aspectj:aspectjtools:1.8.13'
-    }
-}
-
 apply plugin: 'com.android.library'
 
 android {
@@ -48,6 +38,7 @@ dependencies {
     implementation 'org.aspectj:aspectjrt:1.8.14'
 }
 
+/*
 
 android.libraryVariants.all { variant ->
     LibraryPlugin plugin = project.plugins.getPlugin(LibraryPlugin)
@@ -83,4 +74,4 @@ android.libraryVariants.all { variant ->
             }
         }
     }
-}
+}*/

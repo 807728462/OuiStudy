@@ -31,9 +31,14 @@ import com.oyf.codecollection.ui.adapter.BaseAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
 import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
+import com.oyf.plugin.NoRegisterActivity;
+import com.oyf.plugin.utils.PluginUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import dalvik.system.DexClassLoader;
+import dalvik.system.PathClassLoader;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         OBus.getDefault().register(this);
         initView(savedInstanceState);
         initData();
-
     }
 
     private void initView(Bundle savedInstanceState) {
@@ -62,9 +66,13 @@ public class MainActivity extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testClick();
+                // testClick();
+                Intent intent = new Intent();
+                intent.setClassName("com.oyf.plugin", NoRegisterActivity.class.getName());
+                startActivity(intent);
             }
         });
+
     }
 
     public void testClick() {
@@ -85,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         mAdapter.setOnItemClickListener(new BaseAdapter.OnRecyclerViewItemClickListener<ListBean>() {
+
             @Override
             public void onItemClick(View view, int viewType, ListBean data, int position) {
                 startActivity(new Intent(MainActivity.this, data.clazz));
@@ -112,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         mLists.add(new ListBean("图片滚动配合", "ViewFlipper跟Gallery的配合使用", GalleryActivity.class));
         mLists.add(new ListBean("自定义View", "一些自定义view", ViewActivity.class));
         mLists.add(new ListBean("九宫格密码支付", "一些自定义view", NinePasswordActivity.class));
+        mLists.add(new ListBean("跳转未注册的界面", "使用hook技术跳转未注册的界面，在IActivityManager进行拦截，在ActivityThread进行Handler拦截", NoRegisterActivity.class));
 
     }
 

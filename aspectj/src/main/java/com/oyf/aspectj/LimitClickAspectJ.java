@@ -34,7 +34,7 @@ public class LimitClickAspectJ {
     @Around("methodLimit()")
     public Object limitClick(ProceedingJoinPoint joinPoint) throws Throwable {
         //获取context
-        Context context = (Context) joinPoint.getThis();
+       // Context context = (Context) joinPoint.getThis();
         //获取
         Signature signature = joinPoint.getSignature();
         if (!(signature instanceof MethodSignature)) {
