@@ -14,6 +14,9 @@ import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 
+/**
+ * 小窗在海上
+ */
 public class ShipView extends View {
     public ShipView(Context context) {
         this(context, null);

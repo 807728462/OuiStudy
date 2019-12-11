@@ -3,6 +3,7 @@ package com.oyf.codecollection.ui.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,11 +22,14 @@ import com.oyf.codecollection.databinding.LayoutActivityDatabindingBindingImpl;
 public class DataBindingActivity extends AppCompatActivity {
     UserBean user;
 
+    TextView tips;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         LayoutActivityDatabindingBindingImpl databindingBinding = DataBindingUtil.setContentView(this, R.layout.layout_activity_databinding);
+        tips = findViewById(R.id.tv_tips);
         user = new UserBean("oyf", "账号", "123", "密码");
 
         databindingBinding.setUser(user);
@@ -33,6 +37,7 @@ public class DataBindingActivity extends AppCompatActivity {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 Log.d("test", "-------------------------sender-" + sender.toString() + "-propertyId=" + propertyId);
+                tips.setText("name=" + user.getUsername() + ",pwd=" + user.getPwd());
             }
         });
         databindingBinding.setOnClickListener(new View.OnClickListener() {

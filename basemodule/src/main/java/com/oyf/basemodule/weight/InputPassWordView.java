@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+/**
+ * 输入密码显示框
+ */
 public class InputPassWordView extends View {
     public static final int STYLE_POINT = 0;
     public static final int STYLE_DEFAULT = 1;

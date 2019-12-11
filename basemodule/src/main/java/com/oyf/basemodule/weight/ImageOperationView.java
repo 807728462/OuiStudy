@@ -24,6 +24,9 @@ import androidx.annotation.RequiresApi;
 
 import com.oyf.basemodule.R;
 
+/**
+ * 图片的双指拖动放大旋转
+ */
 public class ImageOperationView extends View {
     private static int NONE = 0;
     private static int DRAG = 1;    // 拖动

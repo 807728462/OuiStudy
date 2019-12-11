@@ -1,11 +1,9 @@
 package com.oyf.plugin.utils;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -26,6 +24,7 @@ public class PluginUtils {
     private static final String KEY_INTENT = "key_intent";
 
     public static void hookIActivityManager() {
+
         try {
             //获取activityManager中的IActivityManagerSingleton对象，用于取出singleton中的iActivityManager
             Class<?> activityManagerClass = Class.forName("android.app.ActivityManager");

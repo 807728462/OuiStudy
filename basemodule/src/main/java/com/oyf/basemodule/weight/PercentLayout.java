@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 
-//百分比适配
+/**
+ * 百分比适配
+ */
 public class PercentLayout extends RelativeLayout {
 
     public PercentLayout(Context context) {

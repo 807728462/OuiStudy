@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,13 +51,12 @@ public class MainActivity extends AppCompatActivity {
     List<ListBean> mLists = new ArrayList<>();
     BaseAdapter mAdapter;
 
-    @SuppressLint("ObjectAnimatorBinding")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //StatusBarUtil.setStatusBar(this);
-
+        LayoutInflater.from(this).inflate(R.layout.rcv_item, (ViewGroup) getWindow().getDecorView().getRootView(), true);
         OBus.getDefault().register(this);
         initView(savedInstanceState);
         initData();

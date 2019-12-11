@@ -8,6 +8,9 @@ import android.widget.RelativeLayout;
 import com.oyf.basemodule.utils.PxAdapterUtil;
 
 
+/**
+ * 屏幕像素适配
+ */
 public class ScreenAdapterLayout extends RelativeLayout {
     //防止重复测量
     private boolean flag;

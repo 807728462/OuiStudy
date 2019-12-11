@@ -18,6 +18,9 @@ import androidx.annotation.Nullable;
 
 import com.oyf.basemodule.R;
 
+/**
+ * 使用color过滤器，实现灰度图片
+ */
 public class GrayImageView extends View {
     public GrayImageView(Context context) {
         this(context, null);
