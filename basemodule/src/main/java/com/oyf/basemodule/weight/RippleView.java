@@ -60,7 +60,7 @@ public class RippleView extends RelativeLayout {
         layoutParams.addRule(CENTER_IN_PARENT, TRUE);
 
         float maxValue = 10;
-        float time = 3000;
+        float time = 2000;
         float delay = time / (float) count;
 
         for (int i = 0; i < count; i++) {
@@ -106,7 +106,6 @@ public class RippleView extends RelativeLayout {
             //mAnimationSet.end();
             for (int i = 0; i < mViewAnimation.size(); i++) {
                 ObjectAnimator animator = (ObjectAnimator) mViewAnimation.get(i);
-                animator.setRepeatCount(0);
                 int finalI = i;
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
@@ -115,6 +114,7 @@ public class RippleView extends RelativeLayout {
                         mViewLists.get(finalI).setVisibility(INVISIBLE);
                     }
                 });
+                animator.setRepeatCount(1);
             }
         }
     }

@@ -17,9 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @创建者 oyf
- * @创建时间 2019/11/25 15:42
- * @描述
+ * 九宫格密码支付
  **/
 public class PayPasswordView extends View {
     public PayPasswordView(Context context) {

@@ -18,6 +18,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+/**
+ * 图层混合模式
+ */
 public class FrameModeView extends View {
 /*    PorterDuff.Mode.CLEAR
     所绘制不会提交到画布上

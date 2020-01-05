@@ -4,23 +4,25 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.oyf.aspectj.TestUtils;
+import com.oyf.aspectj.annotation.LimitClick;
 import com.oyf.basemodule.bus.OBus;
 import com.oyf.basemodule.bus.OSubscribe;
 import com.oyf.basemodule.bus.OThreadMode;
 import com.oyf.codecollection.ui.activity.BehaviorActivity;
 import com.oyf.codecollection.ui.activity.ChinaMapActivity;
+import com.oyf.codecollection.ui.activity.DataBindingActivity;
 import com.oyf.codecollection.ui.activity.GalleryActivity;
 import com.oyf.codecollection.ui.activity.MusicActivity;
 import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
@@ -33,12 +35,11 @@ import com.oyf.codecollection.ui.adapter.BaseAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
 import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
+import com.oyf.plugin.NoRegisterActivity;
+import com.oyf.plugin.utils.PluginUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 
 import dalvik.system.DexClassLoader;
 import dalvik.system.PathClassLoader;
@@ -51,22 +52,38 @@ public class MainActivity extends AppCompatActivity {
     List<ListBean> mLists = new ArrayList<>();
     BaseAdapter mAdapter;
 
-    @SuppressLint("ObjectAnimatorBinding")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //StatusBarUtil.setStatusBar(this);
-
+        LayoutInflater.from(this).inflate(R.layout.rcv_item, (ViewGroup) getWindow().getDecorView().getRootView(), true);
         OBus.getDefault().register(this);
         initView(savedInstanceState);
         initData();
-        Log.d("test", "MainActivity.oncreat");
-
     }
 
     private void initView(Bundle savedInstanceState) {
         rcv = findViewById(R.id.rcv);
+        Button bt = findViewById(R.id.bt_test);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // testClick();
+                Intent intent = new Intent();
+                intent.setClassName("com.oyf.plugin", NoRegisterActivity.class.getName());
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    public void testClick() {
+        TestUtils.click();
+        TestUtils.click1();
+        TestUtils.click2();
+        TestUtils.click3();
+        TestUtils.abc();
     }
 
     private void initData() {
@@ -79,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         mAdapter.setOnItemClickListener(new BaseAdapter.OnRecyclerViewItemClickListener<ListBean>() {
+
             @Override
             public void onItemClick(View view, int viewType, ListBean data, int position) {
                 startActivity(new Intent(MainActivity.this, data.clazz));
@@ -95,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initLists() {
+        mLists.add(new ListBean("DataBinding", "DataBinding的基本使用", DataBindingActivity.class));
         mLists.add(new ListBean("vLayout的使用", "vlayout的基本使用方法，添加删除动画", VLayoutActivity.class));
         mLists.add(new ListBean("behavior的使用", "使用behavior，在recyccleview的滑动控制按钮的显示与隐藏", BehaviorActivity.class));
         mLists.add(new ListBean("使用svg画中国地图", "使用svg加path，svg的dom解析", ChinaMapActivity.class));
@@ -105,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         mLists.add(new ListBean("图片滚动配合", "ViewFlipper跟Gallery的配合使用", GalleryActivity.class));
         mLists.add(new ListBean("自定义View", "一些自定义view", ViewActivity.class));
         mLists.add(new ListBean("九宫格密码支付", "一些自定义view", NinePasswordActivity.class));
+        mLists.add(new ListBean("跳转未注册的界面", "使用hook技术跳转未注册的界面，在IActivityManager进行拦截，在ActivityThread进行Handler拦截", NoRegisterActivity.class));
 
     }
 

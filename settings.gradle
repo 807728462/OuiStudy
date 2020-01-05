@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 include ':app', ':basemodule', ':aspect', ':algorithm'
+=======
+include ':app', ':basemodule', ':aspectj', ':plugin'
+>>>>>>> 4e96b0d6454a62cfa045c61cc9acea82875d0396
 rootProject.name='CodeCollection'
