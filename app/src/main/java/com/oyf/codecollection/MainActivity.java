@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testClick() {
-        TestUtils.click();
+       /* TestUtils.click();
         TestUtils.click1();
         TestUtils.click2();
         TestUtils.click3();
-        TestUtils.abc();
+        TestUtils.abc();*/
     }
 
     private void initData() {
