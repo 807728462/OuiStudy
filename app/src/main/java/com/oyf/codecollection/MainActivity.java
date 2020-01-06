@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.oyf.aspectj.TestUtils;
 import com.oyf.aspectj.annotation.LimitClick;
 import com.oyf.basemodule.bus.OBus;
@@ -21,6 +22,7 @@ import com.oyf.basemodule.bus.OSubscribe;
 import com.oyf.basemodule.bus.OThreadMode;
 import com.oyf.codecollection.ui.activity.BehaviorActivity;
 import com.oyf.codecollection.ui.activity.ChinaMapActivity;
+import com.oyf.codecollection.ui.activity.CoordinatorLayoutActivity;
 import com.oyf.codecollection.ui.activity.DataBindingActivity;
 import com.oyf.codecollection.ui.activity.GalleryActivity;
 import com.oyf.codecollection.ui.activity.MusicActivity;
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         mLists.add(new ListBean("自定义View", "一些自定义view", ViewActivity.class));
         mLists.add(new ListBean("九宫格密码支付", "一些自定义view", NinePasswordActivity.class));
         mLists.add(new ListBean("跳转未注册的界面", "使用hook技术跳转未注册的界面，在IActivityManager进行拦截，在ActivityThread进行Handler拦截", NoRegisterActivity.class));
-
+        mLists.add(new ListBean("CoordinatorLayoutActivity中滑动回弹等问题", "处理CoordinatorLayout中Appbar跟Recycleview的回弹冲突问题", CoordinatorLayoutActivity.class));
     }
 
 

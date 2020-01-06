@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".ui.activity.SplashActivity"></activity>
-        <activity android:name=".ui.activity.RippleActivity"></activity>
+        <activity android:name=".ui.activity.CoordinatorLayoutActivity"></activity>
+        <activity android:name=".ui.activity.SplashActivity" />
+        <activity android:name=".ui.activity.RippleActivity" />
         <activity android:name=".ui.activity.ViewActivity" />
         <activity android:name=".ui.activity.GalleryActivity" />
         <activity android:name=".ui.activity.PlayMusicActivity" />
@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.DataBindingActivity"/>
+        <activity android:name=".ui.activity.DataBindingActivity" />
         <activity android:name=".ui.activity.BehaviorActivity" />
         <activity android:name=".ui.activity.VLayoutActivity" />
         <activity android:name=".ui.activity.NinePasswordActivity" />
