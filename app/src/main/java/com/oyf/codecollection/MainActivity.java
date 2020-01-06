@@ -1,6 +1,7 @@
 package com.oyf.codecollection;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -80,11 +81,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testClick() {
-        TestUtils.click();
+       /* TestUtils.click();
         TestUtils.click1();
         TestUtils.click2();
         TestUtils.click3();
-        TestUtils.abc();
+        TestUtils.abc();*/
     }
 
     private void initData() {
