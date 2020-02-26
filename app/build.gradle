@@ -38,6 +38,7 @@ dependencies {
     implementation rootProject.ext.dependencies.blockcanary
     implementation rootProject.ext.dependencies.flexbox
     implementation rootProject.ext.dependencies.butterknife
+    implementation rootProject.ext.dependencies.MPAndroidChart
     annotationProcessor rootProject.ext.dependencies.butterknife_compiler
     implementation project(path: ':plugin')
 

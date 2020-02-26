@@ -22,6 +22,7 @@ import com.oyf.basemodule.bus.OSubscribe;
 import com.oyf.basemodule.bus.OThreadMode;
 import com.oyf.codecollection.ui.activity.BehaviorActivity;
 import com.oyf.codecollection.ui.activity.ChinaMapActivity;
+import com.oyf.codecollection.ui.activity.CompanyActivity;
 import com.oyf.codecollection.ui.activity.DataBindingActivity;
 import com.oyf.codecollection.ui.activity.GalleryActivity;
 import com.oyf.codecollection.ui.activity.MusicActivity;
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initLists() {
+        mLists.add(new ListBean("company", "公司的自定义view", CompanyActivity.class));
         mLists.add(new ListBean("DataBinding", "DataBinding的基本使用", DataBindingActivity.class));
         mLists.add(new ListBean("vLayout的使用", "vlayout的基本使用方法，添加删除动画", VLayoutActivity.class));
         mLists.add(new ListBean("behavior的使用", "使用behavior，在recyccleview的滑动控制按钮的显示与隐藏", BehaviorActivity.class));
