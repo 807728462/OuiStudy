@@ -1,27 +1,37 @@
 package com.oyf.codecollection.ui.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.basemodule.utils.SizeUtils;
+import com.oyf.codecollection.MainActivity;
 import com.oyf.codecollection.R;
+import com.oyf.codecollection.company.dialog.CalendarPopWindow;
 import com.oyf.codecollection.company.view.CircleChartView;
 import com.oyf.codecollection.company.view.HistoryDataView;
 import com.oyf.codecollection.company.view.LineChartView;
@@ -29,6 +39,18 @@ import com.oyf.codecollection.company.view.LineChartView;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
+
+import zhy.com.highlight.HighLight;
+import zhy.com.highlight.interfaces.HighLightInterface;
+import zhy.com.highlight.position.OnBottomPosCallback;
+import zhy.com.highlight.position.OnLeftPosCallback;
+import zhy.com.highlight.position.OnRightPosCallback;
+import zhy.com.highlight.position.OnTopPosCallback;
+import zhy.com.highlight.shape.BaseLightShape;
+import zhy.com.highlight.shape.CircleLightShape;
+import zhy.com.highlight.shape.OvalLightShape;
+import zhy.com.highlight.shape.RectLightShape;
+import zhy.com.highlight.view.HightLightView;
 
 
 public class CompanyActivity extends BaseActivity {
@@ -42,22 +64,26 @@ public class CompanyActivity extends BaseActivity {
         return R.layout.activity_company;
     }
 
+    Button btGuide;
     LineChartView lineChartView;
     CircleChartView circleChartView;
     HistoryDataView hdvLeft;
     HistoryDataView hdvRight;
     Spinner spinner;
     RadioGroup rg;
+    Button btPop;
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        btGuide = findViewById(R.id.bt_guide);
         lineChartView = findViewById(R.id.lineChartView);
         circleChartView = findViewById(R.id.circleChartView);
         hdvLeft = findViewById(R.id.hdv_left);
         hdvRight = findViewById(R.id.hdv_right);
         spinner = findViewById(R.id.spinner);
         rg = findViewById(R.id.rg);
+        btPop = findViewById(R.id.bt_pop);
     }
 
 
@@ -68,9 +94,71 @@ public class CompanyActivity extends BaseActivity {
         initSpinner();
     }
 
+    HighLight mHightLight;
+
+    public void showGuide(View view) {
+        mHightLight = new HighLight(CompanyActivity.this)//
+                .autoRemove(false)//设置背景点击高亮布局自动移除为false 默认为true
+//                .intercept(false)//设置拦截属性为false 高亮布局不影响后面布局的滑动效果
+                .intercept(true)//拦截属性默认为true 使下方ClickCallback生效
+                .enableNext()//开启next模式并通过show方法显示 然后通过调用next()方法切换到下一个提示布局，直到移除自身
+                .setClickCallback(new HighLight.OnClickCallback() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(CompanyActivity.this, "clicked and remove HightLight view by yourself", Toast.LENGTH_SHORT).show();
+                        mHightLight.next();
+                    }
+                })
+                //.anchor(findViewById(R.id.id_container))//如果是Activity上增加引导层，不需要设置anchor
+                .addHighLight(btGuide, R.layout.item_mrcv, new OnLeftPosCallback(45), new RectLightShape(0, 0, 15, 0, 0))//矩形去除圆角
+                .addHighLight(btGuide, R.layout.layout_mine_statistics, new OnRightPosCallback(5), new BaseLightShape(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()), TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()), 0) {
+                    @Override
+                    protected void resetRectF4Shape(RectF viewPosInfoRectF, float dx, float dy) {
+                        //缩小高亮控件范围
+                        viewPosInfoRectF.inset(dx, dy);
+                    }
+
+                    @Override
+                    protected void drawShape(Bitmap bitmap, HighLight.ViewPosInfo viewPosInfo) {
+                        //custom your hight light shape 自定义高亮形状
+                        Canvas canvas = new Canvas(bitmap);
+                        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                        paint.setDither(true);
+                        paint.setAntiAlias(true);
+                        //blurRadius必须大于0
+                        if (blurRadius > 0) {
+                            paint.setMaskFilter(new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.SOLID));
+                        }
+                        RectF rectF = viewPosInfo.rectF;
+                        canvas.drawOval(rectF, paint);
+                    }
+                })
+                .addHighLight(btGuide, R.layout.item_mrcv, new OnTopPosCallback(), new CircleLightShape())
+                .addHighLight(view, R.layout.layout_mine_statistics, new OnBottomPosCallback(10), new OvalLightShape(5, 5, 20))
+                .setOnRemoveCallback(new HighLightInterface.OnRemoveCallback() {//监听移除回调
+                    @Override
+                    public void onRemove() {
+                        Toast.makeText(CompanyActivity.this, "The HightLight view has been removed", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setOnShowCallback(new HighLightInterface.OnShowCallback() {//监听显示回调
+                    @Override
+                    public void onShow(HightLightView hightLightView) {
+                        Toast.makeText(CompanyActivity.this, "The HightLight view has been shown", Toast.LENGTH_SHORT).show();
+                    }
+                }).setOnNextCallback(new HighLightInterface.OnNextCallback() {
+                    @Override
+                    public void onNext(HightLightView hightLightView, View targetView, View tipView) {
+                        // targetView 目标按钮 tipView添加的提示布局 可以直接找到'我知道了'按钮添加监听事件等处理
+                        Toast.makeText(CompanyActivity.this, "The HightLight show next TipView，targetViewID:" + (targetView == null ? null : targetView.getId()) + ",tipViewID:" + (tipView == null ? null : tipView.getId()), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        mHightLight.show();
+    }
+
     private void initSpinner() {
         String[] t = new String[]{"2020-01", "2020-02", "2020-03", "2020-04"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.layout_spinner_text,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.layout_spinner_text,
                 t);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -164,5 +252,27 @@ public class CompanyActivity extends BaseActivity {
         hdvRight.setTextBlod();
         hdvRight.setLine(true);
         hdvRight.updateData(0);
+    }
+
+    CalendarPopWindow mCalendarPopWindow;
+    int a = 0;
+
+    public void showPop(View view) {
+        if (mCalendarPopWindow == null) {
+            mCalendarPopWindow = new CalendarPopWindow(this);
+        }
+        if (a % 5 == 0) {
+            mCalendarPopWindow.updateData(CalendarPopWindow.CALENDAR_TYPE_QUARTER, 2);
+        } else {
+            mCalendarPopWindow.updateData(CalendarPopWindow.CALENDAR_TYPE_MOUTH, a % 4);
+        }
+        mCalendarPopWindow.setOnCalendarSelectListener(new CalendarPopWindow.OnCalendarSelectListener() {
+            @Override
+            public void select(int type, int quarter, int mouth) {
+                Log.d("mCalendarPopWindow", "type=" + type + ",q=" + quarter + ",mouth=" + mouth);
+            }
+        });
+        a++;
+        mCalendarPopWindow.showAsDropDown(btPop);
     }
 }

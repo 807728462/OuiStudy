@@ -1,7 +1,5 @@
 package com.oyf.codecollection;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,23 +9,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.oyf.aspectj.TestUtils;
-import com.oyf.aspectj.annotation.LimitClick;
 import com.oyf.basemodule.bus.OBus;
 import com.oyf.basemodule.bus.OSubscribe;
 import com.oyf.basemodule.bus.OThreadMode;
+import com.oyf.codecollection.company.EstoreExplosiveActivity;
 import com.oyf.codecollection.ui.activity.BehaviorActivity;
 import com.oyf.codecollection.ui.activity.ChinaMapActivity;
-<<<<<<< HEAD
 import com.oyf.codecollection.ui.activity.CompanyActivity;
-=======
 import com.oyf.codecollection.ui.activity.CoordinatorLayoutActivity;
->>>>>>> 254e75009114e9498205d357127d4f99873a4dee
 import com.oyf.codecollection.ui.activity.DataBindingActivity;
 import com.oyf.codecollection.ui.activity.GalleryActivity;
 import com.oyf.codecollection.ui.activity.MusicActivity;
@@ -42,13 +34,9 @@ import com.oyf.codecollection.ui.adapter.BaseViewHolder;
 import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
 import com.oyf.plugin.NoRegisterActivity;
-import com.oyf.plugin.utils.PluginUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import dalvik.system.DexClassLoader;
-import dalvik.system.PathClassLoader;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -119,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initLists() {
+        mLists.add(new ListBean("爆款", "两级RecycleView联动", EstoreExplosiveActivity.class));
         mLists.add(new ListBean("company", "公司的自定义view", CompanyActivity.class));
         mLists.add(new ListBean("DataBinding", "DataBinding的基本使用", DataBindingActivity.class));
         mLists.add(new ListBean("vLayout的使用", "vlayout的基本使用方法，添加删除动画", VLayoutActivity.class));
