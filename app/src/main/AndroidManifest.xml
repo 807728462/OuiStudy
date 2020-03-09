@@ -30,8 +30,10 @@
         <activity android:name=".ui.activity.DataBindingActivity" />
         <activity android:name=".ui.activity.BehaviorActivity" />
         <activity android:name=".ui.activity.VLayoutActivity" />
+        <activity android:name=".ui.activity.CompanyActivity" />
         <activity android:name=".ui.activity.NinePasswordActivity" />
         <activity android:name="com.oyf.plugin.ProxyActivity" />
+        <activity android:name=".company.EstoreExplosiveActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

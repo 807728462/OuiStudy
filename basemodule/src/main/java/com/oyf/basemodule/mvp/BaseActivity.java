@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import butterknife.ButterKnife;
+
+
 public abstract class BaseActivity<P extends BasePresenter> extends Activity implements IView {
     protected P mPresenter;
 
@@ -18,6 +21,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+
+        ButterKnife.bind(this);
         initView(savedInstanceState);
         initData(savedInstanceState);
 

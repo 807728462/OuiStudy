@@ -55,7 +55,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     }
 
-    public View getView(int viewId) {
+    public <T extends View> T getView(int viewId) {
         return retrieveView(viewId);
     }
 

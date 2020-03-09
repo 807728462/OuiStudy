@@ -25,7 +25,7 @@ ext {
             rxjavaVersion           : "2.1.3",//rx
             rxandroidVersion        : "2.0.1",
             okgo                    : "3.0.4",
-            butterknifeVersion      : "8.4.0",//黄油刀
+            butterknifeVersion      : "10.2.1",//黄油刀
             superAdapterVersion     : "3.6.8",//万能Adapter
             easypermissionsVersion  : "1.2.0",//权限申请
             gsonVersion             : "2.8.5",//json
@@ -34,7 +34,9 @@ ext {
             luban                   : "1.1.8",
             vlayout                 : "1.2.8",
             smartRefreshLayout      : "1.1.0",
-            flexbox                 : "1.0.0"//流式布局
+            flexbox                 : "1.0.0",//流式布局
+            MPAndroidChart          : "3.1.0",//曲线图
+            highlight               : "1.8.0" //引导图
 
     ]
     dependencies = [
@@ -93,6 +95,10 @@ ext {
             "vlayout"             : "com.alibaba.android:vlayout:${versions["vlayout"]}@aar",
             "smartRefreshLayout"  : "com.scwang.smartrefresh:SmartRefreshLayout:${versions["smartRefreshLayout"]}",
             "flexbox"             : "com.google.android:flexbox:${versions["flexbox"]}",
+
+            //曲线图
+            "MPAndroidChart"      : "com.github.PhilJay:MPAndroidChart:v${versions["MPAndroidChart"]}",
+            "highlight"           : "com.isanwenyu.highlight:highlight:${versions["highlight"]}"
 
     ]
 
