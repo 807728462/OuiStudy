@@ -1,7 +1,5 @@
 package com.oyf.codecollection;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,17 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.oyf.aspectj.TestUtils;
-import com.oyf.aspectj.annotation.LimitClick;
 import com.oyf.basemodule.bus.OBus;
 import com.oyf.basemodule.bus.OSubscribe;
 import com.oyf.basemodule.bus.OThreadMode;
+import com.oyf.basemodule.mvp.BaseActivity;
+import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.codecollection.ui.activity.BehaviorActivity;
 import com.oyf.codecollection.ui.activity.ChinaMapActivity;
 import com.oyf.codecollection.ui.activity.CoordinatorLayoutActivity;
@@ -38,34 +33,35 @@ import com.oyf.codecollection.ui.adapter.BaseViewHolder;
 import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
 import com.oyf.plugin.NoRegisterActivity;
-import com.oyf.plugin.utils.PluginUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dalvik.system.DexClassLoader;
-import dalvik.system.PathClassLoader;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     RecyclerView rcv;
 
     List<ListBean> mLists = new ArrayList<>();
     BaseAdapter mAdapter;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //StatusBarUtil.setStatusBar(this);
-        LayoutInflater.from(this).inflate(R.layout.rcv_item, (ViewGroup) getWindow().getDecorView().getRootView(), true);
-        OBus.getDefault().register(this);
-        initView(savedInstanceState);
-        initData();
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
-    private void initView(Bundle savedInstanceState) {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    protected void initView(Bundle savedInstanceState) {
+        LayoutInflater.from(this).inflate(R.layout.rcv_item, (ViewGroup) getWindow().getDecorView().getRootView(), true);
+        OBus.getDefault().register(this);
         rcv = findViewById(R.id.rcv);
         Button bt = findViewById(R.id.bt_test);
         bt.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Subscribe
+    public void onEvent(Object o) {
+        Log.d("test", "MainActivity.onEvent.Object");
+    }
+
+    @Subscribe
+    public void onEvent(String o) {
+        Log.d("test", "MainActivity.onEvent.String");
+    }
+
     public void testClick() {
        /* TestUtils.click();
         TestUtils.click1();
@@ -88,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         TestUtils.abc();*/
     }
 
-    private void initData() {
+    protected void initData(Bundle savedInstanceState) {
         rcv.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BaseAdapter<ListBean>(mLists, R.layout.rcv_main_list) {
             @Override
@@ -101,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(View view, int viewType, ListBean data, int position) {
-                startActivity(new Intent(MainActivity.this, data.clazz));
+                EventBus.getDefault().post(new TestMain());
+                //startActivity(new Intent(MainActivity.this, data.clazz));
             }
         });
         rcv.setAdapter(mAdapter);

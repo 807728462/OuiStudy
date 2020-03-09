@@ -3,9 +3,13 @@ package com.oyf.basemodule.mvp;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public abstract class BaseActivity<P extends BasePresenter> extends Activity implements IView {
     protected P mPresenter;
@@ -17,11 +21,17 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
         initView(savedInstanceState);
         initData(savedInstanceState);
 
+        EventBus.getDefault().register(this);
 
         mPresenter = createPresenter();
         if (mPresenter != null) {
             mPresenter.takeView(this);
         }
+    }
+
+    @Subscribe
+    public void onEvent(Object o) {
+        Log.d("test", "BaseActivity.onEvent");
     }
 
     protected abstract P createPresenter();
@@ -49,7 +59,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
      *
      * @param savedInstanceState
      */
-    protected  void initData(@Nullable Bundle savedInstanceState){
+    protected void initData(@Nullable Bundle savedInstanceState) {
 
     }
 
@@ -58,39 +68,47 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
      *
      * @return context
      */
-    public Context getContext(){
+    public Context getContext() {
         return this;
     }
 
     /**
      * 隐藏无数据页面
      */
-    public void hideEmptyView(){}
-    /**
-     * 显示空页面或者出错页面
-     */
-    public void showEmptyOrErrorView(){}
+    public void hideEmptyView() {
+    }
 
     /**
      * 显示空页面或者出错页面
      */
-    public void showEmptyOrErrorView(String text,int imageId){
+    public void showEmptyOrErrorView() {
+    }
+
+    /**
+     * 显示空页面或者出错页面
+     */
+    public void showEmptyOrErrorView(String text, int imageId) {
 
     }
+
     /**
      * 显示加载框
      */
-    public void showLoading(){}
+    public void showLoading() {
+    }
+
     /**
      * 隐藏加载框
      */
-    public void dismissLoading(){}
+    public void dismissLoading() {
+    }
 
     /**
      * 是否使用eventBus
+     *
      * @return 使用true，否则false
      */
-    public boolean useEventBus(){
+    public boolean useEventBus() {
         return false;
     }
 }
