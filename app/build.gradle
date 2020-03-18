@@ -42,8 +42,9 @@ dependencies {
     implementation rootProject.ext.dependencies.flexbox
     implementation rootProject.ext.dependencies.butterknife
     implementation rootProject.ext.dependencies.MPAndroidChart
-    implementation rootProject.ext.dependencies.highlight
+    //implementation rootProject.ext.dependencies.highlight
     annotationProcessor rootProject.ext.dependencies.butterknife_compiler
+    implementation project(path: ':highlight')
     implementation project(path: ':plugin')
 
 }

@@ -23,6 +23,7 @@ import com.oyf.codecollection.ui.activity.CompanyActivity;
 import com.oyf.codecollection.ui.activity.CoordinatorLayoutActivity;
 import com.oyf.codecollection.ui.activity.DataBindingActivity;
 import com.oyf.codecollection.ui.activity.GalleryActivity;
+import com.oyf.codecollection.ui.activity.HighlightActivity;
 import com.oyf.codecollection.ui.activity.MusicActivity;
 import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
 import com.oyf.codecollection.ui.activity.NinePasswordActivity;
@@ -36,7 +37,6 @@ import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
 import com.oyf.plugin.NoRegisterActivity;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -45,10 +45,9 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
-    RecyclerView rcv;
-
-    List<ListBean> mLists = new ArrayList<>();
-    BaseAdapter mAdapter;
+    private RecyclerView rcv;
+    private List<ListBean> mLists = new ArrayList<>();
+    private BaseAdapter mAdapter;
 
 
     @Override
@@ -109,8 +108,8 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onItemClick(View view, int viewType, ListBean data, int position) {
-                EventBus.getDefault().post(new TestMain());
-                //startActivity(new Intent(MainActivity.this, data.clazz));
+                //EventBus.getDefault().post(new TestMain());
+                startActivity(new Intent(MainActivity.this, data.clazz));
             }
         });
         rcv.setAdapter(mAdapter);
@@ -124,6 +123,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void initLists() {
+        mLists.add(new ListBean("新手提示", "新手提示指引", HighlightActivity.class));
         mLists.add(new ListBean("爆款", "两级RecycleView联动", EstoreExplosiveActivity.class));
         mLists.add(new ListBean("company", "公司的自定义view", CompanyActivity.class));
         mLists.add(new ListBean("DataBinding", "DataBinding的基本使用", DataBindingActivity.class));

@@ -17,6 +17,7 @@ public class TestMain {
 
     public static void main(String[] args) {
 
+
       /*  String property = System.getProperty("sun.boot.class.path");
         System.out.println(property);
         System.out.println("----------------");
@@ -51,7 +52,7 @@ public class TestMain {
         System.out.println("node.size=" + singleNode.getLength());
         SingleNode reservt = singleNode.reservt();
         reservt.list();*/
-        CircleSingleNode circleSingleNode = new CircleSingleNode();
+       /* CircleSingleNode circleSingleNode = new CircleSingleNode();
         circleSingleNode.add(new Node(1));
         circleSingleNode.add(new Node(2));
         circleSingleNode.add(new Node(3));
@@ -67,8 +68,16 @@ public class TestMain {
         Stack stack=new Stack();
         stack.pop();
         stack.push(1);
-        stack.peek();
+        stack.peek();*/
 
+    }
+
+    public static void change(String str) {
+        str = "123";
+    }
+
+    public static void changeNode(Node node) {
+        node = null;
     }
 
     static class SingleNode {

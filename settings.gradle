@@ -1,2 +1,2 @@
-include ':app', ':basemodule', ':aspectj', ':algorithm', ':plugin'
+include ':app', ':basemodule', ':aspectj', ':algorithm', ':plugin', ':highlight'
 rootProject.name='CodeCollection'

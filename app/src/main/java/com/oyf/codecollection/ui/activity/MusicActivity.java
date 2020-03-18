@@ -98,7 +98,7 @@ public class MusicActivity extends AppCompatActivity {
                 ll_show.getGlobalVisibleRect(rect);
                 int showHeight = rect.top - toolbar.getHeight() - getStateBar();
                 Log.d("test", "height=" + showHeight);
-                if (showHeight < 0) {
+                if (showHeight < 0 && ll_hide.getVisibility() == View.GONE) {
                     Drawable background = toolbar.getBackground().mutate();
                     background.setAlpha(255);
                     toolbar.setTitle("歌曲名称");

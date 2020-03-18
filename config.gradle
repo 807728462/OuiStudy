@@ -48,8 +48,8 @@ ext {
             "support_annotations" : "com.android.support:support-annotations:${versions["annotationsVersion"]}",
             "design"              : "com.android.support:design:${versions["androidSupportSdkVersion"]}",
             //"design"              : "com.google.android.material:material:1.0.0",//使用androidx之后
-            "support-v4"          : "com.android.support:support-v4:${versions["androidSupportSdkVersion"]}",
-            "cardview-v7"         : "com.android.support:cardview-v7:${versions["androidSupportSdkVersion"]}",
+            "support_v4"          : "com.android.support:support-v4:${versions["androidSupportSdkVersion"]}",
+            "cardview_v7"         : "com.android.support:cardview-v7:${versions["androidSupportSdkVersion"]}",
             "recyclerview_v7"     : "com.android.support:recyclerview-v7:${versions["androidSupportSdkVersion"]}",
             "androidx"            : "androidx.appcompat:appcompat:${versions["androidx"]}",
             //方法数超过65535解决方法64K MultiDex分包方法

@@ -98,19 +98,19 @@ public class MyRecycleView extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
-        if (isNeedLayout && changed) {
+        if (isNeedLayout || changed) {
             isNeedLayout = false;
             //清空存放的view，移除所有的view
             viewLists.clear();
             removeAllViews();
             if (adapter != null) {
-                int width = r - l;
-                int height = b - t;
+                width = r - l;
+                height = b - t;
                 int top = 0, left = 0, right, bottom = 0;
 
                 for (int i = 0; i < rowCount && top < height; i++) {
                     right = width;
-                    bottom =top+ heights[i];
+                    bottom = top + heights[i];
                     View view = makeAndStepView(i, 0, top, right, bottom);
                     viewLists.add(view);
                     top = bottom;
@@ -155,7 +155,7 @@ public class MyRecycleView extends ViewGroup {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             currentY = (int) ev.getRawY();
         } else if (ev.getAction() == MotionEvent.ACTION_MOVE) {
-            if (Math.abs(currentY-(int)ev.getRawY()) > touchSlop) {
+            if (Math.abs(currentY - (int) ev.getRawY()) > touchSlop) {
                 return true;
             }
         }
@@ -166,8 +166,12 @@ public class MyRecycleView extends ViewGroup {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_MOVE) {
             //上滑为正   下滑为负
+            int y2 = (int) event.getRawY();
+            int diffY = currentY - y2;
+            currentY = y2;//不加响应会变慢
+
 //                画布移动  并不影响子控件的位置
-            scrollBy(0, (currentY - (int)event.getRawY()));
+            scrollBy(0, diffY);
         }
         return super.onTouchEvent(event);
     }
@@ -177,7 +181,7 @@ public class MyRecycleView extends ViewGroup {
         scrollY += y;
         //修正scroll， 当在顶部的时候 不能下滑   当在底部的时候不能上滑
         scrollY = scrollBound(scrollY);
-        Log.d("test",scrollY+"");
+        Log.d("test", scrollY + "");
         if (scrollY > 0) {
             //头部移除， 添加到recycle中     底部添加
             while (scrollY > heights[mFristRow]) {
@@ -197,7 +201,7 @@ public class MyRecycleView extends ViewGroup {
                 int firstAddRow = mFristRow - 1;
                 View view = obtainView(firstAddRow, width, heights[firstAddRow]);
                 mFristRow--;
-                viewLists.add(0,view);
+                viewLists.add(0, view);
                 scrollY += heights[mFristRow + 1];
             }
             //下滑移除

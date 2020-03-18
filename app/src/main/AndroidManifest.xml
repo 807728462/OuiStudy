@@ -34,6 +34,7 @@
         <activity android:name=".ui.activity.NinePasswordActivity" />
         <activity android:name="com.oyf.plugin.ProxyActivity" />
         <activity android:name=".company.EstoreExplosiveActivity" />
+        <activity android:name=".ui.activity.HighlightActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

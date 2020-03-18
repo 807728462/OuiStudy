@@ -2,6 +2,7 @@ package com.oyf.codecollection.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,12 @@ public class MyRecycleViewActivity extends AppCompatActivity {
             @Override
             public View onBinderViewHodler(int position, View convertView, ViewGroup parent) {
                 TextView textView = convertView.findViewById(R.id.tv_item);
-                textView.setText("item="+position);
+                textView.setText("item=" + position);
+                if (position % 2 == 0) {
+                    textView.setBackgroundColor(Color.RED);
+                } else {
+                    textView.setBackgroundColor(Color.GREEN);
+                }
                 return convertView;
             }
 
