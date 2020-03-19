@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion  rootProject.ext.versions.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
+        versionCode rootProject.ext.versions.versionCode
+        versionName rootProject.ext.versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'Highlight'
+    publishedGroupId = 'com.isanwenyu.highlight'
+    libraryName = 'Highlight'
+    artifact = 'highlight'
+    libraryDescription = 'One for Android app highlights the directivity function of library'
+    siteUrl = 'https://github.com/isanwenyu/Highlight'
+    gitUrl = 'https://github.com/isanwenyu/Highlight.git'
+    libraryVersion = '1.8.0'
+    developerId = 'isanwenyu'
+    developerName = 'isanwenyu'
+    developerEmail = 'isanwenyu@163.com'
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+//apply from: 'https://raw.githubusercontent.com/isanwenyu/BintrayUploadGradle/master/bintray_upload.gradle'
+
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:support-core-ui:24.2.0'
+    implementation rootProject.ext.dependencies.support_v4
+}
