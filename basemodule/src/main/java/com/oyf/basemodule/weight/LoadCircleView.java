@@ -17,6 +17,8 @@ import android.view.animation.LinearInterpolator;
 import androidx.annotation.Nullable;
 
 public class LoadCircleView extends View {
+    private final static String TAG = LoadCircleView.class.getSimpleName();
+
     public LoadCircleView(Context context) {
         this(context, null);
     }
@@ -40,7 +42,7 @@ public class LoadCircleView extends View {
     private int rectR = 80;
     private Rect rectF = new Rect();
     private float value;
-    ValueAnimator valueAnimator;
+    private ValueAnimator valueAnimator;
 
     private void init() {
         mPaint = new Paint();
@@ -87,12 +89,18 @@ public class LoadCircleView extends View {
         if (posTan) {
 
             double atan = Math.atan2(tan[1], tan[0]) * 180 / Math.PI;
-            Log.d("test", "degress=" + atan + ",value=" + value);
+            Log.d(TAG, "degress=" + atan + ",value=" + value);
             canvas.translate(width / 2, height / 2);
             rectF.set(mRadius - rectR / 2, -rectR / 2, mRadius + rectR / 2, rectR / 2);
-            canvas.rotate((float) ( atan-90));
+            canvas.rotate((float) (atan - 90));
             canvas.drawRect(rectF, mPaint);
             canvas.restore();
+        }
+    }
+
+    public void stop() {
+        if (null != valueAnimator && valueAnimator.isStarted()) {
+            valueAnimator.cancel();
         }
     }
 }

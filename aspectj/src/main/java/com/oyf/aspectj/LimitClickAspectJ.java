@@ -1,9 +1,5 @@
 package com.oyf.aspectj;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.View;
-
 import com.oyf.aspectj.annotation.LimitClick;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,7 +10,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 
 /**
  * @创建者 oyf
@@ -29,7 +24,6 @@ public class LimitClickAspectJ {
     @Pointcut("execution(@com.oyf.aspectj.annotation.LimitClick * *(..))")
     public void methodLimit() {
     }
-
 
     @Around("methodLimit()")
     public Object limitClick(ProceedingJoinPoint joinPoint) throws Throwable {

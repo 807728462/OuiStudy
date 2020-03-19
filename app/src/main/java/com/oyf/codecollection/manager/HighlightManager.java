@@ -1,27 +1,8 @@
 package com.oyf.codecollection.manager;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BlurMaskFilter;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.View;
-
-import com.oyf.codecollection.R;
 
 import zhy.com.highlight.HighLight;
-import zhy.com.highlight.interfaces.HighLightInterface;
-import zhy.com.highlight.position.OnBottomPosCallback;
-import zhy.com.highlight.position.OnLeftPosCallback;
-import zhy.com.highlight.position.OnRightPosCallback;
-import zhy.com.highlight.position.OnTopPosCallback;
-import zhy.com.highlight.shape.BaseLightShape;
-import zhy.com.highlight.shape.CircleLightShape;
-import zhy.com.highlight.shape.RectLightShape;
-import zhy.com.highlight.view.HightLightView;
 
 
 /**
@@ -47,7 +28,6 @@ public class HighlightManager {
         highLight.autoRemove(false)//设置背景点击高亮布局自动移除为false 默认为true
                 .intercept(true)//拦截属性默认为true 使下方callback生效/设置拦截属性为false 高亮布局不影响后面布局的滑动效果
                 .enableNext();//开启next模式并通过show方法显示 然后通过调用next()方法切换到下一个提示布局，直到移除自身
-
           /* .setClickCallback(new HighLightInterface.OnClickCallback() {
                             @Override
                             public void onClick() {

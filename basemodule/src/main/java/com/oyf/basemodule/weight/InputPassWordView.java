@@ -39,20 +39,20 @@ public class InputPassWordView extends View {
         init();
     }
 
-    Paint mPaintRect;
-    int screenW;//屏幕的宽
-    int screenH;//屏幕的高
-    int leftPadding;
-    int topPadding;
-    int length;
-    String pwd[];//输入密码的数据
-    int width;//每个控件的宽
-    int height;//每个控件的高
-    int inputShowType;//显示在中间的类型，原点或者*号
-    RectF rectf;
-    Rect rect;
-    int currentNumber = 0;
-    boolean isShow = false;
+    private Paint mPaintRect;
+    private int screenW;//屏幕的宽
+    private int screenH;//屏幕的高
+    private int leftPadding;
+    private int topPadding;
+    private int length;
+    private String pwd[];//输入密码的数据
+    private int width;//每个控件的宽
+    private int height;//每个控件的高
+    private int inputShowType;//显示在中间的类型，原点或者*号
+    private RectF rectf;
+    private Rect rect;
+    private int currentNumber = 0;
+    private boolean isShow = false;
 
     private void init() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -115,7 +115,6 @@ public class InputPassWordView extends View {
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-
         switch (keyCode) {
             case KeyEvent.KEYCODE_DEL:
                 deletePwd();
@@ -156,7 +155,6 @@ public class InputPassWordView extends View {
 
     private void drawPwdRect(Canvas canvas) {
         mPaintRect.setColor(Color.WHITE);
-
         canvas.drawRoundRect(rectf, 10, 10, mPaintRect);
         for (int i = 1; i < length; i++) {
             mPaintRect.setColor(Color.GRAY);
@@ -228,7 +226,12 @@ public class InputPassWordView extends View {
         Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
     }
 
-    //如果输入法在窗口上已经显示，则隐藏，反之则显示
+
+    /**
+     * 如果输入法在窗口上已经显示，则隐藏，反之则显示
+     *
+     * @param context
+     */
     public void showOrHide(Context context) {
         if (isShow) {
             isShow = false;

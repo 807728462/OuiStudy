@@ -36,21 +36,14 @@ public class WaveView extends View {
         mPath = new Path();
     }
 
-    @Override protected void onDraw(Canvas canvas) {
-
+    @Override
+    protected void onDraw(Canvas canvas) {
         // 振幅
         int amplitude = 20;
-
         int height = getHeight();
         // 波长
         int width = getWidth();
         int index = 0;
-
-        // while (index < width) {
-        // float endY = (float) (Math.sin((float) index / (float) width * 2f * Math.PI + mTheta) * (float) amplitude + height - amplitude);
-        // canvas.drawLine(index, 0, index, endY, mPaint);
-        // index++;
-        // }
 
         mPath.reset();
         mPath.moveTo(0, 0);
@@ -63,9 +56,7 @@ public class WaveView extends View {
         }
         mPath.lineTo(index - 1, 0);
         mPath.close();
-
         canvas.drawPath(mPath, mPaint);
-
         mTheta += 0.1;
         if (mTheta >= 2f * Math.PI) {
             mTheta -= (2f * Math.PI);
@@ -73,7 +64,8 @@ public class WaveView extends View {
         postInvalidateDelayed(80);
     }
 
-    @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }

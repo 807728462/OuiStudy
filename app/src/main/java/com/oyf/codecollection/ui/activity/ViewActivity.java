@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ViewActivity extends AppCompatActivity {
-    BigView bigview;
+    private BigView bigview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,5 @@ public class ViewActivity extends AppCompatActivity {
 
             }
         }).start();
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        return super.onTouchEvent(event);
     }
 }

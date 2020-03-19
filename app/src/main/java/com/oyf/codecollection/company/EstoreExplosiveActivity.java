@@ -115,7 +115,6 @@ public class EstoreExplosiveActivity extends BaseActivity {
 
         rcvRight.setLayoutManager(new LinearLayoutManager(this));
         rcvRight.setAdapter(mRightAdapter);
-
     }
 
     @Override
@@ -155,7 +154,7 @@ public class EstoreExplosiveActivity extends BaseActivity {
                 ));
             }
         }
-        map.put(leftData.type,rightData);
+        map.put(leftData.type, rightData);
         return rightData;
     }
 

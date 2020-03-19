@@ -9,6 +9,5 @@ import com.oyf.basemodule.mvp.BaseModel;
  **/
 public class LoginContract {
     interface LoginModel{
-
     }
 }

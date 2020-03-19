@@ -23,9 +23,11 @@ import com.oyf.codecollection.R;
 
 public class BehaviorActivity extends BaseActivity {
 
-    RecyclerView rcv;
-    TextView tv_top;
-    LinearLayoutManager linearLayoutManager;
+    private RecyclerView rcv;
+    private TextView tv_top;
+    private LinearLayoutManager linearLayoutManager;
+    private int mCurrentPosition;
+    private int topHeight;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -43,9 +45,6 @@ public class BehaviorActivity extends BaseActivity {
         rcv = findViewById(R.id.rcv);
         tv_top = findViewById(R.id.tv_top);
     }
-
-    int mCurrentPosition;
-    int topHeight;
 
     @SuppressLint("NewApi")
     @Override
@@ -80,7 +79,6 @@ public class BehaviorActivity extends BaseActivity {
                             }
                         }
                     }
-
                 }
 
                 if (mCurrentPosition != linearLayoutManager.findFirstVisibleItemPosition()) {
@@ -91,7 +89,6 @@ public class BehaviorActivity extends BaseActivity {
                         tv_top.setText("头部" + mCurrentPosition);
                     }
                 }
-
             }
         });
     }
@@ -130,8 +127,6 @@ public class BehaviorActivity extends BaseActivity {
                 tv.setText("头部" + position);
                 tv.setGravity(Gravity.CENTER_VERTICAL);
             }
-
-
         }
 
         @Override

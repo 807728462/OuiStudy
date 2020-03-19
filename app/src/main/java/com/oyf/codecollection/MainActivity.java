@@ -3,9 +3,7 @@ package com.oyf.codecollection;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,7 +27,6 @@ import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
 import com.oyf.codecollection.ui.activity.NinePasswordActivity;
 import com.oyf.codecollection.ui.activity.PlayMusicActivity;
 import com.oyf.codecollection.ui.activity.RippleActivity;
-import com.oyf.codecollection.ui.activity.VLayoutActivity;
 import com.oyf.codecollection.ui.activity.ViewActivity;
 import com.oyf.codecollection.ui.adapter.BaseAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
@@ -44,11 +41,11 @@ import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
+    private final static String TAG = MainActivity.class.getName();
 
     private RecyclerView rcv;
     private List<ListBean> mLists = new ArrayList<>();
     private BaseAdapter mAdapter;
-
 
     @Override
     protected BasePresenter createPresenter() {
@@ -61,7 +58,7 @@ public class MainActivity extends BaseActivity {
     }
 
     protected void initView(Bundle savedInstanceState) {
-        LayoutInflater.from(this).inflate(R.layout.rcv_item, (ViewGroup) getWindow().getDecorView().getRootView(), true);
+        //LayoutInflater.from(this).inflate(R.layout.rcv_item, (ViewGroup) getWindow().getDecorView().getRootView(), true);
         OBus.getDefault().register(this);
         rcv = findViewById(R.id.rcv);
         Button bt = findViewById(R.id.bt_test);
@@ -79,20 +76,12 @@ public class MainActivity extends BaseActivity {
 
     @Subscribe
     public void onEvent(Object o) {
-        Log.d("test", "MainActivity.onEvent.Object");
+        Log.d(TAG, "MainActivity.onEvent.Object");
     }
 
     @Subscribe
     public void onEvent(String o) {
-        Log.d("test", "MainActivity.onEvent.String");
-    }
-
-    public void testClick() {
-       /* TestUtils.click();
-        TestUtils.click1();
-        TestUtils.click2();
-        TestUtils.click3();
-        TestUtils.abc();*/
+        Log.d(TAG, "MainActivity.onEvent.String");
     }
 
     protected void initData(Bundle savedInstanceState) {
@@ -119,7 +108,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d("test", "MainActivity.onNewIntent");
+        Log.d(TAG, "MainActivity.onNewIntent");
     }
 
     public void initLists() {
@@ -127,7 +116,7 @@ public class MainActivity extends BaseActivity {
         mLists.add(new ListBean("爆款", "两级RecycleView联动", EstoreExplosiveActivity.class));
         mLists.add(new ListBean("company", "公司的自定义view", CompanyActivity.class));
         mLists.add(new ListBean("DataBinding", "DataBinding的基本使用", DataBindingActivity.class));
-        mLists.add(new ListBean("vLayout的使用", "vlayout的基本使用方法，添加删除动画", VLayoutActivity.class));
+        //mLists.add(new ListBean("vLayout的使用", "vlayout的基本使用方法，添加删除动画", VLayoutActivity.class));
         mLists.add(new ListBean("behavior的使用", "使用behavior，在recyccleview的滑动控制按钮的显示与隐藏", BehaviorActivity.class));
         mLists.add(new ListBean("使用svg画中国地图", "使用svg加path，svg的dom解析", ChinaMapActivity.class));
         mLists.add(new ListBean("语音识别扩散", "识别扩散波纹效果", RippleActivity.class));
@@ -141,14 +130,13 @@ public class MainActivity extends BaseActivity {
         mLists.add(new ListBean("CoordinatorLayoutActivity中滑动回弹等问题", "处理CoordinatorLayout中Appbar跟Recycleview的回弹冲突问题", CoordinatorLayoutActivity.class));
     }
 
-
     @OSubscribe(threadMode = OThreadMode.MAIN)
     public void logMain(ItemBean itemBean) {
-        Log.d("test", "logMain.thread=" + Thread.currentThread() + ",name=" + itemBean.name);
+        Log.d(TAG, "logMain.thread=" + Thread.currentThread() + ",name=" + itemBean.name);
     }
 
     @OSubscribe(threadMode = OThreadMode.BACKGROUND)
     public void logY(ItemBean itemBean) {
-        Log.d("test", "logY.thread=" + Thread.currentThread().getName() + ",name=" + itemBean.name);
+        Log.d(TAG, "logY.thread=" + Thread.currentThread().getName() + ",name=" + itemBean.name);
     }
 }

@@ -38,16 +38,19 @@ public class BigView extends View {
         init(context);
     }
 
-    Paint mPaint;
-    Bitmap mBitmap;
-    int w;
-    int h;
-    Rect rect;
-    BitmapRegionDecoder mRegionDecoder;
-    Bitmap bitmap;
-    int mImageHeight;
-    int mImageWidth;
-    BitmapFactory.Options options = new BitmapFactory.Options();
+    private Paint mPaint;
+    private Bitmap mBitmap;
+    private int w;
+    private int h;
+    private Rect rect;
+    private BitmapRegionDecoder mRegionDecoder;
+    private Bitmap bitmap;
+    private int mImageHeight;
+    private int mImageWidth;
+    private BitmapFactory.Options options = new BitmapFactory.Options();
+
+    private int px;
+    private int py;
 
     private void init(Context context) {
         mPaint = new Paint();
@@ -57,13 +60,11 @@ public class BigView extends View {
     }
 
     public void setImage() throws IOException {
-
         InputStream open = getContext().getAssets().open("timg.jpg");
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeStream(open, null, options);
         mImageHeight = options.outHeight;
         mImageWidth = options.outWidth;
-
 
         mRegionDecoder = BitmapRegionDecoder.newInstance(open, false);
         rect = new Rect(0, 0, Math.min(w, mImageWidth), Math.min(h, mImageHeight));
@@ -80,8 +81,8 @@ public class BigView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        this.w = w-50;
-        this.h = h-50;
+        this.w = w - 50;
+        this.h = h - 50;
     }
 
     @Override
@@ -90,9 +91,6 @@ public class BigView extends View {
         if (mBitmap != null)
             canvas.drawBitmap(mBitmap, 0, 0, mPaint);
     }
-
-    private int px;
-    private int py;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -117,7 +115,6 @@ public class BigView extends View {
     }
 
     private void updateWH(MotionEvent event) {
-
         int dx = (int) (event.getX() - px);
         int dy = (int) (event.getY() - py);
         if (rect.left - dx >= 0 && rect.right - dx <= mImageWidth) {

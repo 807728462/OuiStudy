@@ -21,7 +21,4 @@ public class AdapterTextSizeUtil {
             tv.setAutoSizeTextTypeUniformWithPresetSizes(new int[]{10, 12, 14, 16, 18, 20, 22, 24, 26}, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         }
     }
-
-
-
 }

@@ -29,7 +29,6 @@ public class OdragBubbleView extends View {
         init();
     }
 
-
     /**
      * 气泡默认状态--静止
      */
@@ -70,9 +69,7 @@ public class OdragBubbleView extends View {
     //手指触摸点到不可动圆心距离
     private float mDist = 0;
 
-    /**
-     * 气泡相连状态最大圆心距离
-     */
+    //气泡相连状态最大圆心距离
     private float mMaxDist = 300;
     //气泡的画笔
     private Paint mBubblePaint;
@@ -91,8 +88,7 @@ public class OdragBubbleView extends View {
         mTextPaint.setTextSize(24);
         mTextPaint.setColor(mBubbleTextColor);
         mTextRect = new Rect();
-        mbPath=new Path();
-
+        mbPath = new Path();
     }
 
     @Override
@@ -104,39 +100,35 @@ public class OdragBubbleView extends View {
                 mBubmovePoint.x - mTextRect.width() / 2,
                 mBubmovePoint.y + mTextRect.height() / 2, mTextPaint);
 
-        if (mCurrentStatus==BUBBLE_STATE_CONNECT){
+        if (mCurrentStatus == BUBBLE_STATE_CONNECT) {
             canvas.drawCircle(mBubFixPoint.x, mBubFixPoint.y, mBubFixRadius, mBubblePaint);
 
-            float sin=(mBubmovePoint.y-mBubFixPoint.y)/mDist;
-            float cos=(mBubmovePoint.x-mBubFixPoint.x)/mDist;
-            float ax=mBubFixPoint.x-sin*mBubFixRadius;
-            float ay=mBubFixPoint.y+cos*mBubFixRadius;
+            float sin = (mBubmovePoint.y - mBubFixPoint.y) / mDist;
+            float cos = (mBubmovePoint.x - mBubFixPoint.x) / mDist;
+            float ax = mBubFixPoint.x - sin * mBubFixRadius;
+            float ay = mBubFixPoint.y + cos * mBubFixRadius;
 
-            float bx=mBubmovePoint.x-sin*mBubMoveRadius;
-            float by=mBubmovePoint.y+cos*mBubMoveRadius;
+            float bx = mBubmovePoint.x - sin * mBubMoveRadius;
+            float by = mBubmovePoint.y + cos * mBubMoveRadius;
 
-            float cx=mBubFixPoint.x+sin*mBubFixRadius;
-            float cy=mBubFixPoint.y-cos*mBubFixRadius;
+            float cx = mBubFixPoint.x + sin * mBubFixRadius;
+            float cy = mBubFixPoint.y - cos * mBubFixRadius;
 
-            float dx=mBubmovePoint.x+sin*mBubMoveRadius;
-            float dy=mBubmovePoint.y-cos*mBubMoveRadius;
+            float dx = mBubmovePoint.x + sin * mBubMoveRadius;
+            float dy = mBubmovePoint.y - cos * mBubMoveRadius;
 
-            int ccx= (int) ((mBubFixPoint.x+mBubmovePoint.x)/2);
-            int ccy= (int) ((mBubFixPoint.y+mBubmovePoint.y)/2);
+            int ccx = (int) ((mBubFixPoint.x + mBubmovePoint.x) / 2);
+            int ccy = (int) ((mBubFixPoint.y + mBubmovePoint.y) / 2);
             mbPath.reset();
-            mbPath.moveTo(ax,ay);
+            mbPath.moveTo(ax, ay);
             //mbPath.lineTo(bx,by);
-            mbPath.quadTo(ccx,ccy,bx,by);
-
-            mbPath.lineTo(dx,dy);
+            mbPath.quadTo(ccx, ccy, bx, by);
+            mbPath.lineTo(dx, dy);
             //mbPath.lineTo(cx,cy);
-
-            mbPath.quadTo(ccx,ccy,cx,cy);
+            mbPath.quadTo(ccx, ccy, cx, cy);
             mbPath.close();
-            canvas.drawPath(mbPath,mBubblePaint);
-
+            canvas.drawPath(mbPath, mBubblePaint);
         }
-
     }
 
     @Override
@@ -168,40 +160,38 @@ public class OdragBubbleView extends View {
                         if (mDist > mMaxDist) {
                             mCurrentStatus = BUBBLE_STATE_APART;
                         } else {
-                            mBubFixRadius=(1-mDist/mMaxDist)*mBubMoveRadius;
+                            mBubFixRadius = (1 - mDist / mMaxDist) * mBubMoveRadius;
                             mCurrentStatus = BUBBLE_STATE_CONNECT;
                         }
                     }
-
                     invalidate();
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if (mCurrentStatus==BUBBLE_STATE_CONNECT){
+                if (mCurrentStatus == BUBBLE_STATE_CONNECT) {
                     startBack();
-                }else{
+                } else {
                     mBubmovePoint.x = mBubFixPoint.x;
                     mBubmovePoint.y = mBubFixPoint.y;
                     invalidate();
                 }
-
-                mCurrentStatus=BUBBLE_STATE_DEFAULT;
+                mCurrentStatus = BUBBLE_STATE_DEFAULT;
                 break;
         }
         return true;
     }
 
     private void startBack() {
-        ValueAnimator valueAnimator=ValueAnimator.ofFloat(mDist,0.1f);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(mDist, 0.1f);
         valueAnimator.setDuration(200);
         valueAnimator.setInterpolator(new AnticipateOvershootInterpolator(2f));
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                mDist= (float) animation.getAnimatedValue();
+                mDist = (float) animation.getAnimatedValue();
                 float hypot = (float) Math.hypot(mBubmovePoint.x - mBubFixPoint.x, mBubmovePoint.y - mBubFixPoint.y);
-                mBubmovePoint.x=mBubFixPoint.x+(mDist/hypot)*(mBubmovePoint.x-mBubFixPoint.x);
-                mBubmovePoint.y=mBubFixPoint.y+(mDist/hypot)*(mBubmovePoint.y-mBubFixPoint.y);
+                mBubmovePoint.x = mBubFixPoint.x + (mDist / hypot) * (mBubmovePoint.x - mBubFixPoint.x);
+                mBubmovePoint.y = mBubFixPoint.y + (mDist / hypot) * (mBubmovePoint.y - mBubFixPoint.y);
                 invalidate();
             }
         });
@@ -210,7 +200,6 @@ public class OdragBubbleView extends View {
 
     private void init(int w, int h) {
         mCurrentStatus = BUBBLE_STATE_DEFAULT;
-
         //设置固定气泡圆心初始坐标
         if (mBubFixPoint == null) {
             mBubFixPoint = new PointF(w / 2, h / 2);

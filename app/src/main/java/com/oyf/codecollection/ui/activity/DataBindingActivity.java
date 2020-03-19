@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
 
+import com.oyf.codecollection.MainActivity;
 import com.oyf.codecollection.R;
 import com.oyf.codecollection.bean.UserBean;
 import com.oyf.codecollection.databinding.LayoutActivityDatabindingBindingImpl;
@@ -20,9 +21,10 @@ import com.oyf.codecollection.databinding.LayoutActivityDatabindingBindingImpl;
  * @描述
  **/
 public class DataBindingActivity extends AppCompatActivity {
-    UserBean user;
+    private final static String TAG = DataBindingActivity.class.getName();
 
-    TextView tips;
+    private UserBean user;
+    private TextView tips;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,23 +32,23 @@ public class DataBindingActivity extends AppCompatActivity {
 
         LayoutActivityDatabindingBindingImpl databindingBinding = DataBindingUtil.setContentView(this, R.layout.layout_activity_databinding);
         tips = findViewById(R.id.tv_tips);
-        user = new UserBean("oyf", "账号", "123", "密码");
+        user = new UserBean(TAG, "账号", "123", "密码");
 
         databindingBinding.setUser(user);
         user.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                Log.d("test", "-------------------------sender-" + sender.toString() + "-propertyId=" + propertyId);
+                Log.d(TAG, "-------------------------sender-" + sender.toString() + "-propertyId=" + propertyId);
                 tips.setText("name=" + user.getUsername() + ",pwd=" + user.getPwd());
             }
         });
         databindingBinding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("test", "-------------------------username-" + user.getUsername() + "-pwd=" + user.getPwd());
+                Log.d(TAG, "-------------------------username-" + user.getUsername() + "-pwd=" + user.getPwd());
                 user.setUsername("更改后username");
                 user.setPwd("更改后pwd");
-                Log.d("test", "-------------------------username-" + user.getUsername() + "-pwd=" + user.getPwd());
+                Log.d(TAG, "-------------------------username-" + user.getUsername() + "-pwd=" + user.getPwd());
             }
         });
     }

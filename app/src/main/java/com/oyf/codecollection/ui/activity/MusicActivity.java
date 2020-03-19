@@ -1,12 +1,6 @@
 package com.oyf.codecollection.ui.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -18,27 +12,26 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.alibaba.android.vlayout.VirtualLayoutAdapter;
-import com.oyf.basemodule.bus.OBus;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.oyf.codecollection.R;
-import com.oyf.codecollection.ui.bean.ItemBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class MusicActivity extends AppCompatActivity {
 
-    ListView lv;
-    Toolbar toolbar;
-    LinearLayout ll_hide;
-    LinearLayout ll_show;
-    View headView;
+    private ListView lv;
+    private Toolbar toolbar;
+    private LinearLayout ll_hide;
+    private LinearLayout ll_show;
+    private View headView;
 
     @SuppressLint("NewApi")
     @Override
@@ -48,7 +41,6 @@ public class MusicActivity extends AppCompatActivity {
         initView();
         initData();
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initView() {
@@ -89,7 +81,6 @@ public class MusicActivity extends AppCompatActivity {
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
             }
 
             @Override
@@ -110,7 +101,6 @@ public class MusicActivity extends AppCompatActivity {
                     toolbar.setTitle("音乐");
                 }
             }
-
         });
     }
 
@@ -122,5 +112,4 @@ public class MusicActivity extends AppCompatActivity {
         }
         return result;
     }
-
 }

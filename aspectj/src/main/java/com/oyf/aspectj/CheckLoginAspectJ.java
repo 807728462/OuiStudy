@@ -1,6 +1,5 @@
 package com.oyf.aspectj;
 
-import android.media.audiofx.DynamicsProcessing;
 import android.util.Log;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,7 +13,6 @@ import org.aspectj.lang.annotation.Aspect;
  **/
 @Aspect
 public class CheckLoginAspectJ {
-
 
     @Around("execution(void *.oyf.aspectj.TestUtils.click* (..))")
     public Object check(ProceedingJoinPoint joinPoint) throws Throwable {

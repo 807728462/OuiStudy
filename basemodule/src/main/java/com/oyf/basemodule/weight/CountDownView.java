@@ -87,7 +87,6 @@ public class CountDownView extends LinearLayout {
         timerStart(1000 * 60 * 60 * 5);
     }
 
-
     /**
      * 取消倒计时
      */

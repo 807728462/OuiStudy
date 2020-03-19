@@ -24,7 +24,7 @@ import com.oyf.basemodule.R;
 /**
  * @创建者 oyf
  * @创建时间 2019/11/11 13:44
- * @描述      进度条控件
+ * @描述 进度条控件
  **/
 public class ProgressView extends View {
 
@@ -41,8 +41,8 @@ public class ProgressView extends View {
         init(context);
     }
 
-    Paint mBorderPaint;
-    Paint mProgressPaint;
+    private Paint mBorderPaint;
+    private Paint mProgressPaint;
     //开始颜色
     private int startColor;
     //结束颜色
@@ -81,7 +81,6 @@ public class ProgressView extends View {
     private ValueAnimator valueAnimator;
 
     private void init(Context context) {
-
         TypedArray typedArray = context.obtainStyledAttributes(R.styleable.ProgressView);
         startColor = typedArray.getColor(R.styleable.ProgressView_startColor, Color.GREEN);
         endColor = typedArray.getColor(R.styleable.ProgressView_endColor, Color.RED);
@@ -93,7 +92,6 @@ public class ProgressView extends View {
         strokeW = typedArray.getInt(R.styleable.ProgressView_strokeW, 4);
         textPadding = typedArray.getInt(R.styleable.ProgressView_textPadding, 10);
         typedArray.recycle();
-
         mBorderPaint = new Paint();
         mBorderPaint.setAntiAlias(true);
         mBorderPaint.setColor(borderColor);

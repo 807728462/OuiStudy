@@ -1,13 +1,13 @@
 package com.oyf.codecollection.ui.adapter;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
 
 public class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
     private final SparseArray<View> views;
     private View convertView;
     protected OnViewClickListener mOnViewClickListener = null;
@@ -50,13 +50,10 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         this.mOnViewClickListener = listener;
     }
 
-
     protected void onRelease() {
-
     }
 
     public <T extends View> T getView(int viewId) {
         return retrieveView(viewId);
     }
-
 }

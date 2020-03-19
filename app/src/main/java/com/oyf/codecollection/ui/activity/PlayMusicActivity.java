@@ -56,25 +56,24 @@ import java.util.Timer;
 import static com.oyf.codecollection.palymusic.DiscView.DURATION_NEEDLE_ANIMATOR;
 
 public class PlayMusicActivity extends AppCompatActivity implements View.OnClickListener, DiscView.IPlayInfo {
-
-    private static final String TAG = "testPlayMusicActivity";
-    int bg_pic_res = -1;
-    ImageSwitcher imageSwitcher;
-    Toolbar mToolbar;
-    DiscView mDiscView;
-    List<MusicDataBean> mMusicLists;
-
-
+    private static final String TAG = PlayMusicActivity.class.getName();
     public static final int MUSIC_MESSAGE = 0;
-    TextView tvStartTime;
-    TextView tvEndTime;
-    SeekBar seekBar;
-    ImageView ivPlay;
-    ImageView ivNext;
-    ImageView ivPrevious;
-    MusicReceiver musicReceiver = new MusicReceiver();
-    boolean isPlay = false;
-    Intent intent;
+
+    private int bg_pic_res = -1;
+    private ImageSwitcher imageSwitcher;
+    private Toolbar mToolbar;
+    private DiscView mDiscView;
+    private List<MusicDataBean> mMusicLists;
+
+    private TextView tvStartTime;
+    private TextView tvEndTime;
+    private SeekBar seekBar;
+    private ImageView ivPlay;
+    private ImageView ivNext;
+    private ImageView ivPrevious;
+    private MusicReceiver musicReceiver = new MusicReceiver();
+    private boolean isPlay = false;
+    private Intent intent;
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -149,7 +148,6 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
                 tvStartTime.setText(duration2Time(progress));
             }
 
@@ -163,7 +161,6 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(MusicService.ACTION_OPT_MUSIC_SEEK_TO);
                 intent.putExtra(MusicService.PARAM_MUSIC_SEEK_TO, seekBar.getProgress());
                 LocalBroadcastManager.getInstance(PlayMusicActivity.this).sendBroadcast(intent);
-
                 stopUpdateSeekBarProgress();
             }
         });
@@ -174,7 +171,6 @@ public class PlayMusicActivity extends AppCompatActivity implements View.OnClick
         intentFilter.addAction(MusicService.ACTION_STATUS_MUSIC_COMPLETE);
         intentFilter.addAction(MusicService.ACTION_STATUS_MUSIC_DURATION);
         LocalBroadcastManager.getInstance(this).registerReceiver(musicReceiver, intentFilter);
-
     }
 
     private void initMusic() {

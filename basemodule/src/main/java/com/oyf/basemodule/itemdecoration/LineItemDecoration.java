@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
  **/
 public class LineItemDecoration extends RecyclerView.ItemDecoration {
 
-    Paint mPaint;
-    int color = Color.WHITE;
-    int height = 10;
+    private Paint mPaint;
+    private int color = Color.WHITE;
+    private int height = 10;
 
     public LineItemDecoration(int color, int height) {
         this.color = color;
@@ -43,7 +43,6 @@ public class LineItemDecoration extends RecyclerView.ItemDecoration {
             //这里把left和right的值分别增加item_padding,和减去item_padding.
             c.drawRect(left, top, right, bottom, mPaint);
         }
-
     }
 
     @Override

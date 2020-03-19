@@ -1,4 +1,4 @@
-package com.oyf.codecollection.utils;
+package com.oyf.basemodule.weight;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,8 +10,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 public class TouchView extends View {
     public TouchView(Context context) {
@@ -27,11 +25,11 @@ public class TouchView extends View {
         init();
     }
 
-    float lastX;
-    float lastY;
+    private float lastX;
+    private float lastY;
 
-    int screenW;
-    int screenH;
+    private int screenW;
+    private int screenH;
 
     private void init() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -44,7 +42,6 @@ public class TouchView extends View {
         super.onDraw(canvas);
         canvas.drawColor(Color.RED);
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

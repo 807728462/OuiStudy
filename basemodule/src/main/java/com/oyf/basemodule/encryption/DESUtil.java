@@ -10,12 +10,13 @@ import javax.crypto.spec.DESKeySpec;
 public class DESUtil {
     /**
      * 加密
+     *
      * @param datasource byte[]
-     * @param password 秘钥
+     * @param password   秘钥
      * @return byte[]
      */
-    public static  byte[] encrypt(byte[] datasource, String password) {
-        try{
+    public static byte[] encrypt(byte[] datasource, String password) {
+        try {
             SecureRandom random = new SecureRandom();
             DESKeySpec desKey = new DESKeySpec(password.getBytes());
             //创建一个密匙工厂，然后用它把DESKeySpec转换成
@@ -28,14 +29,16 @@ public class DESUtil {
             //现在，获取数据并加密
             //正式执行加密操作
             return cipher.doFinal(datasource);
-        }catch(Throwable e){
+        } catch (Throwable e) {
             e.printStackTrace();
         }
         return null;
     }
+
     /**
      * 解密
-     * @param src byte[]
+     *
+     * @param src      byte[]
      * @param password 秘钥
      * @return byte[]
      * @throws Exception

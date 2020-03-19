@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
  * @描述
  **/
 public class TimeItemDecoration extends RecyclerView.ItemDecoration {
-    Paint mPaint;
-    int current = 0;
-    int color = Color.GRAY;
-    int radius = 15;
-    int stroke = 6;
+    private Paint mPaint;
+    private int current = 0;
+    private int color = Color.GRAY;
+    private int radius = 15;
+    private int stroke = 6;
 
     public TimeItemDecoration() {
         mPaint = new Paint();
@@ -60,11 +60,9 @@ public class TimeItemDecoration extends RecyclerView.ItemDecoration {
                 //为底部
                 mPaint.setStyle(Paint.Style.STROKE);
                 c.drawCircle(cx, cy, radius, mPaint);
-
                 c.drawLine(cx, viewTop - top, cx, cy - radius, mPaint);
                 c.drawLine(cx, cy + radius, cx, viewBottom + bottom, mPaint);
             }
-
         }
     }
 

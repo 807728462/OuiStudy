@@ -11,7 +11,6 @@ import com.oyf.codecollection.R;
 
 public class CoordinatorLayoutActivity extends BaseActivity {
 
-
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -25,6 +24,5 @@ public class CoordinatorLayoutActivity extends BaseActivity {
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-
     }
 }

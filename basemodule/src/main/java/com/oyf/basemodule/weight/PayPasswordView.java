@@ -46,8 +46,8 @@ public class PayPasswordView extends View {
     private CornerView mLastView;
     private Path mPath;
 
-    int w;
-    int h;
+    private int w;
+    private int h;
 
     private void init() {
         mPaint = new Paint();

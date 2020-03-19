@@ -14,8 +14,6 @@ public class FastBlurUtil {
      * @return
      */
     public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
-
-
         Bitmap bitmap;
         if (canReuseInBitmap) {
             bitmap = sentBitmap;
@@ -215,9 +213,7 @@ public class FastBlurUtil {
                 yi += w;
             }
         }
-
         bitmap.setPixels(pix, 0, w, 0, 0, w, h);
-
         return (bitmap);
     }
 

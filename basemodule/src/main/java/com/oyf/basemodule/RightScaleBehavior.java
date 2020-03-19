@@ -1,7 +1,5 @@
 package com.oyf.basemodule;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -10,14 +8,12 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.ViewPropertyAnimatorListener;
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
 
-import com.oyf.basemodule.animators.BaseItemAnimator;
-
 public class RightScaleBehavior extends CoordinatorLayout.Behavior {
+    private static final String TAG = RightScaleBehavior.class.getName();
 
-    int top;
+    private int top;
     private boolean isRunning;
 
     public RightScaleBehavior(Context context, AttributeSet attrs) {
@@ -26,7 +22,7 @@ public class RightScaleBehavior extends CoordinatorLayout.Behavior {
 
     @Override
     public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
-        Log.d("nestedScroll", "axes=" + axes);
+        Log.d(TAG, "axes=" + axes);
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL;
     }
 
@@ -40,8 +36,7 @@ public class RightScaleBehavior extends CoordinatorLayout.Behavior {
             //向上滚动
             onshow(child);
         }
-
-        Log.d("nestedScroll", "dxConsumed=" + dxConsumed +
+        Log.d(TAG, "dxConsumed=" + dxConsumed +
                 ",dyConsumed=" + dyConsumed +
                 ",dxUnconsumed=" + dxUnconsumed +
                 ",dyUnconsumed=" + dyUnconsumed +
@@ -77,7 +72,6 @@ public class RightScaleBehavior extends CoordinatorLayout.Behavior {
                     }
                 }).start();
     }
-
 
     private void onHide(View child) {
         isRunning = true;

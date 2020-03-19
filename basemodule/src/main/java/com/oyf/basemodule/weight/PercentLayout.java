@@ -34,15 +34,14 @@ public class PercentLayout extends RelativeLayout {
             View child = getChildAt(i);
             ViewGroup.LayoutParams params = child.getLayoutParams();
             //如果说是百分比布局属性
-            if (checkLayoutParams(params)){
-                LayoutParams lp = (LayoutParams)params;
-                 float widthPercent = lp.widthPercent;
-                 if (widthPercent > 0){
-                     params.width = (int) (widthSize * widthPercent);
-                 }
+            if (checkLayoutParams(params)) {
+                LayoutParams lp = (LayoutParams) params;
+                float widthPercent = lp.widthPercent;
+                if (widthPercent > 0) {
+                    params.width = (int) (widthSize * widthPercent);
+                }
             }
         }
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -51,11 +50,11 @@ public class PercentLayout extends RelativeLayout {
         return p instanceof LayoutParams;
     }
 
-    public LayoutParams generateLayoutParams(AttributeSet attrs){
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new LayoutParams(getContext(), attrs);
     }
 
-    public static class LayoutParams extends RelativeLayout.LayoutParams{
+    public static class LayoutParams extends RelativeLayout.LayoutParams {
 
         private float widthPercent;
         private float heightPercent;

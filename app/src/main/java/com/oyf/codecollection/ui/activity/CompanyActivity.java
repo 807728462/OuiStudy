@@ -54,6 +54,17 @@ import zhy.com.highlight.view.HightLightView;
 
 
 public class CompanyActivity extends BaseActivity {
+
+    private Button btGuide;
+    private LineChartView lineChartView;
+    private CircleChartView circleChartView;
+    private HistoryDataView hdvLeft;
+    private HistoryDataView hdvRight;
+    private Spinner spinner;
+    private RadioGroup rg;
+    private Button btPop;
+    private HighLight mHightLight;
+
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -63,15 +74,6 @@ public class CompanyActivity extends BaseActivity {
     protected int getLayoutId() {
         return R.layout.activity_company;
     }
-
-    Button btGuide;
-    LineChartView lineChartView;
-    CircleChartView circleChartView;
-    HistoryDataView hdvLeft;
-    HistoryDataView hdvRight;
-    Spinner spinner;
-    RadioGroup rg;
-    Button btPop;
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
@@ -86,15 +88,12 @@ public class CompanyActivity extends BaseActivity {
         btPop = findViewById(R.id.bt_pop);
     }
 
-
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
         super.initData(savedInstanceState);
         initRg();
         initSpinner();
     }
-
-    HighLight mHightLight;
 
     public void showGuide(View view) {
         mHightLight = new HighLight(CompanyActivity.this)//
@@ -174,9 +173,9 @@ public class CompanyActivity extends BaseActivity {
         });
     }
 
-    String[] titles = new String[]{"今天", "昨日", "上周", "近一个月"};
-    GradientDrawable check;
-    List<RadioButton> mRadioLists = new ArrayList<>();
+    private String[] titles = new String[]{"今天", "昨日", "上周", "近一个月"};
+    private GradientDrawable check;
+    private List<RadioButton> mRadioLists = new ArrayList<>();
 
     private void initRg() {
         check = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
@@ -254,8 +253,8 @@ public class CompanyActivity extends BaseActivity {
         hdvRight.updateData(0);
     }
 
-    CalendarPopWindow mCalendarPopWindow;
-    int a = 0;
+    private CalendarPopWindow mCalendarPopWindow;
+    private int a = 0;
 
     public void showPop(View view) {
         if (mCalendarPopWindow == null) {

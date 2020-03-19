@@ -12,7 +12,6 @@ public class PxAdapterUtil {
     public static final float STANDARD_WIDTH = 1080f;
     public static final float STANDARD_HEIGHT = 1920f;
 
-
     //这里是屏幕显示宽高
     private int mDisplayWidth;
     private int mDisplayHeight;
@@ -37,6 +36,13 @@ public class PxAdapterUtil {
         }
     }
 
+    public static PxAdapterUtil getInstance() {
+        if (utils == null) {
+            throw new RuntimeException("ViewCalculateUtil请先初始化");
+        }
+        return utils;
+    }
+
     /**
      * @param context
      */
@@ -44,14 +50,6 @@ public class PxAdapterUtil {
         if (utils == null) {
             utils = new PxAdapterUtil(context.getApplicationContext());
         }
-    }
-
-
-    public static PxAdapterUtil getInstance() {
-        if (utils == null) {
-            throw new RuntimeException("ViewCalculateUtil请先初始化");
-        }
-        return utils;
     }
 
     /**
@@ -113,6 +111,4 @@ public class PxAdapterUtil {
     public int getScreenHeight() {
         return mDisplayHeight;
     }
-
-
 }

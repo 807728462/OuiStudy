@@ -22,55 +22,53 @@ import androidx.annotation.RequiresApi;
  * 图层混合模式
  */
 public class FrameModeView extends View {
-/*    PorterDuff.Mode.CLEAR
-    所绘制不会提交到画布上
+    /*    PorterDuff.Mode.CLEAR
+        所绘制不会提交到画布上
 
-    PorterDuff.Mode.SRC
-    显示上层绘制图片
+        PorterDuff.Mode.SRC
+        显示上层绘制图片
 
-    PorterDuff.Mode.DST
-    显示下层绘制图片
+        PorterDuff.Mode.DST
+        显示下层绘制图片
 
-    PorterDuff.Mode.SRC_OVER
-    正常绘制显示，上下层绘制叠盖。
+        PorterDuff.Mode.SRC_OVER
+        正常绘制显示，上下层绘制叠盖。
 
-    PorterDuff.Mode.DST_OVER
-    上下层都显示。下层居上显示。
+        PorterDuff.Mode.DST_OVER
+        上下层都显示。下层居上显示。
 
-    PorterDuff.Mode.SRC_IN
-    取两层绘制交集。显示上层。
+        PorterDuff.Mode.SRC_IN
+        取两层绘制交集。显示上层。
 
-    PorterDuff.Mode.DST_IN
-    取两层绘制交集。显示下层。
+        PorterDuff.Mode.DST_IN
+        取两层绘制交集。显示下层。
 
-    PorterDuff.Mode.SRC_OUT
-    取上层绘制非交集部分。
+        PorterDuff.Mode.SRC_OUT
+        取上层绘制非交集部分。
 
-    PorterDuff.Mode.DST_OUT
-    取下层绘制非交集部分。
+        PorterDuff.Mode.DST_OUT
+        取下层绘制非交集部分。
 
-    PorterDuff.Mode.SRC_ATOP
-    取下层非交集部分与上层交集部分
+        PorterDuff.Mode.SRC_ATOP
+        取下层非交集部分与上层交集部分
 
-    PorterDuff.Mode.DST_ATOP
-    取上层非交集部分与下层交集部分
+        PorterDuff.Mode.DST_ATOP
+        取上层非交集部分与下层交集部分
 
-    PorterDuff.Mode.XOR
-    取两层绘制非交集。两层绘制非交集。
+        PorterDuff.Mode.XOR
+        取两层绘制非交集。两层绘制非交集。
 
-     PorterDuff.Mode.DARKEN
-    上下层都显示。变暗
+         PorterDuff.Mode.DARKEN
+        上下层都显示。变暗
 
-    PorterDuff.Mode.LIGHTEN
-    上下层都显示。变量
+        PorterDuff.Mode.LIGHTEN
+        上下层都显示。变量
 
-    PorterDuff.Mode.MULTIPLY
-    取两层绘制交集
+        PorterDuff.Mode.MULTIPLY
+        取两层绘制交集
 
-    PorterDuff.Mode.SCREEN
-    上下层都显示。*/
-
-
+        PorterDuff.Mode.SCREEN
+        上下层都显示。*/
     public FrameModeView(Context context) {
         this(context, null);
     }
@@ -84,17 +82,19 @@ public class FrameModeView extends View {
         init();
     }
 
-    Paint mGreenPaint;
-    Paint mRedPaint;
-    Paint mGrarPaint;
-    Paint mTopPaint;
-    PorterDuffXfermode[] porterDuffXfermodes;
-    int left = 0;
-    int top = -300;
-    int w = 100;
-    int row = 4;
-    RectF rectF;
-    Path mPath;
+    private Paint mGreenPaint;
+    private Paint mRedPaint;
+    private Paint mGrarPaint;
+    private Paint mTopPaint;
+    private PorterDuffXfermode[] porterDuffXfermodes;
+    private int left = 0;
+    private int top = -300;
+    private int w = 100;
+    private int row = 4;
+    private RectF rectF;
+    private Path mPath;
+
+    private Region region = new Region();
 
     private void init() {
         mGreenPaint = new Paint();
@@ -116,9 +116,7 @@ public class FrameModeView extends View {
         mTopPaint.setStrokeWidth(10);
         mTopPaint.setColor(Color.RED);
 
-
         mPath = new Path();
-
         porterDuffXfermodes = new PorterDuffXfermode[]{
                 new PorterDuffXfermode(PorterDuff.Mode.CLEAR),
                 new PorterDuffXfermode(PorterDuff.Mode.SRC),
@@ -149,7 +147,6 @@ public class FrameModeView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         canvas.drawColor(Color.GRAY);
        /* for (int i = 0; i < porterDuffXfermodes.length; i++) {
             if (i % row == 0) {
@@ -180,7 +177,6 @@ public class FrameModeView extends View {
         top = -300;
     }
 
-    Region region = new Region();
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

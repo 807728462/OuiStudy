@@ -45,20 +45,18 @@ public class ImageOperationView extends View {
         super(context, attrs, defStyleAttr);
         init();
     }
+    private Paint mPaint;
+    private Bitmap mBitmap;
 
-    Paint mPaint;
-    Bitmap mBitmap;
+    private Matrix mSaveMatrix;
+    private Matrix mMatrix;
+    private int mode = NONE;
 
-    Matrix mSaveMatrix;
-    Matrix mMatrix;
-
-    int mode = NONE;
-
-    Point mFristPoint;
-    Point mSecondPoint;
-    PointF mCenterPointF;
-    float oldDistance;
-    float oldAngle;
+    private Point mFristPoint;
+    private Point mSecondPoint;
+    private PointF mCenterPointF;
+    private float oldDistance;
+    private float oldAngle;
 
     private void init() {
         mPaint = new Paint();
@@ -94,7 +92,6 @@ public class ImageOperationView extends View {
         canvas.drawText("单点拖拽，两指缩放，三指旋转", 0, 100, mPaint);
         canvas.drawBitmap(mBitmap, mMatrix, null);
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -145,7 +142,6 @@ public class ImageOperationView extends View {
         return true;
     }
 
-
     /**
      * 计算两个点之间的距离
      *
@@ -158,7 +154,6 @@ public class ImageOperationView extends View {
         return (float) Math.sqrt(x * x + y * y);
     }
 
-
     /**
      * 计算两个手指触摸时候的角度
      *
@@ -168,7 +163,6 @@ public class ImageOperationView extends View {
     private float getDegree(MotionEvent event) {
         return (float) (Math.atan((event.getY(1) - event.getY(0)) / (event.getX(1) - event.getX(0))) * 180f);
     }
-
 
     /**
      * 计算两个手指头之间的中心点的位置
@@ -183,5 +177,4 @@ public class ImageOperationView extends View {
         float y = (event.getY(0) + event.getY(1)) / 2;
         return new PointF(x, y);
     }
-
 }

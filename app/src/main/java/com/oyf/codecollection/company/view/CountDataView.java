@@ -96,7 +96,6 @@ public class CountDataView extends LinearLayout {
         drawable.setColors(c);
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setGradientType(GradientDrawable.RECTANGLE);
-        //todo 转角度
         drawable.setCornerRadius(radius);
         setBackground(drawable);
     }

@@ -1,6 +1,6 @@
 package com.oyf.basemodule.mvp;
 
-public interface IPresenter<M,V> {
+public interface IPresenter<M, V> {
 
     M creatModel();
 
@@ -18,6 +18,7 @@ public interface IPresenter<M,V> {
 
     /**
      * 是否已经与View绑定
+     *
      * @return true绑定，否则没有绑定
      */
     boolean isAttached();

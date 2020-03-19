@@ -41,16 +41,14 @@ public class CircleChartView extends View {
     private String emptyText = "暂无数据";
     private int totleCount = 30;
     private int currPrencet = 0;
-    Paint textPaint;
-    Paint circlePaint;
+    private Paint textPaint;
+    private Paint circlePaint;
     private int leftPadding = 20;
-
 
     private String title = "打卡分布图";
     private int titleColor = Color.parseColor("#333333");
     private int titleSize = 15;//sp
     private float titleHeight = 0;//sp
-
 
     private List<Data> mLists = new ArrayList<>();
 
@@ -77,7 +75,6 @@ public class CircleChartView extends View {
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int wMode = MeasureSpec.getMode(widthMeasureSpec);
         int hMode = MeasureSpec.getMode(heightMeasureSpec);
-
         mWidth = w;
         mHeight = 204 * mWidth / 345;
         titleHeight = 44 * mWidth / 345;
@@ -88,7 +85,6 @@ public class CircleChartView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         currPrencet = 0;
         drawTitle(canvas);
         drawCircle(canvas);
@@ -103,7 +99,6 @@ public class CircleChartView extends View {
             textPaint.setTypeface(Typeface.DEFAULT);
             Rect rect = new Rect();
             textPaint.getTextBounds(emptyText, 0, emptyText.length(), rect);
-
             canvas.drawText(emptyText, mWidth / 2 - rect.width() / 2,
                     (mHeight - 44 * mWidth / 345) / 2 + rect.height() / 2, textPaint);
         } else {
@@ -113,7 +108,6 @@ public class CircleChartView extends View {
                 circlePaint.setColor(data.color);
                 circlePaint.setStrokeWidth(data.widePercen * wide);
                 circlePaint.setStyle(Paint.Style.STROKE);
-
                 RectF rectf_head = new RectF(mWidth / 12 + wide / 2, (mHeight - titleHeight) / 6 + wide / 2,
                         mWidth * 5 / 12 - wide / 2, (mHeight - titleHeight) * 5 / 6 - wide / 2);//确定外切矩形范围
                 if (i == mLists.size() - 1) {
@@ -122,7 +116,6 @@ public class CircleChartView extends View {
                     canvas.drawArc(rectf_head, currPrencet, data.count * 360 / totleCount + 1, false, circlePaint);//绘制圆弧，不含圆心
                     currPrencet += (data.count * 360 / totleCount);
                 }
-
                 textPaint.setColor(titleColor);
                 textPaint.setTextSize(SizeUtils.sp2px(context, 11));
                 textPaint.setTypeface(Typeface.DEFAULT);
@@ -180,15 +173,6 @@ public class CircleChartView extends View {
 
                 circlePaint.setStyle(Paint.Style.FILL);
                 canvas.drawRect(rMin, circlePaint);
-
-              /*  else if (i == mLists.size() - 1) {
-                    rMin = new Rect((int) (mWidth / 2 + leftPadding),
-                            (int) (cicleHeight * 5 / 6 - rect.height()),
-                            (int) (mWidth / 2 + 20 + rect.height()),
-                            (int) (cicleHeight * 5 / 6));
-                    canvas.drawText(data.time, mWidth / 2 + leftPadding + rect.height() + leftPadding,
-                            (cicleHeight * 5 / 6), textPaint);
-                } else*/
             }
         }
     }
@@ -221,14 +205,12 @@ public class CircleChartView extends View {
 
 
     public static class Data {
-
         int count;
         int color;
         String time;
         int widePercen = 1;
 
         public Data() {
-
         }
 
         public Data(int count,

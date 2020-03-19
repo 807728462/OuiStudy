@@ -72,9 +72,7 @@ public class PatImageView extends ImageView {
 
         startPoint = new PointF();
         middlePoint = new PointF();
-
         oldDistance = 1f;
-
         gdetector = new GestureDetector(getContext(), new GestureDetector.OnGestureListener() {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
@@ -188,7 +186,6 @@ public class PatImageView extends ImageView {
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);
         point.set(x / 2, y / 2);
-
         return point;
     }
 }

@@ -20,6 +20,7 @@ public interface IView {
      * 隐藏无数据页面
      */
     void hideEmptyView();
+
     /**
      * 显示空页面或者出错页面
      */
@@ -28,7 +29,8 @@ public interface IView {
     /**
      * 显示空页面或者出错页面
      */
-    void showEmptyOrErrorView(String text,int imageId);
+    void showEmptyOrErrorView(String text, int imageId);
+
     /**
      * 显示加载框
      */
@@ -36,6 +38,7 @@ public interface IView {
 
     /**
      * 是否使用eventBus
+     *
      * @return 使用true，否则false
      */
     boolean useEventBus();

@@ -31,11 +31,9 @@ public class MusicViewFlipper extends ViewFlipper implements View.OnTouchListene
     public static final int SCROLL_STATE_SETTLING = 2;//滑动后自然沉降的状态
     private int currentItem = 0;
     private int musicSize;
-
     private int startX;
     private int width;
-
-    OnPageChangeListener mOnPageChangeListener;
+    private OnPageChangeListener mOnPageChangeListener;
 
     private void init() {
         setOnTouchListener(this);
@@ -258,6 +256,4 @@ public class MusicViewFlipper extends ViewFlipper implements View.OnTouchListene
 
         void onPageScrollStateChanged(int state);
     }
-
-
 }

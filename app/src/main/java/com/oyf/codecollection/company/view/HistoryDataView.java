@@ -57,7 +57,6 @@ public class HistoryDataView extends LinearLayout {
     }
 
     public void initTitleData(String[] args, int orientation) {
-
         this.mDataOrientation = orientation;
         if (null == args) {
             mDatas = new String[]{"打卡次数：", "活跃时长：",

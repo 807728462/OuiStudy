@@ -18,20 +18,18 @@ public class ProvinceItemBean {
 
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(color);
-        canvas.drawPath(mPath,mPaint);
-        if (isSelect){
+        canvas.drawPath(mPath, mPaint);
+        if (isSelect) {
             mPaint.setColor(Color.RED);
             mPaint.setStyle(Paint.Style.STROKE);
             mPaint.setStrokeMiter(4);
-            canvas.drawPath(mPath,mPaint);
+            canvas.drawPath(mPath, mPaint);
         }
     }
 
     public boolean isContain(float x, float y) {
         RectF rect = new RectF();
-
         mPath.computeBounds(rect, true);
-
         Region region = new Region();
         Region region1 = new Region((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom);
         region.setPath(mPath, region1);

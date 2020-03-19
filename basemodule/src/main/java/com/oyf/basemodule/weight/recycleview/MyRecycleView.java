@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyRecycleView extends ViewGroup {
+    private final static String TAG = MyRecycleView.class.getName();
+
     public MyRecycleView(Context context) {
         this(context, null);
     }
@@ -97,7 +99,6 @@ public class MyRecycleView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
         if (isNeedLayout || changed) {
             isNeedLayout = false;
             //清空存放的view，移除所有的view
@@ -138,15 +139,12 @@ public class MyRecycleView extends ViewGroup {
             }
         }
         view = adapter.onBinderViewHodler(i, view, this);
-
-
         view.setTag(R.id.tag_type_view, itemViewType);
         //取出来需要重新设置宽高
         view.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
         //添加到recycleview的viewgroup中
         addView(view, 0);
-
         return view;
     }
 
@@ -169,8 +167,7 @@ public class MyRecycleView extends ViewGroup {
             int y2 = (int) event.getRawY();
             int diffY = currentY - y2;
             currentY = y2;//不加响应会变慢
-
-//                画布移动  并不影响子控件的位置
+            //画布移动  并不影响子控件的位置
             scrollBy(0, diffY);
         }
         return super.onTouchEvent(event);
@@ -181,7 +178,7 @@ public class MyRecycleView extends ViewGroup {
         scrollY += y;
         //修正scroll， 当在顶部的时候 不能下滑   当在底部的时候不能上滑
         scrollY = scrollBound(scrollY);
-        Log.d("test", scrollY + "");
+        Log.d(TAG, scrollY + "");
         if (scrollY > 0) {
             //头部移除， 添加到recycle中     底部添加
             while (scrollY > heights[mFristRow]) {
@@ -225,18 +222,17 @@ public class MyRecycleView extends ViewGroup {
 
     private int getFillHeight() {
         //数组的长度减去滑动的距离  去跟屏幕的宽进行比较
-//        数据的高度 -scrollY
+        //数据的高度 -scrollY
         return sumArray(heights, mFristRow, viewLists.size()) - scrollY;
     }
 
     private int scrollBound(int scrollY) {
-//        上滑
+        //上滑
         if (scrollY > 0) {
             scrollY = Math.min(scrollY, sumArray(heights, mFristRow, heights.length - mFristRow) - height);
         } else {
-//            极限值  会取零  非极限值的情况下   socrlly
+            //极限值  会取零  非极限值的情况下   socrlly
             scrollY = Math.max(scrollY, -sumArray(heights, 0, mFristRow));
-
         }
         return scrollY;
     }

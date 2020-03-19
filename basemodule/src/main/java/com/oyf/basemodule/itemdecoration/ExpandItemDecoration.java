@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
  **/
 public class ExpandItemDecoration extends RecyclerView.ItemDecoration {
 
-    Paint mPaint;
+    private Paint mPaint;
 
     public ExpandItemDecoration() {
         mPaint = new Paint();
@@ -37,10 +37,8 @@ public class ExpandItemDecoration extends RecyclerView.ItemDecoration {
         View childAt = parent.getChildAt(1);
         if (childAt != null) {
             Rect rect = new Rect(0, -0, 1080, 100);
-
             c.drawRect(rect, mPaint);
         }
-
     }
 
     @Override

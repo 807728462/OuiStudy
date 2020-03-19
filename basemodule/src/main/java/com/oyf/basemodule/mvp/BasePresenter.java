@@ -12,10 +12,8 @@ public abstract class BasePresenter<M extends IModel, V extends IView> implement
     protected V mView;
     protected WeakReference weakReference;
 
-
     @Override
     public void dismissLoading() {
-
     }
 
     @Override

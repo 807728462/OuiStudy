@@ -58,7 +58,6 @@ public class DiscView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-
     /*唱针当前所处的状态*/
     private enum NeedleAnimatorStatus {
         /*移动时：从唱盘往远处移动*/
@@ -93,18 +92,18 @@ public class DiscView extends RelativeLayout {
     }
 
     //轮盘的转动
-    MusicViewFlipper musicViewFlipper;
+    private MusicViewFlipper musicViewFlipper;
     //把柄的view
-    ImageView needleView;
+    private ImageView needleView;
     //上面的把柄的状态
-    NeedleAnimatorStatus needleAnimatorStatus = NeedleAnimatorStatus.IN_FAR_END;
-    ObjectAnimator needleAnimator;
+    private NeedleAnimatorStatus needleAnimatorStatus = NeedleAnimatorStatus.IN_FAR_END;
+    private ObjectAnimator needleAnimator;
     //音乐的状态
-    MusicStatus musicStatus = MusicStatus.STOP;
+    private MusicStatus musicStatus = MusicStatus.STOP;
     //回调音乐状态
-    IPlayInfo iPlayInfo;
-    List<MusicDataBean> mMusicLists = new ArrayList<>();
-    List<ObjectAnimator> mDiscAnimators = new ArrayList<>();
+    private IPlayInfo iPlayInfo;
+    private List<MusicDataBean> mMusicLists = new ArrayList<>();
+    private List<ObjectAnimator> mDiscAnimators = new ArrayList<>();
     /*标记ViewFlipper是否处于偏移的状态*/
     private boolean mViewFlipperIsOffset = false;
 
@@ -112,7 +111,6 @@ public class DiscView extends RelativeLayout {
     private boolean mIsNeed2StartPlayAnimator = false;
 
     public static final int DURATION_NEEDLE_ANIMATOR = 500;
-
     private int otherPosterRes = -1;
 
     @Override
@@ -126,7 +124,6 @@ public class DiscView extends RelativeLayout {
     }
 
     public void setMusicLists(List<MusicDataBean> mLists) {
-
         if (mLists == null) return;
         mMusicLists.clear();
         mMusicLists.addAll(mLists);
@@ -146,7 +143,6 @@ public class DiscView extends RelativeLayout {
             mDiscAnimators.add(getDiscObjectAnimator(inflate));
             musicViewFlipper.addView(inflate);
         }
-
         //接口回调通知图片更新
         if (iPlayInfo != null) {
             iPlayInfo.onMusicInfoChanged(musicData.getMusicName(), musicData.getMusicAuthor());
@@ -160,7 +156,6 @@ public class DiscView extends RelativeLayout {
         needleAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-
                 Log.d(TAG, "needleAnimator.onAnimationStart,needleAnimatorStatus=" + needleAnimatorStatus);
                 if (needleAnimatorStatus == NeedleAnimatorStatus.IN_FAR_END) {
                     needleAnimatorStatus = NeedleAnimatorStatus.TO_NEAR_END;
@@ -172,7 +167,6 @@ public class DiscView extends RelativeLayout {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-
                 Log.d(TAG, "needleAnimator.onAnimationEnd,needleAnimatorStatus=" + needleAnimatorStatus + ",mIsNeed2StartPlayAnimator=" + mIsNeed2StartPlayAnimator);
                 if (needleAnimatorStatus == NeedleAnimatorStatus.TO_NEAR_END) {
                     needleAnimatorStatus = NeedleAnimatorStatus.IN_NEAR_END;
@@ -228,7 +222,6 @@ public class DiscView extends RelativeLayout {
         needleView.setPivotY(PxAdapterUtil.getInstance().getHeight(NEEDLE_PIVOT_Y));
         needleView.setRotation(ROTATION_INIT_NEEDLE);
     }
-
 
     /**
      * 初始化flipper，左右滑动的
@@ -469,11 +462,14 @@ public class DiscView extends RelativeLayout {
         objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
         objectAnimator.setDuration(20 * 1000);
         objectAnimator.setInterpolator(new LinearInterpolator());
-
         return objectAnimator;
     }
 
-    /*得到唱盘背后半透明的圆形背景*/
+    /**
+     * 得到唱盘背后半透明的圆形背景
+     *
+     * @return
+     */
     private Drawable getDiscBlackGroundDrawable() {
         int discSize = PxAdapterUtil.getInstance().getWidth(DISC_BG_WIDTH);
         Bitmap bitmapDisc = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R
@@ -493,7 +489,12 @@ public class DiscView extends RelativeLayout {
         return bitmapDisc;
     }
 
-    //获取封面图，切圆角
+    /**
+     * 获取封面图，切圆角
+     *
+     * @param musicPicRes
+     * @return
+     */
     private Drawable getDiscPosterDrawable(int musicPicRes) {
         int musicPicSize = PxAdapterUtil.getInstance().getWidth(DiscView.DISC_POSTER_WIDTH);
         Bitmap bitmapMusicPic = getMusicPicBitmap(musicPicSize, musicPicRes);
@@ -514,10 +515,8 @@ public class DiscView extends RelativeLayout {
     private Bitmap getMusicPicBitmap(int musicPicSize, int musicPicRes) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-
         BitmapFactory.decodeResource(getResources(), musicPicRes, options);
         int imageWidth = options.outWidth;
-
         int sample = imageWidth / musicPicSize;
         int dstSample = 1;
         if (sample > dstSample) {

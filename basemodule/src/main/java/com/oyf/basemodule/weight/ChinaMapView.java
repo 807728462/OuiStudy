@@ -44,7 +44,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class ChinaMapView extends View {
 
     private int[] colorArray = new int[]{0xFF239BD7, 0xFF30A9E5, 0xFF80CBF1, 0xFFFFFF25};
-    List<ProvinceItemBean> mLists;
+    private List<ProvinceItemBean> mLists;
     private Paint mPaint;
     private RectF mMapRectf;
     private float mScale;
@@ -68,7 +68,7 @@ public class ChinaMapView extends View {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mLists=new ArrayList<>();
+                mLists = new ArrayList<>();
                 float left = -1, top = -1, right = -1, bottom = -1;
                 final InputStream inputStream = getContext().getResources().openRawResource(R.raw.china);
                 //使用dom解析

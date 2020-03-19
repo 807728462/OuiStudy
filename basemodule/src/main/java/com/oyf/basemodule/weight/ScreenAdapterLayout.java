@@ -33,7 +33,6 @@ public class ScreenAdapterLayout extends RelativeLayout {
             //得到宽高的缩放比例
             float scaleX = PxAdapterUtil.getInstance().getWidthScale();
             float scaleY = PxAdapterUtil.getInstance().getHeightScale();
-
             int count = getChildCount();
             for (int i = 0; i < count; i++) {
                 View child = getChildAt(i);
@@ -45,7 +44,6 @@ public class ScreenAdapterLayout extends RelativeLayout {
                 params.topMargin = (int)(params.topMargin * scaleY);
                 params.bottomMargin = (int)(params.bottomMargin * scaleY);
             }
-
             flag = true;
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

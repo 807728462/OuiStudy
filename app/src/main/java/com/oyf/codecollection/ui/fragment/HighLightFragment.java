@@ -34,7 +34,6 @@ public class HighLightFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         inflate = LayoutInflater.from(getContext()).inflate(R.layout.fragment_highlight, null);
-
         initView();
         return inflate;
     }

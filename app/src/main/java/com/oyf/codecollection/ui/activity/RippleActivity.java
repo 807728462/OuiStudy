@@ -13,7 +13,7 @@ import com.oyf.codecollection.R;
 
 public class RippleActivity extends BaseActivity {
 
-    RippleView rippleView;
+    private RippleView rippleView;
 
     @Override
     protected BasePresenter createPresenter() {

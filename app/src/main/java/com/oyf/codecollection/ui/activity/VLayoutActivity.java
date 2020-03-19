@@ -37,11 +37,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class VLayoutActivity extends BaseActivity {
     public static final String TAG = VLayoutActivity.class.getSimpleName();
-    RefreshLayout srl;
-    RecyclerView rcv;
-    DelegateAdapter mDelegateAdapter;
-    List<DelegateAdapter.Adapter> mAdapters = new ArrayList();
-    List<ItemBean> lists = new ArrayList<>();
+
+    private RefreshLayout srl;
+    private RecyclerView rcv;
+    private DelegateAdapter mDelegateAdapter;
+    private List<DelegateAdapter.Adapter> mAdapters = new ArrayList();
+    private List<ItemBean> lists = new ArrayList<>();
+    private RecyclerView.Adapter adapter;
+
+    private String it = null;
+    private DelegateAdapter.Adapter delegateAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +91,6 @@ public class VLayoutActivity extends BaseActivity {
         initVlayoutRecycleData();
         //initAnimationRecycleData();
     }
-
-    RecyclerView.Adapter adapter;
 
     private void initAnimationRecycleData() {
         rcv.setLayoutManager(new LinearLayoutManager(this));
@@ -135,11 +138,7 @@ public class VLayoutActivity extends BaseActivity {
         rcv.setItemAnimator(new FadeInAnimator());
         //rcv.setItemAnimator();
         rcv.setAdapter(adapter);
-
     }
-
-    String it = null;
-    DelegateAdapter.Adapter delegateAdapter;
 
     private void initVlayoutRecycleData() {
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(this);

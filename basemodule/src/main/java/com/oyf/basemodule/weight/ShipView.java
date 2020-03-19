@@ -33,17 +33,17 @@ public class ShipView extends View {
 
     private Paint mPaint;
     private int color = Color.BLUE;
-    Path mPath;
-    Path mBottomPath;
+    private Path mPath;
+    private Path mBottomPath;
 
-    Point point;
+    private Point point;
     private int waterH;
     private int w;
     private int h;
 
     private ValueAnimator valueAnimator;
-    float animatedValue;
-    float pointValue;
+    private float animatedValue;
+    private float pointValue;
 
     private void init() {
         mPaint = new Paint();
@@ -80,7 +80,6 @@ public class ShipView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         mPaint.setColor(Color.BLUE);
         //画底部的
         mBottomPath.reset();
@@ -103,7 +102,7 @@ public class ShipView extends View {
         mPath.close();
         canvas.drawPath(mPath, mPaint);
 
-        float px = animatedValue/360 * w / 360;
+        float px = animatedValue / 360 * w / 360;
         mPaint.setColor(Color.RED);
         canvas.drawPoint(px, (float) (h / 2 - (waterH * Math.sin(degreeToRad(px)))), mPaint);
     }

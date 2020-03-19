@@ -15,6 +15,7 @@ import java.util.List;
  **/
 
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
+
     protected List<T> mInfos;
     protected OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private BaseViewHolder mHolder;
@@ -32,8 +33,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     }
 
     /**
-     * 创建
-     *
      * @param parent
      * @param viewType
      * @return
@@ -46,7 +45,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         } else {
             view = LayoutInflater.from(parent.getContext()).inflate(resId, parent, false);
         }
-
         mHolder = getViewHolder(view);
         mHolder.setOnItemClickListener(new BaseViewHolder.OnViewClickListener() {//设置Item点击事件
             @Override
@@ -95,7 +93,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         return mInfos.size();
     }
 
-
     public List<T> getInfos() {
         return mInfos;
     }
@@ -136,7 +133,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
             }
         }
     }
-
 
     public interface OnRecyclerViewItemClickListener<T> {
         void onItemClick(View view, int viewType, T data, int position);

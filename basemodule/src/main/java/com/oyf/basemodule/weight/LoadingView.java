@@ -33,6 +33,7 @@ public class LoadingView extends View {
     float length;
 
     private int count = 0;
+    private ValueAnimator animator;
 
     private void init() {
         mPaint = new Paint();
@@ -81,7 +82,7 @@ public class LoadingView extends View {
 
     private void startRight() {
         mPathMeasure.setPath(mTruePath, false);
-        ValueAnimator animator = ValueAnimator.ofFloat(0, mPathMeasure.getLength());
+        animator = ValueAnimator.ofFloat(0, mPathMeasure.getLength());
         animator.setDuration(2000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -112,6 +113,11 @@ public class LoadingView extends View {
             mPathMeasure.getSegment(0, animatedValue2, mdstPath, true);
             canvas.drawPath(mdstPath, mPaint);
         }
+    }
 
+    public void stop() {
+        if (null != animator && animator.isStarted()) {
+            animator.cancel();
+        }
     }
 }

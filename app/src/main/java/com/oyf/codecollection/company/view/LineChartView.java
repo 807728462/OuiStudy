@@ -135,9 +135,7 @@ public class LineChartView extends LinearLayout {
         //是否绘制在图表里面
         legend.setDrawInside(false);
 
-
         mDataLists = new ArrayList<>();
-
     }
 
     private void initLineDataSet(LineDataSet lineDataSet) {
@@ -169,14 +167,8 @@ public class LineChartView extends LinearLayout {
 
     public void setData(List list) {
         mDataLists.clear();
-
         Random random = new Random();
         for (int i = 0; i < xTotalCount; i++) {
-
-            /**
-             * 在此可查看 Entry构造方法，可发现 可传入数值 Entry(float x, float y)
-             * 也可传入Drawable， Entry(float x, float y, Drawable icon) 可在XY轴交点 设置Drawable图像展示
-             */
             Entry entry = new Entry(i, random.nextInt(3));
             mDataLists.add(entry);
         }
@@ -191,14 +183,11 @@ public class LineChartView extends LinearLayout {
                     max = mDataList.getY();
                 }
             }
-
-
             YAxis leftYAxis = lineChart.getAxisLeft();
             leftYAxis.setAxisMinimum(0);
             leftYAxis.setLabelCount(3,max>3&&(max%3!=0));
             leftYAxis.setAxisMaximum(((int) (max / 3) + 1) * 3);
             leftYAxis.setDrawLimitLinesBehindData(true);
-
             LineData lineData = new LineData(lineDataSet);
             lineChart.setData(lineData);
             lineChart.invalidate();

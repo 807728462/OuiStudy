@@ -24,7 +24,6 @@ public class PluginUtils {
     private static final String KEY_INTENT = "key_intent";
 
     public static void hookIActivityManager() {
-
         try {
             //获取activityManager中的IActivityManagerSingleton对象，用于取出singleton中的iActivityManager
             Class<?> activityManagerClass = Class.forName("android.app.ActivityManager");

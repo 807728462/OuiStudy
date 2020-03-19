@@ -15,7 +15,6 @@ public abstract class BaseVLayoutAdapter<T> extends DelegateAdapter.Adapter<Base
     private List<T> data;
     private int layoutId;
 
-
     public BaseVLayoutAdapter(int layoutId, List<T> data) {
         this.data = data;
         this.layoutId = layoutId;

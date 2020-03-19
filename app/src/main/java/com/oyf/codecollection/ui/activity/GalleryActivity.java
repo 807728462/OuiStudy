@@ -25,6 +25,16 @@ import com.oyf.codecollection.R;
 import com.oyf.codecollection.palymusic.MusicViewFlipper;
 
 public class GalleryActivity extends BaseActivity {
+    private final static String TAG = GalleryActivity.class.getName();
+
+    private ImageSwitcher imageSwitcher;
+    private MusicViewFlipper musicViewFlipper;
+    private Gallery gallery;
+    private int images[] = {R.drawable.poster1,
+            R.drawable.poster2, R.drawable.poster3};
+
+    private int currentPosition;
+    private int otherNum = 0;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -35,14 +45,6 @@ public class GalleryActivity extends BaseActivity {
     protected int getLayoutId() {
         return R.layout.activity_gallery;
     }
-
-    private ImageSwitcher imageSwitcher;
-    private MusicViewFlipper musicViewFlipper;
-    private Gallery gallery;
-    private int images[] = {R.drawable.poster1,
-            R.drawable.poster2, R.drawable.poster3};
-
-    private int currentPosition;
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
@@ -101,7 +103,6 @@ public class GalleryActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currentPosition = position;
                 imageSwitcher.setImageResource(images[currentPosition]);
-
             }
 
             @Override
@@ -109,12 +110,8 @@ public class GalleryActivity extends BaseActivity {
 
             }
         });
-
         initMVF();
-
     }
-
-    int otherNum = 0;
 
     private void initMVF() {
         for (int i = 0; i < 2; i++) {
@@ -127,7 +124,7 @@ public class GalleryActivity extends BaseActivity {
         musicViewFlipper.setOnPageChangeListener(new MusicViewFlipper.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, float positionOffsetPixels) {
-                Log.d("test", "position=" + position + ",offset=" + positionOffset + ",offsetpix=" + positionOffsetPixels);
+                Log.d(TAG, "position=" + position + ",offset=" + positionOffset + ",offsetpix=" + positionOffsetPixels);
                 if (positionOffsetPixels > 0 && otherNum != musicViewFlipper.getPreviousItem()) {
                     ImageView imageView = (ImageView) musicViewFlipper.getOtherView();
                     imageView.setImageResource(images[musicViewFlipper.getPreviousItem()]);
@@ -140,13 +137,13 @@ public class GalleryActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position, boolean isNext) {
-                Log.d("test", "positon=" + position + ",isnext=" + isNext);
+                Log.d(TAG, "positon=" + position + ",isnext=" + isNext);
                 gallery.setSelection(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                Log.d("test", "state=" + state);
+                Log.d(TAG, "state=" + state);
             }
         });
     }

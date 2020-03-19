@@ -61,18 +61,14 @@ public class GrayImageView extends View {
 
         if (width < mBitmap.getWidth()) {
             mBitmapW = width;
-
             mBitmapH = width * mBitmap.getHeight() / mBitmap.getWidth();
         }
-
         rect = new RectF(0, 0, mBitmapW, mBitmapH);
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         canvas.drawBitmap(mBitmap, null, rect, mPaint);
     }
 }

@@ -21,11 +21,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CalendarPopWindow extends PopupWindow {
-
     public static final int CALENDAR_TYPE_YEAR = 0;
     public static final int CALENDAR_TYPE_QUARTER = 1;
     public static final int CALENDAR_TYPE_MOUTH = 2;
-
 
     private String[] mQuarters = new String[]{"一季度", "二季度", "三季度", "四季度"};
     private String[][] mMouths = new String[][]{{"全部", "1月", "2月", "3月"}, {"全部", " 4月", "5月", "6月"},

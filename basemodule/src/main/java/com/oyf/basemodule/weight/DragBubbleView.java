@@ -153,7 +153,7 @@ public class DragBubbleView extends View {
         super(context, attrs, defStyleAttr, defStyleRes);
         mBubbleColor = Color.RED;
         mTextStr = "12";
-        mTextColor =  Color.WHITE;
+        mTextColor = Color.WHITE;
 
         //两个圆半径大小一致
         mBubFixedRadius = mBubbleRadius;
@@ -213,12 +213,8 @@ public class DragBubbleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         //1. 连接情况绘制贝塞尔曲线  2.绘制圆背景以及文本 3.另外端点绘制一个圆
         //1. 静止状态  2，连接状态 3，分离状态  4，消失
-
-
-
         if (mBubbleState == BUBBLE_STATE_CONNECT) {
             //绘制静止的气泡
             canvas.drawCircle(mBubFixedCenter.x, mBubFixedCenter.y, mBubFixedRadius, mBubblePaint);
@@ -269,7 +265,6 @@ public class DragBubbleView extends View {
                     (int) (mBubMovableCenter.y + mBubMovableRadius));
             canvas.drawBitmap(mBurstBitmapsArray[mCurDrawableIndex], null, mBurstRect, mBubblePaint);
         }
-
     }
 
     @Override
@@ -306,10 +301,10 @@ public class DragBubbleView extends View {
                     // 橡皮筋动画
                     startBubbleRestAnim();
                 } else if (mBubbleState == BUBBLE_STATE_APART) {
-                    if (mDist < 2 * mBubbleRadius){
+                    if (mDist < 2 * mBubbleRadius) {
                         //反弹动画
                         startBubbleRestAnim();
-                    }else{
+                    } else {
                         // 爆炸动画
                         startBubbleBurstAnim();
                     }
@@ -364,10 +359,8 @@ public class DragBubbleView extends View {
         animator.start();
     }
 
-    public void init(){
+    public void init() {
         init(getWidth(), getHeight());
         invalidate();
     }
-
-
 }

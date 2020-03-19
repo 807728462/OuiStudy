@@ -43,20 +43,20 @@ public class OsplashView extends View {
     //扩散圆的画笔
     private Paint mHolePaint;
     //动画
-    ValueAnimator valueAnimator;
+    private ValueAnimator valueAnimator;
 
     //背景颜色
-    int mBgColor;
+    private int mBgColor;
     //旋转圆的中心
-    float mCenterX;
-    float mCenterY;
+    private float mCenterX;
+    private float mCenterY;
     //扩散的最大距离
-    float mMaxDistance;
+    private float mMaxDistance;
 
     //小圆的半径
-    float mRadius = 18f;
+    private float mRadius = 18f;
     //大圆的半径
-    float mRotateRadius = 90f;
+    private float mRotateRadius = 90f;
 
     //当前大圆的旋转角度
     private float mCurrentRotateAngle = 0F;
@@ -70,6 +70,8 @@ public class OsplashView extends View {
 
     //圆的颜色集合
     private int[] mCircleColors;
+    private SplashStatus splashStatus;
+
 
     private void init() {
         mCenterX = 500;
@@ -82,8 +84,6 @@ public class OsplashView extends View {
 
         mCircleColors = new int[]{Color.RED, Color.GREEN, Color.YELLOW, Color.BLUE, Color.GRAY, Color.DKGRAY};
     }
-
-    SplashStatus splashStatus;
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -100,27 +100,26 @@ public class OsplashView extends View {
         if (splashStatus == null) {
             splashStatus = new RotateStatus();
         }
-        //drawCicles(canvas);
         splashStatus.drawState(canvas);
     }
 
     @SuppressLint("NewApi")
     private void drawBackGround(Canvas canvas) {
-        if (mCurrentHoleRadius>0){
+        if (mCurrentHoleRadius > 0) {
             canvas.drawColor(Color.WHITE);
-            RectF rect=new RectF(0, 0, (int)(2 * mCenterX),  (int)(2 * mCenterY));
-            canvas.saveLayer(rect,mHolePaint);
+            RectF rect = new RectF(0, 0, (int) (2 * mCenterX), (int) (2 * mCenterY));
+            canvas.saveLayer(rect, mHolePaint);
 
 
             mHolePaint.setColor(Color.GRAY);
-            canvas.drawRect(rect,mHolePaint);
+            canvas.drawRect(rect, mHolePaint);
             mHolePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
             mHolePaint.setColor(Color.WHITE);
-            canvas.drawCircle(mCenterX,mCenterY,mCurrentHoleRadius,mHolePaint);
+            canvas.drawCircle(mCenterX, mCenterY, mCurrentHoleRadius, mHolePaint);
             mHolePaint.setXfermode(null);
             canvas.restore();
-        }else{
-            mBgColor=Color.WHITE;
+        } else {
+            mBgColor = Color.WHITE;
             canvas.drawColor(mBgColor);
         }
     }
@@ -129,19 +128,15 @@ public class OsplashView extends View {
         canvas.translate(mCenterX, mCenterY);
         float cicleRotate = 360f / mCircleColors.length;
         for (int i = 0; i < mCircleColors.length; i++) {
-
             canvas.save();
             mRotatePaint.setColor(mCircleColors[i]);
-
             canvas.rotate(cicleRotate * i + mCurrentRotateAngle);
             canvas.drawCircle(mCurrentRotateRadius + mCurrentRadius, 0, mCurrentRadius, mRotatePaint);
-
             canvas.restore();
         }
     }
 
     private class RotateStatus extends SplashStatus {
-
         public RotateStatus() {
             valueAnimator = ValueAnimator.ofFloat(0, 360f);
             valueAnimator.setDuration(500);
@@ -192,7 +187,7 @@ public class OsplashView extends View {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    splashStatus=new ScaleStatus();
+                    splashStatus = new ScaleStatus();
                 }
             });
             valueAnimator.start();
@@ -205,16 +200,16 @@ public class OsplashView extends View {
         }
     }
 
-    public class ScaleStatus extends SplashStatus{
+    public class ScaleStatus extends SplashStatus {
 
-        public ScaleStatus(){
-            valueAnimator =ValueAnimator.ofFloat(100,mMaxDistance);
+        public ScaleStatus() {
+            valueAnimator = ValueAnimator.ofFloat(100, mMaxDistance);
             valueAnimator.setDuration(3000);
             valueAnimator.setInterpolator(new LinearInterpolator());
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    mCurrentHoleRadius= (float) animation.getAnimatedValue();
+                    mCurrentHoleRadius = (float) animation.getAnimatedValue();
                     invalidate();
                 }
             });
@@ -222,10 +217,10 @@ public class OsplashView extends View {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    mCurrentHoleRadius=0;
-                    mCurrentRadius=mRadius;
-                    mCurrentRotateAngle=0;
-                    mCurrentRotateRadius=mRotateRadius;
+                    mCurrentHoleRadius = 0;
+                    mCurrentRadius = mRadius;
+                    mCurrentRotateAngle = 0;
+                    mCurrentRotateRadius = mRotateRadius;
 
                 }
             });
@@ -240,8 +235,8 @@ public class OsplashView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction()==MotionEvent.ACTION_DOWN){
-            splashStatus=new RotateStatus();
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            splashStatus = new RotateStatus();
         }
         return super.onTouchEvent(event);
     }

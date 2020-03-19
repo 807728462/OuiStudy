@@ -215,7 +215,6 @@ public class BehaviorCalendarView extends View {
         }
     }
 
-
     public void updateData() {
         mType = TYPE_CLOCK_IN;
         mYear = 2020;
@@ -254,7 +253,6 @@ public class BehaviorCalendarView extends View {
 
     public static class CalenderData {
         public int dayNum;
-
         public boolean isNowMouth;
         public String text;
 
@@ -262,7 +260,6 @@ public class BehaviorCalendarView extends View {
             return dayNum + "";
         }
     }
-
 
     /**
      * 得到指定月的天数
@@ -300,7 +297,6 @@ public class BehaviorCalendarView extends View {
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
-
         return cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
     }
 }
