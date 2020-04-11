@@ -9,7 +9,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import java.util.logging.Level;
 
@@ -19,6 +22,14 @@ import java.util.logging.Level;
 public class LoadingView extends View {
     public LoadingView(Context context) {
         super(context);
+    }
+
+    public LoadingView(Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public LoadingView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         init();
     }
 
@@ -54,7 +65,7 @@ public class LoadingView extends View {
         mPathMeasure = new PathMeasure(mCiclePath, false);
         length = mPathMeasure.getLength();
         ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
-        animator.setDuration(5000);
+        animator.setDuration(1500);
         animator.setRepeatCount(-1);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -83,7 +94,7 @@ public class LoadingView extends View {
     private void startRight() {
         mPathMeasure.setPath(mTruePath, false);
         animator = ValueAnimator.ofFloat(0, mPathMeasure.getLength());
-        animator.setDuration(2000);
+        animator.setDuration(1000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

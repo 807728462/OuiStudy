@@ -24,6 +24,20 @@ android {
     dataBinding {
         enabled = true
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    aspectjx {
+        //排除所有package路径中包含`android.support`的class文件及库（jar文件）
+        exclude(
+                "android.support", "com.umeng", "com.alipay", "com.amap",
+                "com.alibaba", "com.baidu", "com.github", "com.lzy",
+                "com.zhihu", "com.zoonref", "com.zxy", "com.sj",
+                "com.tencent", "com.hannesdorfmann", "butterknife", "com.kongzue",
+                "okio", "okhttp3", "tv.danmaku", "io.reactivex"
+        )
+    }
 }
 
 dependencies {

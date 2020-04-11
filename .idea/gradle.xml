@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/aspectj" />
             <option value="$PROJECT_DIR$/basemodule" />
             <option value="$PROJECT_DIR$/highlight" />
+            <option value="$PROJECT_DIR$/ookhttp" />
             <option value="$PROJECT_DIR$/plugin" />
           </set>
         </option>

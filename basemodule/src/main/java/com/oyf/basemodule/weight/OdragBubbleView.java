@@ -145,8 +145,10 @@ public class OdragBubbleView extends View {
                     mDist = (float) Math.hypot(event.getX() - mBubFixPoint.x, event.getY() - mBubFixPoint.y);
                     if (mBubMoveRadius + MOVE_OFFEST > mDist) {
                         mCurrentStatus = BUBBLE_STATE_CONNECT;
+                        getParent().requestDisallowInterceptTouchEvent(true);
                     } else {
                         mCurrentStatus = BUBBLE_STATE_DEFAULT;
+                        getParent().requestDisallowInterceptTouchEvent(false);
                     }
                 }
                 break;
@@ -175,6 +177,7 @@ public class OdragBubbleView extends View {
                     mBubmovePoint.y = mBubFixPoint.y;
                     invalidate();
                 }
+                getParent().requestDisallowInterceptTouchEvent(false);
                 mCurrentStatus = BUBBLE_STATE_DEFAULT;
                 break;
         }

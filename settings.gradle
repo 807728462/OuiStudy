@@ -1,2 +1,3 @@
 include ':app', ':basemodule', ':aspectj', ':algorithm', ':plugin', ':highlight'
 rootProject.name='CodeCollection'
+include ':ookhttp'

@@ -3,6 +3,7 @@ package com.oyf.codecollection;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,6 +15,12 @@ import com.oyf.basemodule.bus.OSubscribe;
 import com.oyf.basemodule.bus.OThreadMode;
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
+import com.oyf.codecollection.bean.UserBean;
+import com.oyf.codecollection.chain.Intercept;
+import com.oyf.codecollection.chain.OneInterceptor;
+import com.oyf.codecollection.chain.RealInterceptorChain;
+import com.oyf.codecollection.chain.ThreeInterceptor;
+import com.oyf.codecollection.chain.TwoInterceptor;
 import com.oyf.codecollection.company.EstoreExplosiveActivity;
 import com.oyf.codecollection.ui.activity.BehaviorActivity;
 import com.oyf.codecollection.ui.activity.ChinaMapActivity;
@@ -27,6 +34,7 @@ import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
 import com.oyf.codecollection.ui.activity.NinePasswordActivity;
 import com.oyf.codecollection.ui.activity.PlayMusicActivity;
 import com.oyf.codecollection.ui.activity.RippleActivity;
+import com.oyf.codecollection.ui.activity.ScanQRCodeActivity;
 import com.oyf.codecollection.ui.activity.ViewActivity;
 import com.oyf.codecollection.ui.adapter.BaseAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
@@ -34,6 +42,7 @@ import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
 import com.oyf.plugin.NoRegisterActivity;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -57,6 +66,11 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+    @Override
+    public boolean useEventBus() {
+        return true;
+    }
+
     protected void initView(Bundle savedInstanceState) {
         //LayoutInflater.from(this).inflate(R.layout.rcv_item, (ViewGroup) getWindow().getDecorView().getRootView(), true);
         OBus.getDefault().register(this);
@@ -66,9 +80,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // testClick();
-                Intent intent = new Intent();
-                intent.setClassName("com.oyf.plugin", NoRegisterActivity.class.getName());
-                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, HighlightActivity.class);
+                //startActivity(intent);
+                EventBus.getDefault().postSticky(new UserBean());
             }
         });
 
@@ -103,6 +117,12 @@ public class MainActivity extends BaseActivity {
         });
         rcv.setAdapter(mAdapter);
         initLists();
+        List<Intercept> mlist = new ArrayList<>();
+        mlist.add(new OneInterceptor());
+        mlist.add(new TwoInterceptor());
+        mlist.add(new ThreeInterceptor());
+        RealInterceptorChain realInterceptorChain = new RealInterceptorChain(mlist, 0);
+        realInterceptorChain.proceed();
     }
 
     @Override
@@ -112,9 +132,11 @@ public class MainActivity extends BaseActivity {
     }
 
     public void initLists() {
+
         mLists.add(new ListBean("新手提示", "新手提示指引", HighlightActivity.class));
         mLists.add(new ListBean("爆款", "两级RecycleView联动", EstoreExplosiveActivity.class));
         mLists.add(new ListBean("company", "公司的自定义view", CompanyActivity.class));
+        mLists.add(new ListBean("扫描二维码", "自定义SurfaceView,添加扫描框等", ScanQRCodeActivity.class));
         mLists.add(new ListBean("DataBinding", "DataBinding的基本使用", DataBindingActivity.class));
         //mLists.add(new ListBean("vLayout的使用", "vlayout的基本使用方法，添加删除动画", VLayoutActivity.class));
         mLists.add(new ListBean("behavior的使用", "使用behavior，在recyccleview的滑动控制按钮的显示与隐藏", BehaviorActivity.class));

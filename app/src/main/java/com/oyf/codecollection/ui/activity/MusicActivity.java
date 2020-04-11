@@ -33,6 +33,9 @@ public class MusicActivity extends AppCompatActivity {
     private LinearLayout ll_show;
     private View headView;
 
+    private Rect rectShow = new Rect();
+    private int maxTop = 0;
+
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,31 +78,38 @@ public class MusicActivity extends AppCompatActivity {
 
         lv.addHeaderView(headView);
         lv.setAdapter(mSimpleAdapter);
+
     }
 
     private void initData() {
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (maxTop == 0) {
+                    ll_show.getGlobalVisibleRect(rectShow);
+                    maxTop = rectShow.top - getStateBar();
+                }
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                Rect rect = new Rect();
-                ll_show.getGlobalVisibleRect(rect);
-                int showHeight = rect.top - toolbar.getHeight() - getStateBar();
-                Log.d("test", "height=" + showHeight);
-                if (showHeight < 0 && ll_hide.getVisibility() == View.GONE) {
+
+                Rect rectHide = new Rect();
+                ll_show.getGlobalVisibleRect(rectShow);
+                ll_hide.getGlobalVisibleRect(rectHide);
+                if (rectShow.top <= 0) {
+                } else if (rectShow.top <= rectHide.top && ll_hide.getVisibility() == View.INVISIBLE) {
                     Drawable background = toolbar.getBackground().mutate();
                     background.setAlpha(255);
                     toolbar.setTitle("歌曲名称");
                     ll_hide.setVisibility(View.VISIBLE);
-                } else {
+                } else if (rectShow.top != maxTop && rectShow.top >= rectHide.top && ll_hide.getVisibility() == View.VISIBLE) {
                     Drawable background = toolbar.getBackground().mutate();
                     background.setAlpha(0);
-                    ll_hide.setVisibility(View.GONE);
+                    ll_hide.setVisibility(View.INVISIBLE);
                     toolbar.setTitle("音乐");
                 }
+
             }
         });
     }

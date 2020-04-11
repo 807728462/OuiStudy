@@ -25,9 +25,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
         ButterKnife.bind(this);
         initView(savedInstanceState);
         initData(savedInstanceState);
-
-        EventBus.getDefault().register(this);
-
+        if (useEventBus()) {
+            EventBus.getDefault().register(this);
+        }
         mPresenter = createPresenter();
         if (mPresenter != null) {
             mPresenter.takeView(this);
@@ -37,6 +37,14 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     @Subscribe
     public void onEvent(Object o) {
         Log.d("test", "BaseActivity.onEvent");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     protected abstract P createPresenter();

@@ -3,6 +3,7 @@ package com.oyf.codecollection.ui.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -19,9 +20,14 @@ import androidx.annotation.Nullable;
 
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
+import com.oyf.codecollection.MainActivity;
 import com.oyf.codecollection.R;
+import com.oyf.codecollection.bean.UserBean;
 import com.oyf.codecollection.manager.HighlightManager;
 import com.oyf.codecollection.ui.fragment.HighLightFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import zhy.com.highlight.HighLight;
@@ -72,6 +78,9 @@ public class HighlightActivity extends BaseActivity {
     protected void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         initFragment();
+        EventBus.getDefault().register(this);
+        EventBus.getDefault().removeStickyEvent(UserBean.class);
+
     }
 
     @Override
@@ -85,6 +94,22 @@ public class HighlightActivity extends BaseActivity {
         mHighLightFragment = new HighLightFragment();
         fragmentTransaction.replace(R.id.fl, mHighLightFragment);
         fragmentTransaction.commit();
+    }
+
+    public void registerStick(View view) {
+        Intent intent = new Intent(HighlightActivity.this, MainActivity.class);
+        //startActivity(intent);
+        EventBus.getDefault().post(new UserBean());
+    }
+
+    @Subscribe()
+    public void receiveStick(UserBean event) {
+        Log.d(TAG, "普通事件+" + event);
+    }
+
+    @Subscribe(sticky = true)
+    public void receiveStick2(UserBean event) {
+        Log.d(TAG, "粘性事件---+" + event);
     }
 
     public void showHighlight(View view) {
