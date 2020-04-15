@@ -8,4 +8,6 @@ package com.oyf.ookhttp;
 public interface OCall {
 
     void enqueue(OCallBack callBack);
+
+    ORequest request();
 }

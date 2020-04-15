@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -123,5 +124,14 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
      */
     public boolean useEventBus() {
         return false;
+    }
+
+    public void toast(String text) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(BaseActivity.this, text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

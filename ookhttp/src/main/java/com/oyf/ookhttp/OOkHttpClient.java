@@ -1,5 +1,7 @@
 package com.oyf.ookhttp;
 
+import com.oyf.ookhttp.interceptor.OInterceptor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +11,16 @@ import java.util.List;
  * @描述
  **/
 public class OOkHttpClient {
+    public final static String TAG = OOkHttpClient.class.getSimpleName();
 
     final ODispatcher dispatcher;
+    final List<OInterceptor> interceptors;
+    final List<OInterceptor> networkInterceptors;
 
     public OOkHttpClient(Builder builder) {
         dispatcher = builder.dispatcher;
+        interceptors = builder.interceptors;
+        networkInterceptors = builder.networkInterceptors;
     }
 
     public OCall newCall(ORequest request) {
@@ -22,6 +29,18 @@ public class OOkHttpClient {
 
     public ODispatcher dispatcher() {
         return dispatcher;
+    }
+
+    public List<OInterceptor> networkInterceptors() {
+        return networkInterceptors;
+    }
+
+    public List<OInterceptor> interceptors() {
+        return interceptors;
+    }
+
+    public Builder newBuilder() {
+        return new Builder(this);
     }
 
     public static final class Builder {
@@ -33,6 +52,12 @@ public class OOkHttpClient {
             dispatcher = new ODispatcher();
             interceptors = new ArrayList<>();
             networkInterceptors = new ArrayList<>();
+        }
+
+        public Builder(OOkHttpClient okHttpClient) {
+            dispatcher = okHttpClient.dispatcher;
+            interceptors.addAll(okHttpClient.interceptors);
+            networkInterceptors.addAll(okHttpClient.networkInterceptors);
         }
 
         public Builder addInterceptor(OInterceptor oInterceptor) {

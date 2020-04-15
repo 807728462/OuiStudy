@@ -6,11 +6,15 @@ package com.oyf.ookhttp;
  * @描述
  **/
 public final class ORequest {
+    public static final String CONTENT_TYPE = "application/x-www-form-urlencoded";
 
+    public static final String GET = "GET";
+    public static final String POST = "POST";
     final String url;
     final OHeaders headers;
     final String method;
     final ORequestBody body;
+    final int recount;
 
     public ORequest() {
         this(new Builder());
@@ -21,6 +25,7 @@ public final class ORequest {
         this.headers = builder.headers.build();
         this.method = builder.method;
         this.body = builder.body;
+        this.recount = builder.recount;
     }
 
     public String url() {
@@ -33,6 +38,10 @@ public final class ORequest {
 
     public OHeaders headers() {
         return headers;
+    }
+
+    public int getRecount() {
+        return recount;
     }
 
     public OHeaders.Builder newBuilder() {
@@ -48,9 +57,10 @@ public final class ORequest {
         OHeaders.Builder headers;
         String method;
         ORequestBody body;
+        int recount = 3;
 
         public Builder() {
-            this.method = "GET";
+            this.method = GET;
             this.headers = new OHeaders.Builder();
         }
 
@@ -67,12 +77,17 @@ public final class ORequest {
         }
 
         public Builder get() {
-            this.method = "GET";
+            this.method = GET;
+            return this;
+        }
+
+        public Builder setReconut(int recount) {
+            this.recount = recount;
             return this;
         }
 
         public Builder post(ORequestBody oRequestBody) {
-            this.method = "POST";
+            this.method = POST;
             body = oRequestBody;
             return this;
         }

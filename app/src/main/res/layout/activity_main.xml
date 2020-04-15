@@ -8,12 +8,26 @@
     android:padding="20dp"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/bt_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="发送eventbus"
-        android:visibility="visible" />
+    <com.oyf.basemodule.weight.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bt_send_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送EventBus"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/bt_okhttp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testOkHttp"
+            android:text="OkHttp请求"
+            android:visibility="visible" />
+
+    </com.oyf.basemodule.weight.FlowLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"

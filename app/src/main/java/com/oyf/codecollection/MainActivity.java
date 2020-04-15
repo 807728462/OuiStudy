@@ -40,16 +40,23 @@ import com.oyf.codecollection.ui.adapter.BaseAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
 import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
+import com.oyf.ookhttp.OCall;
+import com.oyf.ookhttp.OCallBack;
+import com.oyf.ookhttp.OOkHttpClient;
+import com.oyf.ookhttp.ORequest;
+import com.oyf.ookhttp.OResponse;
+import com.oyf.ookhttp.interceptor.LogInterceptor;
 import com.oyf.plugin.NoRegisterActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     private final static String TAG = MainActivity.class.getName();
 
     private RecyclerView rcv;
@@ -75,26 +82,55 @@ public class MainActivity extends BaseActivity {
         //LayoutInflater.from(this).inflate(R.layout.rcv_item, (ViewGroup) getWindow().getDecorView().getRootView(), true);
         OBus.getDefault().register(this);
         rcv = findViewById(R.id.rcv);
-        Button bt = findViewById(R.id.bt_test);
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // testClick();
+        findViewById(R.id.bt_send_event).setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_send_event:
                 Intent intent = new Intent(MainActivity.this, HighlightActivity.class);
                 //startActivity(intent);
                 EventBus.getDefault().postSticky(new UserBean());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static final String PATH = "http://restapi.amap.com/v3/weather/weatherInfo?city=110101&key=13cb58f5884f9749287abbead9c658f2";
+
+    public void testOkHttp(View view) {
+
+        OOkHttpClient okHttpClient = new OOkHttpClient.Builder().addInterceptor(new LogInterceptor()).build();
+
+        ORequest oRequest = new ORequest.Builder().url(PATH).build();
+
+        OCall oCall = okHttpClient.newCall(oRequest);
+        oCall.enqueue(new OCallBack() {
+            @Override
+            public void onFailure(OCall call, IOException e) {
+                ORequest request = call.request();
+                Log.d(OOkHttpClient.TAG, "失败的url=" + request.url());
+            }
+
+            @Override
+            public void onResponse(OCall call, OResponse response) throws IOException {
+                Log.d(OOkHttpClient.TAG, "成功的结果的=" + response.string());
             }
         });
-
     }
 
     @Subscribe
     public void onEvent(Object o) {
+        toast("以Object接收的Event");
         Log.d(TAG, "MainActivity.onEvent.Object");
     }
 
     @Subscribe
     public void onEvent(String o) {
+        toast("以String接收的Event");
         Log.d(TAG, "MainActivity.onEvent.String");
     }
 
@@ -108,7 +144,6 @@ public class MainActivity extends BaseActivity {
             }
         };
         mAdapter.setOnItemClickListener(new BaseAdapter.OnRecyclerViewItemClickListener<ListBean>() {
-
             @Override
             public void onItemClick(View view, int viewType, ListBean data, int position) {
                 //EventBus.getDefault().post(new TestMain());
@@ -132,7 +167,6 @@ public class MainActivity extends BaseActivity {
     }
 
     public void initLists() {
-
         mLists.add(new ListBean("新手提示", "新手提示指引", HighlightActivity.class));
         mLists.add(new ListBean("爆款", "两级RecycleView联动", EstoreExplosiveActivity.class));
         mLists.add(new ListBean("company", "公司的自定义view", CompanyActivity.class));
