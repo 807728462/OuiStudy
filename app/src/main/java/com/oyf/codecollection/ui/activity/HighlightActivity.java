@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,9 +16,11 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
+import com.oyf.basemodule.log.LogUtils;
 import com.oyf.basemodule.mvp.BaseActivity;
 import com.oyf.basemodule.mvp.BasePresenter;
 import com.oyf.codecollection.MainActivity;
@@ -50,6 +53,8 @@ import zhy.com.highlight.view.HightLightView;
 public class HighlightActivity extends BaseActivity {
     private static final String TAG = HighlightActivity.class.getName();
 
+    @BindView(R.id.iv)
+    ImageView iv;
     @BindView(R.id.bt_top)
     Button btTop;
     @BindView(R.id.bt_left)
@@ -94,6 +99,56 @@ public class HighlightActivity extends BaseActivity {
         mHighLightFragment = new HighLightFragment();
         fragmentTransaction.replace(R.id.fl, mHighLightFragment);
         fragmentTransaction.commit();
+    }
+
+    public void printLocation(View view) {
+
+        Log.d("imageview----",
+                "getLeft=" + iv.getLeft() +
+                        "--" + iv.getTop() +
+                        "--" + iv.getRight() +
+                        "--" + iv.getBottom()
+        );
+        Log.d("imageview----",
+                "getX=" + iv.getX() +
+                        "-------=" + iv.getY()
+        );
+
+        int[] location = new int[2];
+        iv.getLocationInWindow(location);
+        int x = location[0]; // view距离window 左边的距离（即x轴方向）
+        int y = location[1]; // view距离window 顶边的距离（即y轴方向）
+        Log.d("imageview----",
+                "getLocationInWindow.x=" + x +
+                        "-----y=" + y
+        );
+
+        iv.getLocationOnScreen(location);
+        x = location[0]; // view距离 屏幕左边的距离（即x轴方向）
+        y = location[1]; // view距离 屏幕顶边的距离（即y轴方向）
+        Log.d("imageview----",
+                "getLocationOnScreen.x=" + x +
+                        "---=" + y
+        );
+
+        Rect globalRect = new Rect();
+        iv.getGlobalVisibleRect(globalRect);
+
+        Log.d("imageview----",
+                "getGlobalVisibleRect.left=" + globalRect.left +
+                        "---" + globalRect.top +
+                        "---" + globalRect.right +
+                        "---" + globalRect.bottom
+        );
+
+        iv.getLocalVisibleRect(globalRect);
+        Log.d("imageview----",
+                "getLocalVisibleRect.left=" + globalRect.left +
+                        "---" + globalRect.top +
+                        "---" + globalRect.right +
+                        "---" + globalRect.bottom
+        );
+
     }
 
     public void registerStick(View view) {

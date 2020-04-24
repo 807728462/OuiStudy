@@ -1,11 +1,10 @@
 package com.oyf.codecollection;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +31,7 @@ import com.oyf.codecollection.ui.activity.HighlightActivity;
 import com.oyf.codecollection.ui.activity.MusicActivity;
 import com.oyf.codecollection.ui.activity.MyRecycleViewActivity;
 import com.oyf.codecollection.ui.activity.NinePasswordActivity;
+import com.oyf.codecollection.ui.activity.OGlideActivity;
 import com.oyf.codecollection.ui.activity.PlayMusicActivity;
 import com.oyf.codecollection.ui.activity.RippleActivity;
 import com.oyf.codecollection.ui.activity.ScanQRCodeActivity;
@@ -40,6 +40,7 @@ import com.oyf.codecollection.ui.adapter.BaseAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
 import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
+import com.oyf.oglide.cache.MemoryCache;
 import com.oyf.ookhttp.OCall;
 import com.oyf.ookhttp.OCallBack;
 import com.oyf.ookhttp.OOkHttpClient;
@@ -53,7 +54,11 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -84,14 +89,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         rcv = findViewById(R.id.rcv);
         findViewById(R.id.bt_send_event).setOnClickListener(this);
 
+        Log.d("------------", Integer.class.isAssignableFrom(Integer.class) + "");
+        Log.d("------------", Number.class.isAssignableFrom(Integer.class) + "");
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_send_event:
-                Intent intent = new Intent(MainActivity.this, HighlightActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent();
+                //intent.setAction("HighlightActivity");
+                Uri uri = Uri.parse("test://12456:8080");
+
+                intent.setData(uri);
+
+                startActivity(intent);
                 EventBus.getDefault().postSticky(new UserBean());
                 break;
             default:
@@ -167,6 +180,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public void initLists() {
+        mLists.add(new ListBean("gilde指南", "自定义glide，自己手写简单", OGlideActivity.class));
         mLists.add(new ListBean("新手提示", "新手提示指引", HighlightActivity.class));
         mLists.add(new ListBean("爆款", "两级RecycleView联动", EstoreExplosiveActivity.class));
         mLists.add(new ListBean("company", "公司的自定义view", CompanyActivity.class));

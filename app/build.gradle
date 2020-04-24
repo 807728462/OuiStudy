@@ -61,5 +61,6 @@ dependencies {
     implementation project(path: ':highlight')
     implementation project(path: ':plugin')
     implementation project(path: ':ookhttp')
+    implementation project(path: ':oglide')
 
 }
