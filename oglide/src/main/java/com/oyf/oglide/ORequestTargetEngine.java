@@ -76,7 +76,7 @@ public class ORequestTargetEngine implements OLifecycleListener, OActiveResource
     }
 
     /**
-     * 获取
+     * 获取缓存的图片
      */
     private OActiveResource<Bitmap> cacheAction() {
         OActiveResource<Bitmap> oActiveResource = mOActiveCache.get(mOGlideUrl);

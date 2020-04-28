@@ -168,7 +168,7 @@ public class StarListView extends View {
         invalidate();
     }
 
-    public Bitmap creatNewBitmap(Bitmap bitmap, int newWidth, int newHeight) {
+    private Bitmap creatNewBitmap(Bitmap bitmap, int newWidth, int newHeight) {
         // 获得图片的宽高.
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();

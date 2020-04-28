@@ -53,6 +53,11 @@ public class ORequestManagerRetriever implements Handler.Callback {
         }
     }
 
+    /**
+     *
+     * @param context
+     * @return
+     */
     public ORequestManager get(Context context) {
         if (null == applicationManager) {
             OLifecycle oLifecycle = new OLifecycle() {

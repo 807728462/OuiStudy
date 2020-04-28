@@ -23,7 +23,7 @@ import java.net.URL;
  * @创建时间 2020/4/24 14:43
  * @描述
  **/
-public class LoadDataManager implements Runnable, Handler.Callback {
+public class LoadDataManager implements ILoadData,Runnable, Handler.Callback {
     private String path;
     private ResponseListener responseListener;
     private Context context;
@@ -33,6 +33,7 @@ public class LoadDataManager implements Runnable, Handler.Callback {
         mHandler = new Handler(Looper.getMainLooper(), this);
     }
 
+    @Override
     public OActiveResource<Bitmap> loadResource(String keyUrl, ResponseListener responseListener, Context context) {
         this.path = keyUrl;
         this.responseListener = responseListener;
