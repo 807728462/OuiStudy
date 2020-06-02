@@ -9,6 +9,9 @@ import android.widget.Toast;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 
+import com.oyf.basemodule.mvp.proxy.ActivityMvpProxyImpl;
+import com.oyf.basemodule.mvp.proxy.IMvpProxy;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -16,7 +19,8 @@ import butterknife.ButterKnife;
 
 
 public abstract class BaseActivity<P extends BasePresenter> extends Activity implements IView {
-    protected P mPresenter;
+    private P mPresenter;
+    private IMvpProxy mIMvpProxy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
         if (mPresenter != null) {
             mPresenter.takeView(this);
         }
+        createMvpProxy();
+        mIMvpProxy.bindMvpProxy();
     }
 
     @Subscribe
@@ -43,9 +49,27 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (null != mPresenter) {
+            mPresenter.dropView();
+        }
+        if (null != mIMvpProxy) {
+            mIMvpProxy.unbindMvpProxy();
+        }
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
+    }
+
+    /**
+     * 创建代理的，通过代理去处理使用注解presenter
+     *
+     * @return
+     */
+    private IMvpProxy createMvpProxy() {
+        if (null == mIMvpProxy) {
+            mIMvpProxy = new ActivityMvpProxyImpl(this);
+        }
+        return mIMvpProxy;
     }
 
     protected abstract P createPresenter();
@@ -65,7 +89,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
      * @return
      */
     protected void initView(@Nullable Bundle savedInstanceState) {
-
     }
 
     /**
@@ -124,6 +147,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
      */
     public boolean useEventBus() {
         return false;
+    }
+
+    protected P getPresenter() {
+        return mPresenter;
     }
 
     public void toast(String text) {

@@ -36,11 +36,11 @@ import com.oyf.codecollection.ui.activity.PlayMusicActivity;
 import com.oyf.codecollection.ui.activity.RippleActivity;
 import com.oyf.codecollection.ui.activity.ScanQRCodeActivity;
 import com.oyf.codecollection.ui.activity.ViewActivity;
+import com.oyf.codecollection.ui.activity.test.TestMvpActivity;
 import com.oyf.codecollection.ui.adapter.BaseAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
 import com.oyf.codecollection.ui.bean.ItemBean;
 import com.oyf.codecollection.ui.bean.ListBean;
-import com.oyf.oglide.cache.MemoryCache;
 import com.oyf.ookhttp.OCall;
 import com.oyf.ookhttp.OCallBack;
 import com.oyf.ookhttp.OOkHttpClient;
@@ -54,11 +54,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -198,6 +194,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mLists.add(new ListBean("九宫格密码支付", "一些自定义view", NinePasswordActivity.class));
         mLists.add(new ListBean("跳转未注册的界面", "使用hook技术跳转未注册的界面，在IActivityManager进行拦截，在ActivityThread进行Handler拦截", NoRegisterActivity.class));
         mLists.add(new ListBean("CoordinatorLayoutActivity中滑动回弹等问题", "处理CoordinatorLayout中Appbar跟Recycleview的回弹冲突问题", CoordinatorLayoutActivity.class));
+        mLists.add(new ListBean("mvp测试", "测试mvp的架构", TestMvpActivity.class));
     }
 
     @OSubscribe(threadMode = OThreadMode.MAIN)

@@ -1,16 +1,18 @@
 package com.oyf.basemodule.mvp;
 
 
-import java.lang.ref.WeakReference;
+import com.oyf.basemodule.log.LogUtils;
+
+import java.lang.ref.SoftReference;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 public abstract class BasePresenter<M extends IModel, V extends IView> implements IPresenter<M, V> {
 
-    protected M mModel;
-    protected V mView;
-    protected WeakReference weakReference;
+    private M mModel;
+    private SoftReference<V> mViewSoftReference;
+    private V mProxyView;
 
     @Override
     public void dismissLoading() {
@@ -18,19 +20,18 @@ public abstract class BasePresenter<M extends IModel, V extends IView> implement
 
     @Override
     public void dropView() {
-        if (mView != null) {
-            mView = null;
+        if (mViewSoftReference.get() != null) {
+            mViewSoftReference.clear();
         }
     }
 
     @Override
     public boolean isAttached() {
-        return mView == null ? true : false;
+        return mViewSoftReference != null && mViewSoftReference.get() != null;
     }
 
     @Override
     public void showLoading() {
-
     }
 
     /**
@@ -38,28 +39,31 @@ public abstract class BasePresenter<M extends IModel, V extends IView> implement
      */
     @Override
     public void takeView(V view) {
-        weakReference = new WeakReference<>(view);
+        mViewSoftReference = new SoftReference<V>(view);
+        mProxyView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(),
+                view.getClass().getInterfaces(), new MVPViewHandler());
         mModel = creatModel();
-        mView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(),
-                view.getClass().getInterfaces(), new MVPViewHandler((IView) weakReference.get()));
+    }
 
+    public M getModel() {
+        return mModel;
+    }
+
+    public V getView() {
+        return mProxyView;
     }
 
     /**
      * View动态代理 防止 页面关闭P异步操作调用V 方法 空指针问题
      */
     class MVPViewHandler implements InvocationHandler {
-        private IView mvpView;
-
-        public MVPViewHandler(IView view) {
-            mvpView = view;
-        }
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            LogUtils.d("MVPViewHandler.invoke=" + method.getName());
             //如果V层没被销毁, 执行V层的方法.
             if (isAttached()) {
-                return method.invoke(mvpView, args);
+                return method.invoke(mViewSoftReference.get(), args);
             }//无需else因为P层无需关注V的返回值
             return null;
         }

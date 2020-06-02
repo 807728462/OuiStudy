@@ -38,6 +38,7 @@
         <activity android:name="com.oyf.plugin.ProxyActivity" />
         <activity android:name=".company.EstoreExplosiveActivity" />
         <activity android:name=".ui.activity.OGlideActivity" />
+        <activity android:name=".ui.activity.test.TestMvpActivity" />
         <activity android:name=".ui.activity.HighlightActivity">
             <intent-filter>
                 <action android:name="HighlightActivity" />

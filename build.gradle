@@ -6,6 +6,8 @@ buildscript {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url "https://jitpack.io" }
         jcenter()
+        //HMS
+        maven {url 'https://developer.huawei.com/repo/'}
 
     }
     dependencies {
@@ -16,6 +18,8 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'org.aspectj:aspectjtools:1.8.9'
         classpath 'org.aspectj:aspectjweaver:1.8.9'
+        //HMS
+        classpath 'com.huawei.agconnect:agcp:1.2.0.300'
     }
 }
 
@@ -25,6 +29,8 @@ allprojects {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url "https://jitpack.io" }
         jcenter()
+        //HMS
+        maven {url 'https://developer.huawei.com/repo/'}
 
     }
 }
