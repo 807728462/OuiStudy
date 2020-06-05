@@ -37,6 +37,7 @@ import com.oyf.codecollection.ui.activity.RippleActivity;
 import com.oyf.codecollection.ui.activity.ScanQRCodeActivity;
 import com.oyf.codecollection.ui.activity.ViewActivity;
 import com.oyf.codecollection.ui.activity.test.TestMvpActivity;
+import com.oyf.codecollection.ui.activity.test.TestSkinActivity;
 import com.oyf.codecollection.ui.adapter.BaseAdapter;
 import com.oyf.codecollection.ui.adapter.BaseViewHolder;
 import com.oyf.codecollection.ui.bean.ItemBean;
@@ -176,6 +177,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public void initLists() {
+        mLists.add(new ListBean("测试静态换肤", "静态换肤，白天晚上模式切换", TestSkinActivity.class));
         mLists.add(new ListBean("gilde指南", "自定义glide，自己手写简单", OGlideActivity.class));
         mLists.add(new ListBean("新手提示", "新手提示指引", HighlightActivity.class));
         mLists.add(new ListBean("爆款", "两级RecycleView联动", EstoreExplosiveActivity.class));

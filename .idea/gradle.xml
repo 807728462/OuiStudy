@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/oglide" />
             <option value="$PROJECT_DIR$/ookhttp" />
             <option value="$PROJECT_DIR$/plugin" />
+            <option value="$PROJECT_DIR$/skin" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

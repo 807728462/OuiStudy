@@ -63,5 +63,6 @@ dependencies {
     implementation project(path: ':plugin')
     implementation project(path: ':ookhttp')
     implementation project(path: ':oglide')
+    implementation project(path: ':skin')
 
 }

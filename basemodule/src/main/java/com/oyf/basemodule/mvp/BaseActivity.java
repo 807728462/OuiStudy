@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.oyf.basemodule.mvp.proxy.ActivityMvpProxyImpl;
 import com.oyf.basemodule.mvp.proxy.IMvpProxy;
@@ -18,7 +19,7 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.ButterKnife;
 
 
-public abstract class BaseActivity<P extends BasePresenter> extends Activity implements IView {
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IView {
     private P mPresenter;
     private IMvpProxy mIMvpProxy;
 
