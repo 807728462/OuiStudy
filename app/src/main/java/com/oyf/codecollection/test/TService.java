@@ -1,4 +1,4 @@
-package com.oyf.codecollection;
+package com.oyf.codecollection.test;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
