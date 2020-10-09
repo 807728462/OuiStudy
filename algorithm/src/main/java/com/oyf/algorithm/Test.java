@@ -6,15 +6,26 @@ public class Test {
     public static void main(String[] args) {
         int str[] = new int[]{9};
         System.out.println(Arrays.toString(str));
-        mergeSort(str, 0, str.length-1);
+        mergeSort(str, 0, str.length - 1);
         //merge(str,0,2,5);
         System.out.println(Arrays.toString(str));
     }
 
-    //归并排序第一步
+    /**
+     * 归并排序1
+     * 时间复杂度：   O(nlog2n)
+     * max时间复杂度：O(nlog2n)
+     * min时间复杂度：O(nlog2n)
+     * 空间复杂：    O(n)
+     * 稳定较复杂
+     *
+     * @param str
+     * @param start
+     * @param end
+     */
     public static void mergeSort(int[] str, int start, int end) {
         //取中位数
-        int middle = (end +start) / 2;
+        int middle = (end + start) / 2;
         if (start < end) {
             mergeSort(str, start, middle);
             mergeSort(str, middle + 1, end);
@@ -22,7 +33,14 @@ public class Test {
         }
     }
 
-    //归并排序
+    /**
+     * 归并排序2
+     *
+     * @param arr
+     * @param low
+     * @param middle
+     * @param high
+     */
     public static void merge(int arr[], int low, int middle, int high) {
         //创建一个新的数组
         int newStr[] = new int[high - low + 1];
@@ -37,7 +55,7 @@ public class Test {
             if (arr[i] <= arr[j]) {
                 newStr[index] = arr[i];
                 i++;
-            }else {
+            } else {
                 newStr[index] = arr[j];
                 j++;
             }
@@ -61,7 +79,16 @@ public class Test {
         }
     }
 
-    //希尔排序
+    /**
+     * 希尔排序
+     * 时间复杂度：   O(nlog2n)
+     * max时间复杂度：O(n2)
+     * min时间复杂度：O(n1.3)
+     * 空间复杂：    O(1)
+     * 不稳定 较复杂
+     *
+     * @param str
+     */
     public static void shellSort(int[] str) {
         //所有步长，循环
         for (int d = str.length / 2; d > 0; d = d / 2) {
@@ -80,7 +107,18 @@ public class Test {
     }
 
 
-    //快速排序
+    /**
+     * 快速排序
+     * 时间复杂度：   O(nlog2n)
+     * max时间复杂度：O(n2)
+     * min时间复杂度：O(nlog2n)
+     * 空间复杂：    O(nlog2n)
+     * 不稳定 较复杂
+     *
+     * @param str
+     * @param start
+     * @param end
+     */
     public static void quickSort(int[] str, int start, int end) {
         if (start >= end) {
             return;
@@ -118,7 +156,16 @@ public class Test {
         quickSort(str, high + 1, end);
     }
 
-    //插入排序
+    /**
+     * 插入排序
+     * 时间复杂度：   O(n2)
+     * max时间复杂度：O(n2)
+     * min时间复杂度：O(n)
+     * 空间复杂：    O(1)
+     * 稳定	简单
+     *
+     * @param str
+     */
     public static void insertSort(int[] str) {
         for (int i = 1; i < str.length; i++) {
             int temp = str[i];
@@ -133,10 +180,18 @@ public class Test {
             }
             str[index] = temp;
         }
-
     }
 
-    //选择排序
+    /**
+     * 选择排序
+     * 时间复杂度：   O(n2)
+     * max时间复杂度：O(n2)
+     * min时间复杂度：O(n2)
+     * 空间复杂：    O(1)
+     * 不稳定	简单
+     *
+     * @param str
+     */
     public static void selectSort(int[] str) {
         int index = 0;
         int minData;
@@ -155,7 +210,16 @@ public class Test {
         }
     }
 
-    //冒泡排序
+    /**
+     * 冒泡排序
+     * 时间复杂度：   O(n2)
+     * max时间复杂度：O(n2)
+     * min时间复杂度：O(n)
+     * 空间复杂：    O(1)
+     * 稳定	简单
+     *
+     * @param str
+     */
     public static void bubbleSort(int[] str) {
         int count = 0;
         int temp;

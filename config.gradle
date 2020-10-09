@@ -101,7 +101,8 @@ ext {
             //曲线图
             "MPAndroidChart"      : "com.github.PhilJay:MPAndroidChart:v${versions["MPAndroidChart"]}",
             "highlight"           : "com.isanwenyu.highlight:highlight:${versions["highlight"]}",
-            "huaweiScan"          : "com.huawei.hms:scan:${versions["huaweiScan"]}"
+            "huaweiScan"          : "com.huawei.hms:scan:${versions["huaweiScan"]}",
+            "alpha"               : "com.alibaba.android:alpha:1.0.0.1@aar"
 
     ]
 

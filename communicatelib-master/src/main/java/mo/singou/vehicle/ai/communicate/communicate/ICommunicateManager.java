@@ -1,7 +1,6 @@
 package mo.singou.vehicle.ai.communicate.communicate;
 
 
-import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

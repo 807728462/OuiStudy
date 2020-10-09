@@ -55,6 +55,7 @@ dependencies {
     implementation rootProject.ext.dependencies.MPAndroidChart
     implementation rootProject.ext.dependencies.zxing
     implementation rootProject.ext.dependencies.huaweiScan
+    implementation rootProject.ext.dependencies.alpha
     annotationProcessor rootProject.ext.dependencies.butterknife_compiler
     implementation rootProject.ext.dependencies.androidx
     implementation project(path: ':basemodule')

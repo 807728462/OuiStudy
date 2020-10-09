@@ -1,4 +1,4 @@
-include ':app', ':basemodule', ':aspectj', ':algorithm', ':plugin', ':highlight', ':communicatelib-master'
+include ':app', ':basemodule', ':aspectj', ':algorithm', ':plugin', ':highlight'
 rootProject.name='CodeCollection'
 include ':ookhttp'
 include ':oglide'
